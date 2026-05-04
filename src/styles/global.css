@@ -2028,3 +2028,465 @@
     font-weight: 500;
   }
   .mob-gardens-card:active img { opacity: 0.85; }
+
+  /* — Blog (What's Growing) page CSS, desktop (lines 1892–2006); verbatim — */
+  /* ════════════════════════════════════════════════════════════════════
+     BLOG PAGE — What's Growing (post grid, click through to source)
+     ════════════════════════════════════════════════════════════════════ */
+  .page-blog .page-inner {
+    padding: var(--page-pad-y-tight) var(--page-pad-x) var(--page-pad-y-tight) 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--rule) transparent;
+  }
+  .page-blog .page-inner::-webkit-scrollbar { width: 6px; }
+  .page-blog .page-inner::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
+  .blog-head {
+    margin-bottom: 26px;
+    max-width: 880px;
+  }
+  .blog-head h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .blog-head h2 em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .blog-lead {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+  .blog-meta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--sage);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    max-width: 1100px;
+    border-top: 1px solid var(--rule);
+    padding-top: 18px;
+  }
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 16px 18px 16px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  .post-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(47, 64, 48, 0.35);
+    box-shadow: 0 6px 18px rgba(27, 36, 24, 0.06);
+  }
+  .post-date {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .post-title {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    line-height: 1.15;
+    letter-spacing: -0.018em;
+    color: var(--ink);
+    margin-bottom: 10px;
+    transition: color 0.3s;
+  }
+  .post-title em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .post-card:hover .post-title { color: var(--moss); }
+  .post-excerpt {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+    flex: 1;
+  }
+  .post-read {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--moss);
+    font-weight: 500;
+    transition: gap 0.3s;
+  }
+  .post-card:hover .post-read { gap: 10px; }
+  .post-read .arr { display: inline-block; transition: transform 0.3s; }
+
+  /* — Blog mobile CSS (lines 3997–4063); verbatim — */
+  /* ─── MOBILE BLOG — post cards ─── */
+  .mob-blog-meta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--sage);
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: -10px 0 22px;
+  }
+  .mob-post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: 1px solid var(--rule);
+    padding-top: 16px;
+  }
+  .mob-post-card {
+    display: block;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 16px 18px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .mob-post-card:active { border-color: rgba(47, 64, 48, 0.35); }
+  .mob-post-date {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .mob-post-title {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    line-height: 1.18;
+    letter-spacing: -0.018em;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .mob-post-title em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .mob-post-excerpt {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+  .mob-post-read {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--moss);
+    font-weight: 500;
+  }
+
+  /* — iOS-style notification popup, base widget styles (lines 4165–4321); verbatim — */
+  /* ════════════════════════════════════════════════════════════════════
+     iOS-style notification popup — appears on first visit to What's Growing
+     ════════════════════════════════════════════════════════════════════ */
+  .ios-popup {
+    position: fixed;
+    top: 28px;
+    right: 28px;
+    width: 360px;
+    max-width: calc(100vw - 32px);
+    background: rgba(247, 242, 229, 0.92);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 0.5px solid rgba(27, 36, 24, 0.12);
+    border-radius: 16px;
+    padding: 18px 20px 16px;
+    box-shadow:
+      0 12px 40px rgba(27, 36, 24, 0.18),
+      0 2px 8px rgba(27, 36, 24, 0.06);
+    z-index: 2000;
+    opacity: 0;
+    transform: translateX(120%) scale(0.96);
+    transition: opacity 0.45s var(--ease),
+                transform var(--dur-mid) var(--ease);
+    pointer-events: none;
+  }
+  .ios-popup.visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    pointer-events: auto;
+  }
+  .ios-popup-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .ios-popup-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--moss);
+    color: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .ios-popup-app {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage);
+    flex: 1;
+  }
+  .ios-popup-close {
+    width: 22px;
+    height: 22px;
+    border: none;
+    background: rgba(27, 36, 24, 0.06);
+    color: var(--ink-soft);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: background 0.2s, color 0.2s;
+  }
+  .ios-popup-close:hover {
+    background: rgba(27, 36, 24, 0.12);
+    color: var(--ink);
+  }
+  .ios-popup-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    line-height: 1.2;
+    letter-spacing: -0.018em;
+    color: var(--ink);
+    margin-bottom: 6px;
+    font-weight: 400;
+  }
+  .ios-popup-title em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .ios-popup-body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+  .ios-popup-form input[type="email"] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid var(--rule);
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--ink);
+    outline: none;
+    margin-bottom: 10px;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  }
+  .ios-popup-form input[type="email"]:focus {
+    border-color: var(--moss);
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 0 3px rgba(47, 64, 48, 0.08);
+  }
+  .ios-popup-form input::placeholder { color: var(--sage); }
+  .ios-popup-actions {
+    display: flex;
+    gap: 8px;
+  }
+  .ios-popup-later, .ios-popup-subscribe {
+    flex: 1;
+    padding: 9px 14px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .ios-popup-later {
+    background: transparent;
+    color: var(--ink-soft);
+    border: 1px solid var(--rule);
+  }
+  .ios-popup-later:hover {
+    background: rgba(27, 36, 24, 0.04);
+    color: var(--ink);
+  }
+  .ios-popup-subscribe {
+    background: var(--moss);
+    color: var(--cream);
+    border: 1px solid var(--moss);
+  }
+  .ios-popup-subscribe:hover { background: var(--ink); border-color: var(--ink); }
+  .ios-popup-thanks {
+    display: none;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--moss);
+    text-align: center;
+    margin: 8px 0 2px;
+  }
+  .ios-popup.thanked .ios-popup-form,
+  .ios-popup.thanked .ios-popup-body { display: none; }
+  .ios-popup.thanked .ios-popup-thanks { display: block; }
+
+  /* — Blog popup overrides: blur veil + cursor lens + body.blog-popup-open + mobile sheet (lines 4323–4437); verbatim — */
+  /* ─── BLOG POPUP: centered modal + cursor-tracked unblur lens ─── */
+  /* When the popup is shown on the What's Growing page, body gets the
+     .blog-popup-open class. The popup repositions to the centre of the
+     viewport, and a fixed blur veil covers the rest of the page. The
+     veil is cut by a radial-gradient mask centred at (--lens-x,
+     --lens-y) — those CSS variables are written by a mousemove handler
+     in JS. The mask makes the veil transparent inside the lens and
+     opaque outside, so the cursor reveals a sharp circle through the
+     blur. */
+  .blog-blur-veil {
+    position: fixed;
+    inset: 0;
+    z-index: 1500;            /* below popup (2000), above page content */
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.45s var(--ease);
+    backdrop-filter: blur(5px) saturate(108%);
+    -webkit-backdrop-filter: blur(5px) saturate(108%);
+    /* Lens position + size — JS updates --lens-x and --lens-y on mousemove */
+    --lens-x: 50%;
+    --lens-y: 50%;
+    --lens-r: 110px;
+    --lens-feather: 38px;
+    -webkit-mask-image: radial-gradient(
+      circle var(--lens-r) at var(--lens-x) var(--lens-y),
+      transparent 0,
+      transparent calc(var(--lens-r) - var(--lens-feather)),
+      black var(--lens-r)
+    );
+    mask-image: radial-gradient(
+      circle var(--lens-r) at var(--lens-x) var(--lens-y),
+      transparent 0,
+      transparent calc(var(--lens-r) - var(--lens-feather)),
+      black var(--lens-r)
+    );
+  }
+  body.blog-popup-open .blog-blur-veil {
+    opacity: 1;
+  }
+
+  /* Centre the popup over the viewport while the blur is up. Overrides the
+     default top-right slide-in. The transform keeps a smooth scale-in
+     entrance from 96% — same easing as the rest of the site. */
+  body.blog-popup-open .ios-popup {
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    width: min(420px, calc(100vw - 32px));
+    max-width: calc(100vw - 32px);
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+  body.blog-popup-open .ios-popup.visible {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* Lock blog interactions while the popup is up — hovering the cards is
+     fine (mousemove still tracks via document) but clicks shouldn't fall
+     through and navigate to a post. */
+  body.blog-popup-open .post-grid { pointer-events: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .blog-blur-veil { transition: none; }
+  }
+
+  @media (max-width: 900px) {
+    .ios-popup {
+      top: auto;
+      bottom: 16px;
+      left: 12px;
+      right: 12px;
+      width: auto;
+      max-width: none;
+      transform: translateY(140%) scale(0.98);
+    }
+    .ios-popup.visible {
+      transform: translateY(0) scale(1);
+    }
+    /* On mobile the lens follows touch position; keep centred mode but as
+       a sheet that lifts from the bottom. The blur still applies. */
+    body.blog-popup-open .ios-popup {
+      top: auto;
+      bottom: 16px;
+      left: 12px;
+      right: 12px;
+      width: auto;
+      max-width: none;
+      transform: translateY(140%) scale(0.98);
+    }
+    body.blog-popup-open .ios-popup.visible {
+      transform: translateY(0) scale(1);
+    }
+    /* Phones don't have a hovering cursor — kill the radial lens and let
+       the veil blur uniformly across the page. */
+    .blog-blur-veil {
+      -webkit-mask-image: none;
+              mask-image: none;
+    }
+    /* Keep the hamburger and the page back-arrow above the blur veil so
+       the user can always close the page or open the menu. */
+    body.blog-popup-open .mob-menu-toggle,
+    body.blog-popup-open #m-blog .mob-page-back {
+      z-index: 1600;
+    }
+    /* When the user opens the hamburger menu while the blog popup is up,
+       hide the popup + blur underneath so the menu has a clean cream
+       backdrop. Both reappear when the menu closes (the .blog-popup-open
+       class stays on body the whole time). */
+    body.blog-popup-open.mob-menu-open .blog-blur-veil,
+    body.blog-popup-open.mob-menu-open .ios-popup,
+    body.blog-popup-open.mob-menu-open .ios-popup.visible {
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+  }

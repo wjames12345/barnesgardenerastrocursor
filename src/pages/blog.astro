@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout>
+  <section class="page page-blog" id="blog">
+    <div class="page-inner">
+      <div class="blog-head fade-in" style="--fade-delay: 0.0s;">
+        <h2>What's Growing</h2>
+        <p class="blog-lead">Notes from the garden. A working journal of what's in season, what's earning its place, and the odd vintage rod or reel that finds its way home.</p>
+      </div>
+
+      <div class="post-grid fade-in" style="--fade-delay: 0.18s;">
+
+        <a class="post-card">
+          <h3 class="post-title">What's Growing</h3>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="mob-section" id="m-blog" slot="mobile">
+    <button class="mob-page-back" type="button" data-mob-back aria-label="Back to home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    </button>
+    <h2>What's Growing.</h2>
+    <p class="lead">Notes from the garden.</p>
+
+    <div class="mob-post-list">
+
+      <a class="mob-post-card">
+        <h3 class="mob-post-title">What's Growing</h3>
+      </a>
+
+    </div>
+  </section>
+
+  <Fragment slot="overlay">
+    <!-- Blur veil for the What's Growing popup. Cut by a radial-gradient mask
+         so the cursor reveals a clear circular lens through the blur. -->
+    <div class="blog-blur-veil" id="blogBlurVeil" aria-hidden="true"></div>
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         iOS-style "What's Growing" notification popup
+         ══════════════════════════════════════════════════════════════════════ -->
+    <div class="ios-popup" id="blogPopup" role="dialog" aria-labelledby="blogPopupTitle" aria-hidden="true">
+      <div class="ios-popup-header">
+        <div class="ios-popup-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="6" width="18" height="13" rx="2"/>
+            <path d="M3 8l9 6 9-6"/>
+          </svg>
+        </div>
+        <span class="ios-popup-app">What's Growing</span>
+        <button type="button" class="ios-popup-close" data-popup-close aria-label="Dismiss">
+          <svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <line x1="4" y1="4" x2="12" y2="12"/>
+            <line x1="12" y1="4" x2="4" y2="12"/>
+          </svg>
+        </button>
+      </div>
+
+      <h3 class="ios-popup-title" id="blogPopupTitle">Be the <em>first</em> to read</h3>
+      <p class="ios-popup-body">Drop your email and I'll send a quiet line whenever a new post goes up. No lists, no marketing, just the post.</p>
+
+      <form class="ios-popup-form" id="blogPopupForm" novalidate>
+        <input type="email" name="email" placeholder="your@email.com" autocomplete="email" inputmode="email" required>
+        <div class="ios-popup-actions">
+          <button type="button" class="ios-popup-later" data-popup-close>Maybe later</button>
+          <button type="submit" class="ios-popup-subscribe">Subscribe</button>
+        </div>
+      </form>
+
+      <p class="ios-popup-thanks">Thanks. I'll be in touch.</p>
+    </div>
+  </Fragment>
+</BaseLayout>
