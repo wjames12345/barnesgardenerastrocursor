@@ -1,0 +1,67 @@
+  :root {
+    --cream: #F2ECDC;
+    --cream-deep: #E6DCBE;
+    --paper: #F7F2E5;
+    --ink: #1B2418;
+    --ink-soft: #2A3526;
+    --moss: #2F4030;
+    --moss-deep: #1A2419;
+    --sage: #7B8B6A;
+    --sage-light: #B4C2A0;
+    --terracotta: #B25E3D;
+    --terracotta-light: #D4886A;
+    --gold: #A8893E;
+    --navy: #1A2842;
+    --rule: rgba(27, 36, 24, 0.14);
+    --rule-strong: rgba(27, 36, 24, 0.28);
+
+    /* Motion language — single source of truth. Most transitions across
+       the site use the same out-expo curve and one of three durations.
+       Defining them here means any future change to "the site's feel"
+       is one variable away. */
+    --ease:       cubic-bezier(0.22, 1, 0.36, 1);    /* primary out-expo */
+    --ease-soft:  cubic-bezier(0.4, 0, 0.2, 1);      /* gentler symmetric */
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* used for the case-study slider release */
+    --dur-fast:   0.18s;   /* press / micro-interactions */
+    --dur-base:   0.35s;   /* hover, link colour, fade-in */
+    --dur-mid:    0.55s;   /* page transitions, card lifts */
+    --dur-slow:   0.85s;   /* wordmark rise, hero entrances */
+
+    /* Page padding tokens — every .page-inner draws from these. Default
+       rhythm is comfortable; tight rhythm is for media-heavy pages (map,
+       case-study, podcast hero) where the visuals do the breathing. */
+    --page-pad-y:        80px;
+    --page-pad-y-tight:  56px;
+    --page-pad-x:        60px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: var(--cream);
+  }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.5;
+    font-size: 16px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--moss); color: var(--cream); }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 144;
+  }
