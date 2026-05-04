@@ -24,8 +24,11 @@ const { road, area } = Astro.props;
 const parts = road.split(' ');
 const tail  = parts.pop()!;
 const head  = parts.join(' ');
+
+const title       = `${road}, ${area} — Garden Renovation · The Barnes Gardener`;
+const description = `${road} in ${area}: a garden renovation by Gary Hazell. Before and after, the brief, the work, the result.`;
 ---
-<BaseLayout>
+<BaseLayout title={title} description={description}>
   <section class="page page-case active" id="case">
     <div class="page-inner">
       <button class="case-back" id="caseBack" type="button" aria-label="Back to case studies">

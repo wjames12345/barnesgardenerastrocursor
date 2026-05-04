@@ -4,6 +4,22 @@ import SideNav from '../components/SideNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import MobileMenu from '../components/MobileMenu.astro';
 
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const DEFAULT_TITLE = 'The Barnes Gardener · Gary Hazell';
+const DEFAULT_DESCRIPTION = 'Considered, sustainable gardening for Barnes and South West London. By Gary Hazell, independent since 2016.';
+const DEFAULT_OG_IMAGE = '/logo-wordmark.png';
+
+const {
+  title = DEFAULT_TITLE,
+  description = DEFAULT_DESCRIPTION,
+  ogImage = DEFAULT_OG_IMAGE,
+} = Astro.props;
+
 // data-mob-page drives the mobile section visibility rules at source 4143–4162.
 // /latelier maps to "generator" — mobile uses the "generator" slug for the
 // Vision-and-Quote page (matches #m-generator markup).
@@ -22,20 +38,55 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 // /case/[road] sub-routes have no mobile equivalent in source; fall back to
 // "gardens" so mobile users land on the gardens grid rather than the home wordmark.
 const mobPage = path.startsWith('/case/') ? 'gardens' : (PATH_TO_MOB_PAGE[path] ?? 'home');
+
+// Canonical and absolute OG image URL — Astro.site is set in astro.config.mjs.
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImageURL   = new URL(ogImage, Astro.site).toString();
+
+// LocalBusiness JSON-LD — boosts "barnes gardener" / "gardener barnes" queries.
+const localBusinessJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'The Barnes Gardener',
+  description: DEFAULT_DESCRIPTION,
+  url: Astro.site?.toString(),
+  telephone: '+447770450523',
+  email: 'gary@thebarnesgardener.co.uk',
+  priceRange: '££',
+  founder: { '@type': 'Person', name: 'Gary Hazell' },
+  foundingDate: '2016',
+  areaServed: [
+    'Barnes', 'Richmond', 'Wimbledon', 'Kingston', 'Putney',
+    'Chelsea', 'Kensington', 'Notting Hill', 'Brentford', "Shepherd's Bush",
+  ],
+  sameAs: ['https://instagram.com/thebarnesgardener'],
+  image: new URL('/logo-wordmark.png', Astro.site).toString(),
+};
 ---
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>The Barnes Gardener · Gary Hazell</title>
-<meta name="description" content="Considered, sustainable gardening for Barnes and South West London. By Gary Hazell, independent since 2016.">
+<title>{title}</title>
+<meta name="description" content={description}>
 <meta name="theme-color" content="#F7F2E5">
 <meta name="color-scheme" content="light">
 
-<meta property="og:title" content="The Barnes Gardener · Gary Hazell">
-<meta property="og:description" content="Considered, sustainable gardening for Barnes and South West London.">
+<link rel="canonical" href={canonicalURL}>
+
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="The Barnes Gardener">
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:url" content={canonicalURL}>
+<meta property="og:image" content={ogImageURL}>
+<meta property="og:locale" content="en_GB">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
+<meta name="twitter:image" content={ogImageURL}>
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -45,6 +96,8 @@ const mobPage = path.startsWith('/case/') ? 'gardens' : (PATH_TO_MOB_PAGE[path] 
 <link rel="manifest" href="/manifest.json">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:opsz,wght@9..40,300..700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="/BULB TO FLOWER.png" fetchpriority="high">
+
+<script type="application/ld+json" set:html={JSON.stringify(localBusinessJsonLd)} />
 </head>
 <body data-mob-page={mobPage}>
 

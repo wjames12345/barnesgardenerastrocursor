@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thebarnesgardener.co.uk/sitemap-index.xml
