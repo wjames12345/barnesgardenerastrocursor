@@ -3,6 +3,22 @@ import '../styles/global.css';
 import SideNav from '../components/SideNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import MobileMenu from '../components/MobileMenu.astro';
+
+// data-mob-page drives the mobile section visibility rules at source 4143–4162.
+// /latelier maps to "generator" — mobile uses the "generator" slug for the
+// Vision-and-Quote page (matches #m-generator markup).
+const PATH_TO_MOB_PAGE: Record<string, string> = {
+  '/':         'home',
+  '/about':    'about',
+  '/services': 'services',
+  '/gardens':  'gardens',
+  '/latelier': 'generator',
+  '/blog':     'blog',
+  '/podcast':  'podcast',
+  '/shop':     'shop',
+  '/contact':  'contact',
+};
+const mobPage = PATH_TO_MOB_PAGE[Astro.url.pathname.replace(/\/$/, '') || '/'] ?? 'home';
 ---
 <!DOCTYPE html>
 <html lang="en-GB">
@@ -27,7 +43,7 @@ import MobileMenu from '../components/MobileMenu.astro';
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:opsz,wght@9..40,300..700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="BULB TO FLOWER.png" fetchpriority="high">
 </head>
-<body data-mob-page="home">
+<body data-mob-page={mobPage}>
 
 <!-- ═════════════════════════════════════════════════════════════════════
      DESKTOP / FIXED-CANVAS VIEWPORT
