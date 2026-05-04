@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout>
+  <section class="page page-contact" id="contact">
+    <div class="page-inner">
+      <div class="contact-grid">
+        <div class="contact-left">
+          <h2 class="fade-in" style="--fade-delay: 0.15s;">Get in touch with me by my number, email or Instagram below.</h2>
+          <p class="lead fade-in" style="--fade-delay: 0.3s;">For quotes, questions, or to put a date in the diary. Gary replies personally, usually the same day.</p>
+
+          <div class="contact-channels fade-in" style="--fade-delay: 0.45s;">
+            <a href="tel:+447770450523">
+              <span class="ch-value">07770 450523</span>
+              <span class="ch-arrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            </a>
+            <a href="mailto:gary@thebarnesgardener.co.uk">
+              <span class="ch-value">gary@thebarnesgardener.co.uk</span>
+              <span class="ch-arrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            </a>
+            <a href="https://instagram.com/thebarnesgardener" target="_blank" rel="noopener">
+              <span class="ch-value">@thebarnesgardener</span>
+              <span class="ch-arrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <form class="contact-form lat-form fade-in" id="contactForm" style="--fade-delay: 0.3s;" novalidate>
+            <div class="form-row">
+              <div class="field">
+                <label for="ct-name">Name</label>
+                <input type="text" id="ct-name" placeholder="Your name" required>
+              </div>
+              <div class="field">
+                <label for="ct-email">Email</label>
+                <input type="email" id="ct-email" placeholder="you@example.com" required>
+              </div>
+            </div>
+            <div class="form-row single">
+              <div class="field">
+                <label for="ct-msg">Message</label>
+                <textarea id="ct-msg" placeholder="Tell Gary about your garden, or what you'd like to ask."></textarea>
+              </div>
+            </div>
+            <button type="submit" class="submit">
+              <span>Send message</span>
+              <span class="arrow" aria-hidden="true">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Reviews — three short client quotes in a row. -->
+      <div class="testimonials-strip fade-in" style="--fade-delay: 0.55s;">
+        <div class="test-row">
+          <div class="test">
+            <span class="qmark">"</span>
+            <p class="test-text">Three years in and I haven't had to think about the garden once. Highest praise.</p>
+            <div class="test-meta">
+              <span class="test-name">James Robinson</span>
+              <span class="test-place">East Sheen</span>
+            </div>
+            <span class="test-tenure">Client since 2022</span>
+          </div>
+          <div class="test">
+            <span class="qmark">"</span>
+            <p class="test-text">The L'Atelier rendering was uncannily close to what we ended up with. Worth every penny.</p>
+            <div class="test-meta">
+              <span class="test-name">Olivia Marsden</span>
+              <span class="test-place">Mortlake</span>
+            </div>
+            <span class="test-tenure">Renovation, 2025</span>
+          </div>
+          <div class="test">
+            <span class="qmark">"</span>
+            <p class="test-text">Renovated, planted, kept. He treats every garden as if he'll be back next week, because he will.</p>
+            <div class="test-meta">
+              <span class="test-name">Charles Whitcombe</span>
+              <span class="test-place">Richmond</span>
+            </div>
+            <span class="test-tenure">Client since 2019</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="mob-section" id="m-contact" slot="mobile">
+    <button class="mob-page-back" type="button" data-mob-back aria-label="Back to home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    </button>
+
+    <h1 class="mob-contact-title">Phone, email or Instagram. Gary replies the same day.</h1>
+
+    <ul class="mob-contact-list">
+      <li>
+        <a class="mob-contact-row" href="tel:+447770450523">
+          <span class="mob-contact-label">Phone</span>
+          <span class="mob-contact-value">07770 450523</span>
+          <span class="mob-contact-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li>
+        <a class="mob-contact-row" href="mailto:gary@thebarnesgardener.co.uk">
+          <span class="mob-contact-label">Email</span>
+          <span class="mob-contact-value">gary@thebarnesgardener.co.uk</span>
+          <span class="mob-contact-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li>
+        <a class="mob-contact-row" href="https://instagram.com/thebarnesgardener" target="_blank" rel="noopener">
+          <span class="mob-contact-label">Instagram</span>
+          <span class="mob-contact-value">@thebarnesgardener</span>
+          <span class="mob-contact-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+    </ul>
+
+    <p class="mob-contact-foot">For quotes, garden visits, or just to ask. Independent gardener working across Barnes and South West London.</p>
+  </section>
+</BaseLayout>

@@ -3548,3 +3548,380 @@
     text-decoration: none;
   }
   .mob-product-buy:active { background: var(--ink); }
+
+  /* — Contact page CSS, desktop (lines 1127–1368); verbatim — */
+  /* ════════════════════════════════════════════════════════════════════
+     CONTACT PAGE
+     ════════════════════════════════════════════════════════════════════ */
+  .page-contact .page-inner {
+    padding: var(--page-pad-y) var(--page-pad-x) var(--page-pad-y) 0;
+    justify-content: center;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 5fr 6fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .contact-left .eyebrow { margin-bottom: 20px; }
+  .contact-left h2 {
+    font-size: 64px;
+    line-height: 0.94;
+    letter-spacing: -0.03em;
+    margin-bottom: 22px;
+    max-width: none;
+    white-space: nowrap;
+    color: var(--ink);
+  }
+  .contact-left h2 em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .contact-left .lead {
+    color: var(--ink-soft);
+    font-size: 13.5px;
+    line-height: 1.6;
+    max-width: 380px;
+    margin-bottom: 18px;
+  }
+  .contact-channels { border-top: 1px solid var(--rule); }
+  .contact-channels a {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    transition: padding 0.3s;
+    cursor: pointer;
+  }
+  .contact-channels a:hover { padding-left: 10px; }
+  .contact-channels .ch-value {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+  .contact-channels .ch-arrow {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 1px solid var(--rule-strong);
+    display: grid; place-items: center;
+    color: var(--moss);
+    transition: transform 0.3s, background 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .contact-channels a:hover .ch-arrow {
+    background: var(--moss); color: var(--cream);
+    transform: rotate(-45deg); border-color: var(--moss);
+  }
+
+  form.contact-form {
+    background: var(--paper);
+    padding: 24px;
+    border-radius: 6px;
+    border: 1px solid var(--rule);
+  }
+  form.contact-form .field textarea { height: 50px; }
+
+  .testimonials-strip {
+    margin-top: 48px;
+    padding-top: 30px;
+    border-top: 1px solid var(--rule);
+    width: 100%;
+    max-width: 1100px;
+  }
+  /* The lead quote sits across the full width — longest tenure, most
+     trustworthy mark. Supporting quotes follow in a tighter 3-up below. */
+  .test-hero {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 26px;
+    align-items: baseline;
+    margin-bottom: 28px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .test-hero .qmark {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 64px;
+    line-height: 0.4;
+    color: var(--moss);
+    opacity: 0.5;
+    transform: translateY(-2px);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .test-hero .test-text {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    line-height: 1.4;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+    margin: 0;
+    max-width: 56ch;
+  }
+  .test-hero .test-text em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .test-hero .test-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .test-hero .test-name { color: var(--ink); }
+  .test-hero .test-place { color: var(--sage); }
+  .test-hero .test-tenure {
+    color: var(--moss);
+    font-style: normal;
+    letter-spacing: 0.18em;
+    font-size: 9.5px;
+  }
+
+  .test-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+  }
+  .test {
+    position: relative;
+    padding-top: 18px;
+  }
+  .test .qmark {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 56px;
+    line-height: 0.4;
+    color: var(--moss);
+    opacity: 0.45;
+    position: absolute;
+    top: 8px; left: -2px;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .test-text {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 16px;
+    margin-top: 26px;
+  }
+  .test-text em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .test-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .test-name { color: var(--ink); }
+  .test-place { color: var(--sage); }
+  .test .test-tenure {
+    display: block;
+    margin-top: 4px;
+    color: var(--moss);
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+  }
+
+  /* Trusted-by mark strip — the suppliers, makers and accreditations Gary
+     works with. Logos sit in greyscale at low opacity so the row reads as
+     credibility, not advertising. */
+  .suppliers-strip {
+    margin-top: 32px;
+    padding-top: 26px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .suppliers-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .suppliers-marks {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    flex: 1;
+  }
+  .suppliers-marks img {
+    height: 26px;
+    width: auto;
+    max-width: 110px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    filter: grayscale(1) opacity(0.55);
+    transition: filter var(--dur-base) var(--ease);
+  }
+  .suppliers-marks img:hover {
+    filter: grayscale(0) opacity(0.95);
+  }
+  .suppliers-accred {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--moss);
+    letter-spacing: -0.005em;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    flex-shrink: 0;
+    padding-left: 22px;
+    border-left: 1px solid var(--rule);
+  }
+
+  /* — Contact page CSS, mobile (lines 3442–3572); verbatim — */
+  /* ─── CONTACT — editorial directory: hairline-divided rows, micro-uppercase
+     labels, no italics anywhere. Each row is a tap target. Sized to fit
+     a single phone viewport with no scroll — flex distributes space.
+     We don't set `display` here — the page-visibility rule below
+     (`body[data-mob-page="contact"] #m-contact.mob-section`) flips it
+     to `flex` only when contact is the active page; on every other page
+     the base `.mob-section { display: none }` keeps it hidden. ─── */
+  #m-contact {
+    padding-top: max(76px, env(safe-area-inset-top));
+    padding-bottom: max(28px, env(safe-area-inset-bottom));
+    height: 100svh;
+    min-height: 100svh;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .mob-contact-eyebrow {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 18px;
+    flex: 0 0 auto;
+  }
+  .mob-contact-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 26px;
+    height: 1px;
+    background: currentColor;
+    vertical-align: middle;
+    margin-right: 12px;
+    transform: translateY(-1px);
+  }
+  .mob-contact-title {
+    font-family: 'Fraunces', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(28px, 7.6vw, 38px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0 0 28px;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    max-width: 14ch;
+    flex: 0 0 auto;
+  }
+  .mob-contact-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--rule);
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 0;
+  }
+  .mob-contact-list li {
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+  }
+  .mob-contact-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    column-gap: 16px;
+    row-gap: 4px;
+    padding: 16px 2px 14px;
+    text-decoration: none;
+    color: inherit;
+    align-items: end;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.25s var(--ease);
+    width: 100%;
+  }
+  .mob-contact-row:active { background: rgba(74, 93, 67, 0.05); }
+  .mob-contact-label {
+    grid-column: 1;
+    grid-row: 1;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+  .mob-contact-value {
+    grid-column: 1;
+    grid-row: 2;
+    font-family: 'Fraunces', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(18px, 5.2vw, 22px);
+    line-height: 1.1;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    word-break: break-word;
+  }
+  .mob-contact-arrow {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: end;
+    font-family: 'Fraunces', serif;
+    font-style: normal;
+    font-size: 20px;
+    color: var(--moss);
+    line-height: 1;
+    padding-bottom: 4px;
+    transition: transform 0.28s var(--ease);
+  }
+  .mob-contact-row:active .mob-contact-arrow { transform: translateX(5px); }
+  .mob-contact-foot {
+    margin: 22px 0 0;
+    font-family: 'Fraunces', serif;
+    font-style: normal !important;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    opacity: 0.78;
+    max-width: 34ch;
+    flex: 0 0 auto;
+  }
+  /* Defensive override — generic .mob-section p strong is italic; the
+     contact directory uses its own typography and shouldn't pick that up. */
+  #m-contact .mob-contact-row,
+  #m-contact .mob-contact-row * { font-style: normal; }
