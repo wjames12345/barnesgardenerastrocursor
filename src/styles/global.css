@@ -1388,3 +1388,513 @@
     mix-blend-mode: multiply;
     user-select: none;
   }
+
+  /* — L'Atelier (Vision & Quote) page CSS, desktop (lines 774–1125); verbatim — */
+  /* ════════════════════════════════════════════════════════════════════
+     L'ATELIER (was Envisioner) — now on cream like the rest of the site
+     ════════════════════════════════════════════════════════════════════ */
+  .page-latelier .page-inner {
+    padding: var(--page-pad-y) var(--page-pad-x) var(--page-pad-y) 0;
+    justify-content: center;
+  }
+  .lat-grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 100px;
+    align-items: start;
+  }
+  .lat-left .eyebrow { margin-bottom: 22px; }
+  .lat-left h2 {
+    font-size: 60px;
+    line-height: 0.94;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 22px;
+    max-width: 8ch;
+  }
+  .lat-left h2 em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .lat-tagline {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--moss);
+    margin-bottom: 24px;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .lat-lead {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    line-height: 1.45;
+    color: var(--ink);
+    max-width: 28ch;
+    font-variation-settings: "opsz" 144;
+  }
+  .lat-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 38px;
+    padding-top: 0;
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+  .step-num {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-style: italic;
+    line-height: 0.9;
+    color: var(--sage);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .step h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 19px;
+    color: var(--ink);
+    margin-bottom: 10px;
+    letter-spacing: -0.005em;
+    line-height: 1.1;
+  }
+  .step p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin: 0;
+    opacity: 0.92;
+    max-width: 38ch;
+  }
+
+  /* A quiet sense of scale, set apart from the three numbered steps. Sits
+     under the steps in the left column so prospects can self-qualify before
+     submitting a photograph. Editorial divider above; italic accents only. */
+  .lat-investment {
+    margin-top: 36px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
+    max-width: 38ch;
+  }
+  .lat-investment .eyebrow {
+    color: var(--sage);
+    margin-bottom: 12px;
+  }
+  .lat-investment p {
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .lat-investment p em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+
+  form.lat-form {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+  }
+  .form-row {
+    display: grid;
+    gap: 36px;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 42px;
+  }
+  .form-row.single { grid-template-columns: 1fr; }
+  .field { display: flex; flex-direction: column; position: relative; }
+  .field label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .field input,
+  .field textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--rule-strong);
+    color: var(--ink);
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 400;
+    padding: 4px 0 12px;
+    outline: none;
+    transition: border-color 0.4s;
+    border-radius: 0;
+    caret-color: transparent;
+  }
+  .field input:focus,
+  .field textarea:focus { border-bottom-color: var(--moss); }
+  .field textarea {
+    resize: none;
+    height: 38px;
+    line-height: 1.4;
+  }
+  .field input::placeholder, .field textarea::placeholder {
+    color: rgba(27, 36, 24, 0.32);
+    font-style: italic;
+  }
+
+  /* Typewriter cursor — blinks at the end of whatever is typed */
+  .field-with-cursor { position: relative; }
+  .typewriter-cursor {
+    position: absolute;
+    width: 1.5px;
+    background: var(--ink);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .field-with-cursor.is-active .typewriter-cursor {
+    opacity: 1;
+    animation: blink 1.05s steps(1) infinite;
+  }
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+  }
+
+  /* Mac-style choose file button */
+  .file-button-row {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .file-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--cream);
+    padding: 10px 18px 10px 14px;
+    border: 1px solid var(--ink);
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 1.5px 1.5px 0 var(--ink);
+    transition: transform 0.12s, box-shadow 0.12s, background 0.2s;
+    user-select: none;
+  }
+  .file-button:hover {
+    background: var(--paper);
+    transform: translate(-0.5px, -0.5px);
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .file-button:active {
+    transform: translate(1px, 1px);
+    box-shadow: 0 0 0 var(--ink);
+  }
+  .file-button .dot {
+    width: 6px; height: 6px; background: var(--moss); border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .file-button input[type="file"] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+  .file-status {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    letter-spacing: 0.01em;
+    opacity: 0.7;
+  }
+  .file-status.has-file { color: var(--moss); opacity: 1; }
+  .file-status .label {
+    color: var(--sage);
+    margin-right: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 10px;
+    font-weight: 500;
+  }
+
+  button.submit {
+    margin-top: 22px;
+    width: auto;
+    align-self: flex-start;
+    padding: 15px 32px;
+    background: var(--moss);
+    color: var(--cream);
+    border: none;
+    border-radius: 99px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    transition: background 0.3s, transform 0.2s;
+    text-transform: uppercase;
+  }
+  button.submit:hover { background: var(--moss-deep); transform: translateY(-1px); }
+  button.submit .arrow {
+    width: 22px; height: 22px;
+    background: var(--cream);
+    color: var(--moss);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    transition: transform 0.3s;
+  }
+  button.submit:hover .arrow { transform: translateX(2px); }
+
+  /* Confirmation state — replaces form area only, with smooth crossfade */
+  .lat-right { position: relative; min-height: 460px; }
+  .lat-form, .form-success {
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .form-success {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+    padding: 0;
+    text-align: left;
+  }
+  .form-success.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .lat-form.hidden {
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+  }
+  .form-success .success-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+  }
+  .form-success .success-eyebrow::before {
+    content: '';
+    width: 26px; height: 1px; background: var(--moss);
+  }
+  .form-success .success-eyebrow .pulse {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--moss);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.45; transform: scale(0.85); }
+  }
+  .form-success h3 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 44px;
+    line-height: 1.05;
+    color: var(--ink);
+    margin: 0 0 18px;
+    letter-spacing: -0.015em;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    max-width: 14ch;
+  }
+  .form-success h3 em {
+    color: var(--moss);
+  }
+  .form-success p {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 38ch;
+    margin: 0;
+  }
+  .form-success .receipt {
+    margin-top: 36px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--sage);
+    line-height: 1.9;
+  }
+  .form-success .receipt .row { display: flex; gap: 18px; }
+  .form-success .receipt .k { color: var(--sage); text-transform: uppercase; letter-spacing: 0.22em; font-size: 10px; min-width: 96px; font-weight: 500; }
+  .form-success .receipt .v { color: var(--ink-soft); }
+
+  /* — L'Atelier (Vision & Quote) page CSS, mobile (lines 4943–5096); verbatim — */
+  /* ─── GENERATOR PAGE: 1·2·3 steps + photo upload form ─── */
+  .mob-gen-steps {
+    margin: 4px 0 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .mob-gen-step {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .mob-gen-step .num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .mob-gen-step h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 17px;
+    color: var(--ink);
+    margin: 0 0 4px;
+  }
+  .mob-gen-step p {
+    font-family: 'Fraunces', serif;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .mob-gen-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 8px;
+  }
+  .mob-gen-form .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .mob-gen-form label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--moss);
+    font-weight: 500;
+  }
+  .mob-gen-form input,
+  .mob-gen-form textarea {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;                 /* prevents iOS auto-zoom on focus */
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--rule);
+    padding: 8px 0 10px;
+    outline: none;
+    resize: none;
+    width: 100%;
+  }
+  .mob-gen-form input:focus,
+  .mob-gen-form textarea:focus {
+    border-color: var(--moss);
+  }
+  .mob-gen-form textarea { min-height: 76px; }
+  .mob-gen-photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 18px;
+    border: 1px dashed var(--moss);
+    border-radius: 4px;
+    color: var(--moss);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    cursor: pointer;
+    background: transparent;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    transition: background 0.25s ease;
+  }
+  .mob-gen-photo:active { background: rgba(74, 93, 67, 0.06); }
+  .mob-gen-photo input[type="file"] {
+    position: absolute;
+    width: 1px; height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .mob-gen-photo .icon {
+    width: 20px; height: 20px;
+    flex-shrink: 0;
+  }
+  .mob-gen-photo-status {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: -4px;
+    display: block;
+  }
+  .mob-gen-submit {
+    margin-top: 6px;
+    padding: 16px 22px;
+    background: var(--ink);
+    color: var(--cream);
+    border: none;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.25s ease;
+  }
+  .mob-gen-submit:active { background: var(--moss); }
+
+  /* Vision & Quote: stretch to fill one screen, no italic header */
+  #m-generator { padding: 72px 26px 32px; }
+  body[data-mob-page="generator"] #m-generator {
+    display: flex;
+    flex-direction: column;
+  }
+  #m-generator .lead {
+    font-style: normal;
+    color: var(--ink);
+    font-size: 23px;
+    line-height: 1.38;
+    margin-bottom: 0;
+  }
+  #m-generator .mob-gen-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+    margin-top: 22px;
+  }
+  #m-generator .mob-gen-form .field { gap: 2px; }
+  #m-generator .mob-gen-form input,
+  #m-generator .mob-gen-form textarea { padding: 4px 0 8px; }
+  #m-generator .mob-gen-form textarea { min-height: 64px; }
+  #m-generator .mob-gen-photo { padding: 16px; font-size: 15px; }
+  #m-generator .mob-gen-photo-status { margin-top: -10px; font-size: 10px; }
+  #m-generator .mob-gen-submit { padding: 16px 22px; }
+
