@@ -1,0 +1,16 @@
+{
+  "name": "The Barnes Gardener",
+  "short_name": "Gary",
+  "description": "Considered, sustainable gardening for Barnes and South West London. By Gary Hazell, independent since 2016.",
+  "start_url": "./Gary%20the%20Barnes%20Gardener's%20website.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F7F2E5",
+  "theme_color": "#F7F2E5",
+  "lang": "en-GB",
+  "icons": [
+    { "src": "ampersand.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "ampersand.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
