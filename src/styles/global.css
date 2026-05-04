@@ -2654,3 +2654,897 @@
     margin-top: 18px;
   }
   .mob-podcast-thanks.visible { display: block; }
+
+  /* — Shop page CSS, desktop (lines 1370–1890); verbatim — */
+  /* ════════════════════════════════════════════════════════════════════
+     SHOP PAGE — Gary's Kit Shop (affiliate product grid)
+     ════════════════════════════════════════════════════════════════════ */
+  .page-shop .page-inner {
+    padding: var(--page-pad-y-tight) var(--page-pad-x) var(--page-pad-y-tight) 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--rule) transparent;
+  }
+  .page-shop .page-inner::-webkit-scrollbar { width: 6px; }
+  .page-shop .page-inner::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
+  .shop-head {
+    margin-bottom: 22px;
+    max-width: 880px;
+  }
+  .shop-head h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .shop-head h2 em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .shop-lead {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .shop-disclosure {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--sage);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  /* The shop has two views: a clean landing (featured + maker tiles) and
+     a brand-detail view that swaps in when a maker is clicked. Only one
+     is visible at a time; JS toggles the .is-active class. */
+  .shop-view { display: none; }
+  .shop-view.is-active { display: block; }
+
+  /* Section heads + spacing for the two top-level shop sections */
+  .shop-section-block { margin-bottom: 64px; }
+  .shop-section-block:last-child { margin-bottom: 0; }
+
+  /* PRODUCT TYPES — four hand-drawn icon tiles. Click one to see products
+     of that type from across all brands. */
+  .shop-types-head { margin: 4px 0 18px; max-width: 880px; }
+  .shop-types-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 10px;
+  }
+  .shop-types-title {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .shop-types-title em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .shop-types-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    max-width: 1100px;
+  }
+  .shop-type-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 26px 22px 22px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 18px rgba(27, 36, 24, 0.04);
+    animation: floatBreath 6.5s ease-in-out infinite;
+  }
+  .shop-type-tile:nth-child(1) { animation-delay: -0.0s; }
+  .shop-type-tile:nth-child(2) { animation-delay: -1.6s; }
+  .shop-type-tile:nth-child(3) { animation-delay: -3.2s; }
+  .shop-type-tile:nth-child(4) { animation-delay: -4.8s; }
+  .shop-type-tile:hover { animation-play-state: paused; }
+  .shop-type-icon {
+    width: 56px;
+    height: 56px;
+    color: var(--moss);
+    margin-bottom: 18px;
+    transition: transform 0.5s var(--ease);
+  }
+  .shop-type-tile:hover .shop-type-icon { transform: rotate(-6deg) scale(1.08); }
+  .shop-type-name {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    margin-bottom: 10px;
+  }
+  .shop-type-line {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    flex: 1;
+  }
+  .shop-type-foot {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--moss);
+  }
+
+  /* BRANDS section — replaces the old "essentials/makers" head with a
+     unified makers section that includes brand color signatures. */
+  .shop-makers-head { margin: 4px 0 18px; max-width: 880px; }
+  .shop-featured-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 10px;
+  }
+  .shop-featured-title {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .shop-featured-title em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .shop-featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    max-width: 1100px;
+    margin-bottom: 64px;
+  }
+  /* Featured cards float subtly off the page — staggered breath
+     animation gives them quiet life while idle. Paused on hover so the
+     hover lift takes over without compounding. */
+  .product-featured {
+    background: var(--cream-deep, #E6DCBE);
+    padding: 26px 24px 22px;
+    border-radius: 8px;
+    border: 1px solid rgba(47, 64, 48, 0.18);
+    box-shadow: 0 4px 22px rgba(27, 36, 24, 0.05);
+    animation: floatBreath 6s ease-in-out infinite;
+  }
+  .product-featured:nth-child(1) { animation-delay: 0s; }
+  .product-featured:nth-child(2) { animation-delay: -2s; }
+  .product-featured:nth-child(3) { animation-delay: -4s; }
+  .product-featured:hover { animation-play-state: paused; }
+  .product-featured .product-name {
+    font-size: 24px;
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+  .product-featured .product-note {
+    font-size: 12.5px;
+    margin-bottom: 22px;
+  }
+  .product-featured .product-price { font-size: 16px; }
+  .product-featured-tag {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--moss);
+    background: rgba(47, 64, 48, 0.08);
+    padding: 5px 11px;
+    border-radius: 99px;
+    margin-bottom: 14px;
+  }
+
+  /* Maker doors — six tiles that open into brand-detail pages. Same
+     breathing animation as featured, slightly slower so the rhythms
+     sit a beat apart. */
+  .shop-makers-head { margin: 0 0 18px; max-width: 880px; }
+  .shop-makers-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 10px;
+  }
+  .shop-makers-title {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .shop-makers-title em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .shop-makers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 1100px;
+  }
+  .shop-maker-tile {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 24px 22px 22px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 18px rgba(27, 36, 24, 0.04);
+    animation: floatBreath 7.5s ease-in-out infinite;
+  }
+  /* Brand logo at the top of each maker tile. The img is constrained by
+     a height bound and centered within its container so logos of varying
+     proportions sit consistently. If the logo file is missing, the alt
+     text fallback shows the brand name in plain text. */
+  .shop-maker-logo {
+    /* Fixed bounding box so logos of varying aspect ratios all read at
+       the same visual size. object-fit: contain letterboxes each one
+       inside the box without distortion. */
+    width: 140px;
+    height: 44px;
+    margin-bottom: 18px;
+    object-fit: contain;
+    object-position: left center;
+    mix-blend-mode: multiply;
+    display: block;
+    /* Quietened-down treatment: desaturate to gentle grey + slight opacity
+       so the colour logos sit calmly against the cream paper without
+       altering the source files. Lifts to full colour on hover. */
+    filter: grayscale(1) opacity(0.78);
+    transition: filter 0.4s var(--ease);
+  }
+  .shop-maker-tile:hover .shop-maker-logo {
+    filter: grayscale(0) opacity(1);
+  }
+  .shop-maker-tile:nth-child(1) { animation-delay: -0.0s; }
+  .shop-maker-tile:nth-child(2) { animation-delay: -1.2s; }
+  .shop-maker-tile:nth-child(3) { animation-delay: -2.4s; }
+  .shop-maker-tile:nth-child(4) { animation-delay: -3.6s; }
+  .shop-maker-tile:nth-child(5) { animation-delay: -4.8s; }
+  .shop-maker-tile:nth-child(6) { animation-delay: -6.0s; }
+  .shop-maker-tile:hover { animation-play-state: paused; }
+  .shop-maker-tile-where {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 12px;
+  }
+  .shop-maker-tile-name {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    margin-bottom: 14px;
+    transition: color 0.25s;
+  }
+  .shop-maker-tile-line {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+    flex: 1;
+  }
+  .shop-maker-tile-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--moss);
+  }
+  .shop-maker-tile-foot .arr {
+    display: inline-block;
+    transition: transform 0.3s var(--ease);
+  }
+  .shop-maker-tile:hover .arr { transform: translateX(6px); }
+
+  /* The shared floating-breath animation: a gentle 3px lift with a
+     synchronised shadow. Reduced-motion is respected globally. */
+  @keyframes floatBreath {
+    0%, 100% {
+      transform: translateY(0);
+      box-shadow: 0 4px 18px rgba(27, 36, 24, 0.05);
+    }
+    50% {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(27, 36, 24, 0.08);
+    }
+  }
+
+  /* Brand-detail view — a back button, a generous brand intro, and the
+     brand's products as cards. Editorial chapter feel. */
+  .shop-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: none;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 32px;
+    transition: color 0.25s, gap 0.3s var(--ease);
+  }
+  .shop-back:hover { color: var(--moss); gap: 14px; }
+  .shop-back svg { width: 16px; height: 16px; }
+
+  .shop-brand-intro { max-width: 720px; margin-bottom: 40px; }
+  .shop-brand-intro-where {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 14px;
+  }
+  .shop-brand-intro-name {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 56px;
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    margin-bottom: 18px;
+  }
+  .shop-brand-intro-story {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .shop-brand-products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    max-width: 1100px;
+  }
+  /* Inside brand detail, the product brand chip is redundant (the page
+     header already names the brand). Inside type detail, the chip is
+     visible — products span multiple brands. */
+  .shop-brand-products .product .product-brand { display: none; }
+  .shop-type-view-products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    max-width: 1100px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .product-featured, .shop-maker-tile { animation: none; }
+  }
+  .shop-section-num {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+  }
+  .shop-section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .shop-section-title em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    max-width: 1100px;
+  }
+  .product {
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 14px 16px 14px;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  }
+  .product:hover {
+    transform: translateY(-2px);
+    border-color: rgba(47, 64, 48, 0.35);
+    box-shadow: 0 6px 18px rgba(27, 36, 24, 0.06);
+  }
+  .product-brand {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .product-name {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    line-height: 1.18;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .product-name em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .product-note {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+    flex: 1;
+  }
+  .product-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .product-price {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+  }
+  .product-buy {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 13px;
+    background: transparent;
+    color: var(--moss);
+    border: 1px solid var(--moss);
+    border-radius: 99px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s, padding 0.3s;
+  }
+  .product-buy:hover {
+    background: var(--moss);
+    color: var(--cream);
+    padding-right: 15px;
+  }
+  .product-buy .arr {
+    display: inline-block;
+    transition: transform 0.3s;
+  }
+  .product-buy:hover .arr { transform: translateX(2px); }
+
+  /* — Shop page CSS, mobile (lines 3627–3995); verbatim — */
+  /* ─── MOBILE SHOP — product cards, brand chips, buy buttons ─── */
+  .mob-shop-disclosure {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--sage);
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: -10px 0 22px;
+  }
+  .mob-shop-section { margin-bottom: 28px; }
+  .mob-shop-section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+  .mob-shop-section-num {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+  }
+  .mob-shop-section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .mob-shop-section-title em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  /* Mobile shop — landing ↔ brand-detail switcher mirrors desktop. */
+  .mob-shop-view { display: none; }
+  .mob-shop-view.is-active { display: block; }
+
+  /* Mobile featured picks — three stacked cards, breathing animation. */
+  .mob-shop-featured-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin: 8px 0 8px;
+  }
+  .mob-shop-featured-title {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .mob-shop-featured-title em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .mob-product-featured {
+    background: var(--cream-deep, #E6DCBE);
+    border: 1px solid rgba(47, 64, 48, 0.18);
+    padding: 20px 20px 18px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 18px rgba(27, 36, 24, 0.05);
+    animation: floatBreath 6s ease-in-out infinite;
+  }
+  .mob-product-featured:nth-of-type(1) { animation-delay: 0s; }
+  .mob-product-featured:nth-of-type(2) { animation-delay: -2s; }
+  .mob-product-featured:nth-of-type(3) { animation-delay: -4s; }
+  .mob-product-featured-tag {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--moss);
+    background: rgba(47, 64, 48, 0.08);
+    padding: 4px 9px;
+    border-radius: 99px;
+    margin-bottom: 10px;
+  }
+
+  /* Mobile product type tiles */
+  .mob-shop-types-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin: 8px 0 8px;
+  }
+  .mob-shop-types-title {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .mob-shop-types-title em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .mob-shop-types-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 38px; }
+  .mob-shop-type-tile {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 18px rgba(27, 36, 24, 0.04);
+    animation: floatBreath 6.5s ease-in-out infinite;
+  }
+  .mob-shop-type-tile:nth-of-type(1) { animation-delay: -0.0s; }
+  .mob-shop-type-tile:nth-of-type(2) { animation-delay: -1.6s; }
+  .mob-shop-type-tile:nth-of-type(3) { animation-delay: -3.2s; }
+  .mob-shop-type-tile:nth-of-type(4) { animation-delay: -4.8s; }
+  .mob-shop-type-icon {
+    width: 44px;
+    height: 44px;
+    color: var(--moss);
+    flex-shrink: 0;
+  }
+  .mob-shop-type-body { flex: 1; min-width: 0; }
+  .mob-shop-type-name {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    margin-bottom: 4px;
+  }
+  .mob-shop-type-foot {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--moss);
+  }
+
+  /* Mobile maker tiles — six stacked editorial tiles */
+  .mob-shop-makers-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin: 38px 0 8px;
+  }
+  .mob-shop-makers-title {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .mob-shop-makers-title em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .mob-shop-makers-list { display: flex; flex-direction: column; gap: 12px; }
+  .mob-shop-maker-tile {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 22px 22px 20px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 18px rgba(27, 36, 24, 0.04);
+    animation: floatBreath 7.5s ease-in-out infinite;
+  }
+  .mob-shop-maker-logo {
+    /* Fixed bounding box for visually-uniform logos at any aspect ratio. */
+    width: 120px;
+    height: 38px;
+    margin-bottom: 14px;
+    object-fit: contain;
+    object-position: left center;
+    mix-blend-mode: multiply;
+    display: block;
+    filter: grayscale(1) opacity(0.78);
+    transition: filter 0.4s var(--ease);
+  }
+  .mob-shop-maker-tile:active .mob-shop-maker-logo,
+  .mob-shop-maker-tile:hover .mob-shop-maker-logo {
+    filter: grayscale(0) opacity(1);
+  }
+  .mob-shop-maker-tile:nth-of-type(1) { animation-delay: -0.0s; }
+  .mob-shop-maker-tile:nth-of-type(2) { animation-delay: -1.2s; }
+  .mob-shop-maker-tile:nth-of-type(3) { animation-delay: -2.4s; }
+  .mob-shop-maker-tile:nth-of-type(4) { animation-delay: -3.6s; }
+  .mob-shop-maker-tile:nth-of-type(5) { animation-delay: -4.8s; }
+  .mob-shop-maker-tile:nth-of-type(6) { animation-delay: -6.0s; }
+  .mob-shop-maker-tile-where {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 10px;
+  }
+  .mob-shop-maker-tile-name {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    margin-bottom: 12px;
+  }
+  .mob-shop-maker-tile-line {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  .mob-shop-maker-tile-foot {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--moss);
+  }
+
+  /* Mobile brand-detail view */
+  .mob-shop-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: none;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0;
+    margin: 4px 0 24px;
+  }
+  .mob-shop-back svg { width: 16px; height: 16px; }
+  .mob-shop-brand-intro { margin-bottom: 28px; }
+  .mob-shop-brand-intro-where {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 12px;
+  }
+  .mob-shop-brand-intro-name {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    margin-bottom: 16px;
+  }
+  .mob-shop-brand-intro-story {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .mob-shop-brand-products { display: flex; flex-direction: column; gap: 10px; }
+  /* Brand chip behaviour: hidden inside the brand-detail view (the page
+     header already names the brand), shown as plain text inside the
+     type-detail view (which mixes brands). */
+  #mobShopBrandView .mob-product-brand { display: none; }
+  .mob-product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .mob-product {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 14px 16px;
+  }
+  .mob-product-brand {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .mob-product-name {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    line-height: 1.18;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .mob-product-name em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .mob-product-note {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+  .mob-product-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .mob-product-price {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .mob-product-buy {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--moss);
+    color: var(--cream);
+    border-radius: 99px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .mob-product-buy:active { background: var(--ink); }
