@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout>
+  <section class="page page-services" id="services">
+    <div class="page-inner">
+      <div class="services-head fade-in" style="--fade-delay: 0s;">
+        <h2>A gardener for the gardens of Barnes <img class="amp-symbol" src="ampersand.png" alt="and"> beyond.</h2>
+      </div>
+
+      <div class="service-grid fade-in" style="--fade-delay: 0.4s;">
+        <div class="service service-expandable" data-expandable>
+          <span class="service-num" aria-hidden="true">—</span>
+          <div>
+            <div class="service-name">Garden renovations</div>
+            <div class="service-desc">Reworking tired gardens. Planting schemes, beds and structure, rather than starting from scratch. <button class="expand-toggle" type="button">+ also offered</button></div>
+            <div class="service-extra">
+              <p><strong>Clearances.</strong> Available where needed, though Gary's preference is renovation over clearance. Most gardens have more to keep than to remove.</p>
+            </div>
+          </div>
+        </div>
+        <div class="service">
+          <span class="service-num" aria-hidden="true">—</span>
+          <div>
+            <div class="service-name">Productive gardens</div>
+            <div class="service-desc">Vegetables, herbs, soft fruit, cutting flowers. Designed to actually be used.</div>
+          </div>
+        </div>
+        <div class="service">
+          <span class="service-num" aria-hidden="true">—</span>
+          <div>
+            <div class="service-name">Source and supply plants</div>
+            <div class="service-desc">From specialist nurseries. The right plant, well grown, suited to the spot.</div>
+          </div>
+        </div>
+        <div class="service service-expandable service-group-end" data-expandable>
+          <span class="service-num" aria-hidden="true">—</span>
+          <div>
+            <div class="service-name">Garden ornaments</div>
+            <div class="service-desc">Vintage stoneware, metalware and garden objets. <button class="expand-toggle" type="button">+ read more</button></div>
+            <div class="service-extra">
+              <p>Gary deals in vintage stoneware, metalware and <em>objets d'art</em>, the French term for the variety of collectable pieces that bring weight and patina to a garden. Troughs, urns, staddle stones, statuary, gates, finials, planters and ornament. Sourced and placed properly, with a feel for scale, age and where each piece wants to sit.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="service">
+          <span class="service-num" aria-hidden="true">—</span>
+          <div>
+            <div class="service-name">Regular maintenance</div>
+            <div class="service-desc">Weekly, fortnightly or monthly visits, year round. Quietly keeping things right.</div>
+          </div>
+        </div>
+        <div class="service">
+          <span class="service-num" aria-hidden="true">—</span>
+          <div>
+            <div class="service-name">Lawn care, treatment <img class="amp-symbol" src="ampersand.png" alt="and"> irrigation</div>
+            <div class="service-desc">Mowing, scarifying, feeding, top dressing; smart irrigation systems installed and maintained.</div>
+          </div>
+        </div>
+        <div class="service">
+          <span class="service-num" aria-hidden="true">—</span>
+          <div>
+            <div class="service-name">Pruning <img class="amp-symbol" src="ampersand.png" alt="and"> tree care</div>
+            <div class="service-desc">Wisteria, climbers, fruit trees and shrubs. By hand, in season, for the long term.</div>
+          </div>
+        </div>
+        <div class="service">
+          <span class="service-num" aria-hidden="true">—</span>
+          <div>
+            <div class="service-name">Hedges, shaped</div>
+            <div class="service-desc">Beech, yew, box, hornbeam. Clipped properly, not just topped off.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mob-section" id="m-services" slot="mobile">
+    <button class="mob-page-back" type="button" data-mob-back aria-label="Back to home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    </button>
+    <h2>What's on <em>offer</em>.</h2>
+
+    <div class="mob-svc-grid">
+      <button class="mob-svc-card" type="button"
+              data-svc-title="Garden Renovation"
+              data-svc-body="Reworking gardens that have lost their shape — pulling out what's tired, restructuring beds, replanting from the ground up. The aim is a garden you actually want to be in again.">
+        <span class="mob-svc-title">Garden<br>Renovation</span>
+      </button>
+
+      <button class="mob-svc-card" type="button"
+              data-svc-title="Lawn Care &amp; Irrigation"
+              data-svc-body="Feeding, scarifying, aerating, overseeding. Smart irrigation systems sized to your garden — set them once, forget them, the lawn looks after itself.">
+        <span class="mob-svc-title">Lawn Care<br>&amp; Irrigation</span>
+      </button>
+
+      <button class="mob-svc-card" type="button"
+              data-svc-title="Regular Maintenance"
+              data-svc-body="Weekly, fortnightly or monthly visits. Mowing, weeding, pruning, deadheading — the steady hand that keeps a good garden good.">
+        <span class="mob-svc-title">Regular<br>Maintenance</span>
+      </button>
+
+      <button class="mob-svc-card" type="button"
+              data-svc-title="Plant Sourcing"
+              data-svc-body="Specialist nurseries across the south, picked for the right plant for the right spot. Mature stock, unusual varieties, the things you won't find at a chain garden centre.">
+        <span class="mob-svc-title">Plant<br>Sourcing</span>
+      </button>
+
+      <button class="mob-svc-card" type="button"
+              data-svc-title="Productive Gardens"
+              data-svc-body="Vegetable beds, herb gardens, soft fruit cages. Designed around what you actually eat, planted to last well beyond the first season.">
+        <span class="mob-svc-title">Productive<br>Gardens</span>
+      </button>
+
+      <button class="mob-svc-card" type="button"
+              data-svc-title="Pruning &amp; Tree Care"
+              data-svc-body="Wisteria twice a year, espaliered fruit trees, climbing roses, mature shrubs. Cuts the plant grows out of cleanly — never the panicked hack-back.">
+        <span class="mob-svc-title">Pruning<br>&amp; Tree Care</span>
+      </button>
+
+      <button class="mob-svc-card" type="button"
+              data-svc-title="Hedges, Shaped"
+              data-svc-body="Beech, yew, box, hornbeam. Hand-shaped to keep the lines true and the regrowth dense — never rushed with the hedge cutter.">
+        <span class="mob-svc-title">Hedges,<br>Shaped</span>
+      </button>
+
+      <button class="mob-svc-card" type="button"
+              data-svc-title="Vintage Materials"
+              data-svc-body="Troughs, urns, staddle stones, reclaimed terracotta. Sourced over decades from yards across the south — placed where they belong, not just where they fit.">
+        <span class="mob-svc-title">Vintage<br>Materials</span>
+      </button>
+    </div>
+
+    <!-- Service popup (one instance, reused) -->
+    <div class="mob-svc-popup" id="mobSvcPopup" aria-hidden="true">
+      <div class="mob-svc-popup-card" role="dialog" aria-modal="true" aria-labelledby="mobSvcPopupTitle">
+        <button class="mob-svc-popup-close" type="button" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+        </button>
+        <h3 class="mob-svc-popup-title" id="mobSvcPopupTitle"></h3>
+        <p class="mob-svc-popup-body"></p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

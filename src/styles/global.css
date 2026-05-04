@@ -1074,3 +1074,317 @@
     margin-top: 14px;
   }
 
+
+  /* — Services page CSS, desktop (lines 581–772); verbatim — */
+  /* ════════════════════════════════════════════════════════════════════
+     SERVICES PAGE
+     ════════════════════════════════════════════════════════════════════ */
+  .page-services .page-inner {
+    padding: var(--page-pad-y) var(--page-pad-x) var(--page-pad-y) 0;
+    justify-content: center;
+  }
+  .services-head {
+    margin-bottom: 50px;
+  }
+  .services-head h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 56px;
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    max-width: none;
+    white-space: nowrap;
+  }
+  .services-head h2 em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .amp-symbol {
+    display: inline-block;
+    height: 1.15em;
+    width: auto;
+    vertical-align: -0.28em;
+    margin: 0 0.06em;
+    /* Blend the black ink against the cream paper so any PNG matte
+       disappears and the symbol reads as drawn, not pasted. */
+    mix-blend-mode: multiply;
+    user-select: none;
+  }
+  /* Cemented in the menu — same height + baseline rule on desktop sidenav
+     and mobile list. The & sits visually as a letter alongside the others
+     instead of towering / dancing as the viewport changes. */
+  .sidenav .amp-symbol,
+  .mob-list-label .amp-symbol {
+    height: 0.85em;
+    vertical-align: -0.12em;
+    margin: 0 0.05em;
+  }
+  /* Slightly bigger flourish in display headings */
+  .case-title .amp-symbol,
+  .services-head .amp-symbol,
+  .blog-head .amp-symbol,
+  .shop-head .amp-symbol,
+  .podcast-headline .amp-symbol,
+  .mob-podcast-headline .amp-symbol,
+  .mob-hero-title .amp-symbol { height: 1.05em; vertical-align: -0.22em; }
+  .service-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 56px;
+    max-width: 1100px;
+  }
+  .service-tier {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 22px 0 12px;
+    border-top: 1px solid var(--rule-strong);
+  }
+  .service-tier:first-child { padding-top: 0; }
+  .service-tier-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+  }
+  .service-tier-name {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    line-height: 1;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .service-tier-name em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .service-tier-note {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-left: auto;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .service {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    transition: padding 0.4s, color 0.3s;
+    cursor: default;
+  }
+  .service:hover { padding-left: 12px; }
+  .service:hover .service-num,
+  .service:hover .service-name,
+  .service:hover .service-name em,
+  .service:hover .service-desc,
+  .service:hover .service-desc strong,
+  .service:hover .service-extra p,
+  .service:hover .service-extra em,
+  .service:hover .service-extra strong,
+  .service:hover .expand-toggle {
+    color: var(--moss);
+  }
+  .service:hover .service-extra p { border-left-color: var(--moss); }
+  .service-num {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--sage);
+    font-weight: 400;
+    padding-top: 6px;
+    transition: color 0.3s;
+  }
+  /* Soft visual break between the two service groups (formerly the
+     "Signature commissions" and "Ongoing care" tiers). Just space — no
+     line, no heading. */
+  .service-group-end { margin-bottom: 28px; }
+  .service-name {
+    font-family: 'Fraunces', serif;
+    font-size: 21px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    transition: color 0.3s;
+  }
+  .service-name em {
+    font-style: italic;
+    color: var(--moss);
+    transition: color 0.3s;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .service-desc {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin-top: 3px;
+    opacity: 0.85;
+    transition: color 0.3s;
+  }
+  .expand-toggle {
+    display: inline-block;
+    margin-top: 6px;
+    background: transparent;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--moss);
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.3s;
+  }
+  .expand-toggle:hover { color: var(--moss-deep); text-decoration: underline; }
+  .service-extra {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.4s, margin-top 0.4s;
+    margin-top: 0;
+  }
+  .service-expandable.is-open .service-extra {
+    max-height: 200px;
+    opacity: 1;
+    margin-top: 10px;
+  }
+  .service-extra p {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0;
+    padding-left: 12px;
+    border-left: 1px solid var(--rule-strong);
+  }
+  .service-extra em { font-style: italic; color: var(--moss); }
+  .service-extra strong { color: var(--ink); font-weight: 500; }
+
+  /* — Services page CSS, mobile (lines 4571–4675); verbatim — */
+  /* ─── SERVICES PAGE: 2-up grid of square cards, tap for popup ─── */
+  .mob-svc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .mob-svc-card {
+    appearance: none;
+    background: transparent;
+    border: 1px solid rgba(27, 36, 24, 0.32);
+    border-radius: 2px;
+    aspect-ratio: 1 / 1;
+    padding: 14px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    text-align: left;
+    cursor: pointer;
+    color: var(--ink);
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  }
+  .mob-svc-card:active {
+    background: rgba(27, 36, 24, 0.05);
+    transform: scale(0.985);
+  }
+  .mob-svc-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(16px, 4.6vw, 22px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+
+  /* Service popup overlay */
+  .mob-svc-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(27, 36, 24, 0.55);
+    z-index: 1800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+  .mob-svc-popup.is-open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+  }
+  .mob-svc-popup-card {
+    background: var(--cream);
+    padding: 30px 24px 26px;
+    max-width: 460px;
+    width: 100%;
+    border-radius: 4px;
+    position: relative;
+    transform: translateY(18px);
+    transition: transform 0.35s var(--ease);
+    box-shadow: 0 18px 50px rgba(27, 36, 24, 0.22);
+  }
+  .mob-svc-popup.is-open .mob-svc-popup-card { transform: translateY(0); }
+  .mob-svc-popup-close {
+    appearance: none;
+    background: transparent;
+    border: none;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 40px;
+    height: 40px;
+    color: var(--ink);
+    cursor: pointer;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mob-svc-popup-close svg { width: 22px; height: 22px; }
+  .mob-svc-popup-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 30px 14px 0;
+  }
+  .mob-svc-popup-body {
+    font-family: 'DM Sans', 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(27, 36, 24, 0.85);
+    margin: 0;
+  }
+
+
+  /* — .amp-symbol shared utility (lines 606–616); verbatim — */
+  .amp-symbol {
+    display: inline-block;
+    height: 1.15em;
+    width: auto;
+    vertical-align: -0.28em;
+    margin: 0 0.06em;
+    /* Blend the black ink against the cream paper so any PNG matte
+       disappears and the symbol reads as drawn, not pasted. */
+    mix-blend-mode: multiply;
+    user-select: none;
+  }
