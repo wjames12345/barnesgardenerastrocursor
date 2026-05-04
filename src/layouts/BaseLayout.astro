@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import SideNav from '../components/SideNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import MobileMenu from '../components/MobileMenu.astro';
@@ -120,6 +121,35 @@ const localBusinessJsonLd = {
 <link rel="preload" as="image" href="/BULB TO FLOWER.png" fetchpriority="high">
 
 <script type="application/ld+json" set:html={JSON.stringify(localBusinessJsonLd)} />
+
+<ClientRouter />
+
+<!-- Smart page-transition loader: bulb-to-flower cascade only shows when a
+     navigation hasn't completed within ~200ms. Fast navs get no loader at all
+     (no flash). Slow navs get a 0.55s cascade as a perceptual bridge. -->
+<script is:inline>
+  (function () {
+    var THRESHOLD = 200;
+    var timer = null;
+    function showLoader() {
+      var l = document.getElementById('loader');
+      if (l) l.classList.add('visible');
+    }
+    function hideLoader() {
+      if (timer) { clearTimeout(timer); timer = null; }
+      var l = document.getElementById('loader');
+      if (l) l.classList.remove('visible');
+    }
+    document.addEventListener('astro:before-preparation', function () {
+      timer = setTimeout(showLoader, THRESHOLD);
+    });
+    document.addEventListener('astro:after-swap', hideLoader);
+    // Defensive: clear stale timer if user aborts navigation mid-flight.
+    document.addEventListener('astro:before-swap', function () {
+      if (timer) { clearTimeout(timer); timer = null; }
+    });
+  })();
+</script>
 </head>
 <body data-mob-page={mobPage}>
 
@@ -150,7 +180,7 @@ const localBusinessJsonLd = {
     </div><!-- /.pages -->
 
     <!-- LOADING OVERLAY (4 stacked composites, each clipped to one bulb, cascading flash) -->
-    <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader" id="loader" aria-hidden="true" transition:persist>
       <div class="bulb-stage">
         <img src="/BULB TO FLOWER.png" alt="" style="--i: 0">
         <img src="/BULB TO FLOWER.png" alt="" style="--i: 1">
