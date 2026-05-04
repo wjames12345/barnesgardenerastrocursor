@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout>
+  <section class="page page-about" id="about">
+    <div class="page-inner">
+      <div class="about-header fade-in" style="--fade-delay: 0.0s;">
+        <h2>Creating <em>sustainable</em> gardens for a <em>changing</em> climate</h2>
+      </div>
+
+      <div class="about-body fade-in" style="--fade-delay: 0.25s;">
+        <div class="gary-wrap">
+          <img src="__GARY__" alt="Gary Hazell, gardener" id="garyImg">
+        </div>
+        <div class="about-text">
+          <p class="lead">Gary is an independent gardener based in London, working across Barnes and the surrounding areas, creating and maintaining gardens that respond to how the climate is actually shifting, not how it used to be.</p>
+          <p>His approach comes from a genuine and long standing passion for plants, horticulture and design. From an early age, he had access to a landscape shaped by Capability Brown, which formed an early understanding of how gardens should feel. Natural, considered, and able to evolve over time.</p>
+          <p>That continued into his teenage years, growing up next to a farm and spending most of his time outside when not studying or playing sport. This built a practical understanding of soil, seasons, and how plants behave in real conditions.</p>
+          <p>After university, he took on a walled cottage garden with enough land to grow freely, from herbs and vegetables to more structured planting. It became a working space to experiment, refine and understand what actually works.</p>
+          <p>Alongside this, he studied graphic design and art at the London College of Printing, which continues to influence his work today through a strong sense of composition, colour and form within planting.</p>
+          <p>He has worked professionally as a gardener since 2016 and now manages his own potager near Richmond Park, using it to grow, test and refine planting approaches, particularly in response to changing seasonal patterns.</p>
+          <p><strong>Gary is an accredited planter at the RHS Chelsea Flower Show.</strong></p>
+          <p>His work focuses on garden renovation rather than simple clearance, alongside lawn care, treatment and irrigation, plant sourcing and supply, productive gardens, and the sourcing and placement of vintage garden materials and objects.</p>
+          <p>He works across a defined area of West and South West London, centred around Barnes, extending through Richmond, Wimbledon and Kingston, up through Chelsea, Kensington and Notting Hill, and out towards Brentford and Shepherd's Bush. Keeping the area tight allows for proper attention to each garden over time.</p>
+          <p>Sustainability underpins everything. Planting, soil health, water use and long term resilience are considered from the outset, with a consistent focus on best practice.</p>
+          <p class="closing">With a changing environment, we must adapt our approach. Good horticulture, applied properly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mob-section" id="m-about" slot="mobile">
+    <button class="mob-page-back" type="button" data-mob-back aria-label="Back to home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    </button>
+    <h2>An independent gardener.</h2>
+    <p class="lead">Creating sustainable gardens for a changing climate.</p>
+    <p>Gary is an independent gardener based in London, working across Barnes and the surrounding areas, creating and maintaining gardens that respond to how the climate is actually shifting, not how it used to be.</p>
+    <p>His approach comes from a long standing passion for plants, horticulture and design. From an early age, he had access to a landscape shaped by Capability Brown, which formed an early understanding of how gardens should feel: natural, considered, and able to evolve over time.</p>
+    <p>He has worked professionally as a gardener since 2016 and now manages his own potager near Richmond Park. Gary is an accredited planter at the RHS Chelsea Flower Show.</p>
+    <p>His work focuses on garden renovation rather than simple clearance, alongside lawn care, irrigation, plant sourcing, productive gardens, and the placement of vintage garden materials.</p>
+    <p>The approach itself has not changed. Good horticulture, applied properly. What has changed is the environment.</p>
+  </section>
+</BaseLayout>

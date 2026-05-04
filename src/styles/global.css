@@ -924,3 +924,153 @@
   @keyframes lineRise {
     to { opacity: 1; transform: translateY(0); }
   }
+
+  /* — About page CSS (lines 493–579); verbatim — */
+  /* ════════════════════════════════════════════════════════════════════
+     ABOUT PAGE — Gary on left, text echoing his outline on right
+     ════════════════════════════════════════════════════════════════════ */
+  .page-about .page-inner {
+    /* About uses 0 right-padding so the floated Gary cut-out can extend
+       to the inner edge of the stage; 50px left aligns the heading on
+       the same vertical as the sidenav rail. */
+    padding: var(--page-pad-y) 0 var(--page-pad-y) 50px;
+  }
+  .about-header {
+    margin-bottom: 28px;
+  }
+  .about-header h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    max-width: none;
+    white-space: nowrap;
+  }
+  .about-header h2 em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+
+  .about-body {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+  }
+  .gary-wrap {
+    float: right;
+    width: 360px;
+    margin: 0 -10px 8px 32px;
+    /* shape-outside is set via JS at runtime to avoid duplicating the data URI */
+    shape-outside: var(--gary-shape, none);
+    shape-margin: 18px;
+    shape-image-threshold: 0.5;
+    /* the visible image */
+  }
+  .gary-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* tone slightly so it harmonises with the cream */
+    mix-blend-mode: multiply;
+    opacity: 0.97;
+  }
+  .about-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .about-text p {
+    margin-bottom: 8.5px;
+  }
+  .about-text p strong {
+    font-weight: 500;
+    color: var(--ink);
+    font-style: normal;
+  }
+  .about-text p em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .about-text .lead {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 14px;
+    font-variation-settings: "opsz" 144;
+  }
+  .about-text .closing {
+    margin-top: 10px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+
+  /* — MOBILE SECTION BASE — typography for all mob-section pages, source 3383–3441 — */
+  /* ─── CONTENT SECTIONS ─── */
+  /* ─── PAGE SECTIONS ─── exactly one shown at a time ─── */
+  .mob-section {
+    display: none;
+    min-height: 100svh;
+    padding: 84px 26px 64px;
+    position: relative;
+    background: var(--cream);
+  }
+  .mob-section h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(44px, 12vw, 56px);
+    line-height: 0.94;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .mob-section h2 em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .mob-section .lead {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.42;
+    color: var(--moss);
+    margin-bottom: 22px;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .mob-section p {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+  }
+  .mob-section p strong {
+    color: var(--ink);
+    font-weight: 500;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .mob-section .gary-img {
+    width: 78%;
+    max-width: 320px;
+    margin: 4px auto 28px;
+    display: block;
+    mix-blend-mode: multiply;
+  }
+  .mob-section .map-img {
+    width: 100%;
+    display: block;
+    mix-blend-mode: multiply;
+    margin-top: 14px;
+  }
+
