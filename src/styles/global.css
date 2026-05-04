@@ -45,7 +45,7 @@
   }
 
   body {
-    font-family: 'DM Sans', system-ui, sans-serif;
+    font-family: 'IM Fell Double Pica', system-ui, sans-serif;
     background: var(--cream);
     color: var(--ink);
     line-height: 1.5;
@@ -59,7 +59,7 @@
   img { max-width: 100%; display: block; }
 
   h1, h2, h3, h4 {
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'IM Fell Double Pica', Georgia, serif;
     font-weight: 400;
     line-height: 1;
     letter-spacing: -0.02em;
@@ -137,7 +137,7 @@
     display: flex;
     flex-direction: column;
     gap: 14px;
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 14.5px;
     letter-spacing: -0.005em;
   }
@@ -190,7 +190,7 @@
     color: var(--cream);
     border: none;
     border-radius: 99px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 12.5px;
     font-weight: 500;
     letter-spacing: 0.04em;
@@ -262,7 +262,7 @@
     transform: translateX(0);
   }
   .stage-footer .left em {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     text-transform: none;
     letter-spacing: 0;
@@ -299,7 +299,7 @@
 
   /* Reusable bits */
   .eyebrow {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     letter-spacing: 0.26em;
     text-transform: uppercase;
@@ -541,7 +541,7 @@
     padding: 10px 4px;
   }
   .mob-menu-label {
-    font-family: 'DM Sans', 'Inter', sans-serif;
+    font-family: 'IM Fell Double Pica', 'Inter', sans-serif;
     font-weight: 300;
     font-size: clamp(15px, 3.6vw, 18px);
     letter-spacing: 0.22em;
@@ -600,7 +600,7 @@
   }
   .mob-menu-desc p {
     margin: 0;
-    font-family: 'DM Sans', 'Inter', sans-serif;
+    font-family: 'IM Fell Double Pica', 'Inter', sans-serif;
     font-weight: 300;
     font-size: 13.5px;
     line-height: 1.55;
@@ -612,7 +612,7 @@
   .mob-menu-foot {
     margin-top: 22px;
     padding-top: 18px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -737,7 +737,7 @@
   }
   .wordmark .line {
     display: block;
-    font-family: 'Fraunces', Georgia, serif;
+    font-family: 'IM Fell Double Pica', Georgia, serif;
     font-size: 144px;
     line-height: 0.92;
     letter-spacing: -0.045em;
@@ -776,7 +776,7 @@
 
   .home-signature {
     margin-top: 28px;
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-size: 18px;
     color: var(--moss);
@@ -867,7 +867,7 @@
      not per-line). All three words share the same upright Fraunces — no
      italic on "Barnes". */
   .mob-hero-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-weight: 400;
     font-size: clamp(58px, 21vw, 110px);
     line-height: 0.82;
@@ -939,7 +939,7 @@
     margin-bottom: 28px;
   }
   .about-header h2 {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-weight: 400;
     font-size: 44px;
     line-height: 1.05;
@@ -978,7 +978,7 @@
     opacity: 0.97;
   }
   .about-text {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 12.5px;
     line-height: 1.55;
     color: var(--ink-soft);
@@ -992,13 +992,13 @@
     font-style: normal;
   }
   .about-text p em {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .about-text .lead {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 17px;
     line-height: 1.4;
     color: var(--ink);
@@ -1007,7 +1007,7 @@
   }
   .about-text .closing {
     margin-top: 10px;
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-size: 15px;
     color: var(--moss);
@@ -1025,7 +1025,7 @@
     background: var(--cream);
   }
   .mob-section h2 {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-weight: 400;
     font-size: clamp(44px, 12vw, 56px);
     line-height: 0.94;
@@ -1039,7 +1039,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .mob-section .lead {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-size: 19px;
     line-height: 1.42;
@@ -1048,7 +1048,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .mob-section p {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 16px;
     line-height: 1.7;
     color: var(--ink-soft);
@@ -1087,7 +1087,7 @@
     margin-bottom: 50px;
   }
   .services-head h2 {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-weight: 400;
     font-size: 56px;
     line-height: 0.96;
@@ -1145,7 +1145,7 @@
   }
   .service-tier:first-child { padding-top: 0; }
   .service-tier-eyebrow {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     letter-spacing: 0.26em;
     text-transform: uppercase;
@@ -1153,7 +1153,7 @@
     font-weight: 500;
   }
   .service-tier-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 22px;
     line-height: 1;
     letter-spacing: -0.015em;
@@ -1165,7 +1165,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .service-tier-note {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-size: 14px;
     color: var(--ink-soft);
@@ -1196,7 +1196,7 @@
   }
   .service:hover .service-extra p { border-left-color: var(--moss); }
   .service-num {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 18px;
     line-height: 1;
     color: var(--sage);
@@ -1209,7 +1209,7 @@
      line, no heading. */
   .service-group-end { margin-bottom: 28px; }
   .service-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 21px;
     line-height: 1.05;
     letter-spacing: -0.02em;
@@ -1235,7 +1235,7 @@
     margin-top: 6px;
     background: transparent;
     border: none;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 11px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -1298,7 +1298,7 @@
     transform: scale(0.985);
   }
   .mob-svc-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-weight: 400;
     font-size: clamp(16px, 4.6vw, 22px);
     line-height: 1.05;
@@ -1358,7 +1358,7 @@
   }
   .mob-svc-popup-close svg { width: 22px; height: 22px; }
   .mob-svc-popup-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-weight: 400;
     font-size: 26px;
     line-height: 1.08;
@@ -1367,7 +1367,7 @@
     margin: 0 30px 14px 0;
   }
   .mob-svc-popup-body {
-    font-family: 'DM Sans', 'Inter', sans-serif;
+    font-family: 'IM Fell Double Pica', 'Inter', sans-serif;
     font-weight: 400;
     font-size: 15px;
     line-height: 1.6;
@@ -1418,7 +1418,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .lat-tagline {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-size: 16px;
     color: var(--moss);
@@ -1426,7 +1426,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .lat-lead {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 19px;
     line-height: 1.45;
     color: var(--ink);
@@ -1446,7 +1446,7 @@
     align-items: start;
   }
   .step-num {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 32px;
     font-style: italic;
     line-height: 0.9;
@@ -1454,7 +1454,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .step h3 {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-weight: 400;
     font-size: 19px;
     color: var(--ink);
@@ -1485,7 +1485,7 @@
     margin-bottom: 12px;
   }
   .lat-investment p {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 14px;
     line-height: 1.55;
     color: var(--ink-soft);
@@ -1512,7 +1512,7 @@
   .form-row.single { grid-template-columns: 1fr; }
   .field { display: flex; flex-direction: column; position: relative; }
   .field label {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     letter-spacing: 0.26em;
     text-transform: uppercase;
@@ -1526,7 +1526,7 @@
     border: none;
     border-bottom: 1px solid var(--rule-strong);
     color: var(--ink);
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 17px;
     font-weight: 400;
     padding: 4px 0 12px;
@@ -1577,7 +1577,7 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 11.5px;
     font-weight: 500;
     letter-spacing: 0.18em;
@@ -1610,7 +1610,7 @@
     position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
   }
   .file-status {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 12.5px;
     color: var(--ink-soft);
     letter-spacing: 0.01em;
@@ -1635,7 +1635,7 @@
     color: var(--cream);
     border: none;
     border-radius: 99px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 11.5px;
     font-weight: 500;
     letter-spacing: 0.22em;
@@ -1686,7 +1686,7 @@
     pointer-events: none;
   }
   .form-success .success-eyebrow {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     letter-spacing: 0.26em;
     text-transform: uppercase;
@@ -1710,7 +1710,7 @@
     50% { opacity: 0.45; transform: scale(0.85); }
   }
   .form-success h3 {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-size: 44px;
     line-height: 1.05;
@@ -1724,7 +1724,7 @@
     color: var(--moss);
   }
   .form-success p {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 17px;
     line-height: 1.5;
     color: var(--ink-soft);
@@ -1733,7 +1733,7 @@
   }
   .form-success .receipt {
     margin-top: 36px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 12px;
     letter-spacing: 0.02em;
     color: var(--sage);
@@ -1758,21 +1758,21 @@
     align-items: baseline;
   }
   .mob-gen-step .num {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-size: 18px;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .mob-gen-step h3 {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-weight: 400;
     font-size: 17px;
     color: var(--ink);
     margin: 0 0 4px;
   }
   .mob-gen-step p {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 14.5px;
     line-height: 1.55;
     color: var(--ink-soft);
@@ -1790,7 +1790,7 @@
     gap: 6px;
   }
   .mob-gen-form label {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10px;
     letter-spacing: 0.26em;
     text-transform: uppercase;
@@ -1799,7 +1799,7 @@
   }
   .mob-gen-form input,
   .mob-gen-form textarea {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 16px;                 /* prevents iOS auto-zoom on focus */
     color: var(--ink);
     background: transparent;
@@ -1824,7 +1824,7 @@
     border: 1px dashed var(--moss);
     border-radius: 4px;
     color: var(--moss);
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-size: 16px;
     cursor: pointer;
@@ -1844,7 +1844,7 @@
     flex-shrink: 0;
   }
   .mob-gen-photo-status {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -1859,7 +1859,7 @@
     color: var(--cream);
     border: none;
     border-radius: 4px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 11px;
     letter-spacing: 0.26em;
     text-transform: uppercase;
@@ -1918,7 +1918,7 @@
 
   .gardens-head { text-align: center; }
   .gardens-head h2 {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-weight: 400;
     font-size: clamp(40px, 4vw, 56px);
     line-height: 1;
@@ -1955,7 +1955,7 @@
   .gardens-tile-name {
     display: block;
     margin-top: 12px;
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 20px;
     line-height: 1.15;
     letter-spacing: -0.018em;
@@ -1964,7 +1964,7 @@
   .gardens-tile-area {
     display: block;
     margin-top: 4px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -1976,7 +1976,7 @@
   /* ─── TESTIMONIAL GARDENS — vertical scrollable list, centred ─── */
   .mob-gardens-title {
     text-align: center;
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-weight: 400;
     font-size: clamp(34px, 8vw, 42px);
     line-height: 1;
@@ -2011,7 +2011,7 @@
   .mob-gardens-card-name {
     display: block;
     margin-top: 8px;
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 18px;
     line-height: 1.15;
     letter-spacing: -0.018em;
@@ -2020,7 +2020,7 @@
   .mob-gardens-card-area {
     display: block;
     margin-top: 2px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -2047,7 +2047,7 @@
     max-width: 880px;
   }
   .blog-head h2 {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-weight: 400;
     font-size: 50px;
     line-height: 0.96;
@@ -2061,14 +2061,14 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .blog-lead {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 16px;
     line-height: 1.45;
     color: var(--ink-soft);
     margin-bottom: 4px;
   }
   .blog-meta {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10px;
     letter-spacing: 0.18em;
     color: var(--sage);
@@ -2100,7 +2100,7 @@
     box-shadow: 0 6px 18px rgba(27, 36, 24, 0.06);
   }
   .post-date {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 9.5px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -2109,7 +2109,7 @@
     margin-bottom: 8px;
   }
   .post-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 20px;
     line-height: 1.15;
     letter-spacing: -0.018em;
@@ -2124,7 +2124,7 @@
   }
   .post-card:hover .post-title { color: var(--moss); }
   .post-excerpt {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 11.5px;
     line-height: 1.55;
     color: var(--ink-soft);
@@ -2135,7 +2135,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -2149,7 +2149,7 @@
   /* — Blog mobile CSS (lines 3997–4063); verbatim — */
   /* ─── MOBILE BLOG — post cards ─── */
   .mob-blog-meta {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10px;
     letter-spacing: 0.18em;
     color: var(--sage);
@@ -2175,7 +2175,7 @@
   }
   .mob-post-card:active { border-color: rgba(47, 64, 48, 0.35); }
   .mob-post-date {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 9.5px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -2184,7 +2184,7 @@
     margin-bottom: 8px;
   }
   .mob-post-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 20px;
     line-height: 1.18;
     letter-spacing: -0.018em;
@@ -2197,7 +2197,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .mob-post-excerpt {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 12.5px;
     line-height: 1.55;
     color: var(--ink-soft);
@@ -2207,7 +2207,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 11px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -2264,7 +2264,7 @@
     flex-shrink: 0;
   }
   .ios-popup-app {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.18em;
@@ -2291,7 +2291,7 @@
     color: var(--ink);
   }
   .ios-popup-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 19px;
     line-height: 1.2;
     letter-spacing: -0.018em;
@@ -2305,7 +2305,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .ios-popup-body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 12.5px;
     line-height: 1.5;
     color: var(--ink-soft);
@@ -2318,7 +2318,7 @@
     background: rgba(255, 255, 255, 0.55);
     border-radius: 10px;
     padding: 10px 14px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 13px;
     color: var(--ink);
     outline: none;
@@ -2339,7 +2339,7 @@
     flex: 1;
     padding: 9px 14px;
     border-radius: 10px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.04em;
@@ -2363,7 +2363,7 @@
   .ios-popup-subscribe:hover { background: var(--ink); border-color: var(--ink); }
   .ios-popup-thanks {
     display: none;
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-size: 14px;
     color: var(--moss);
@@ -2502,7 +2502,7 @@
     text-align: center;
   }
   .podcast-headline {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-weight: 400;
     font-size: clamp(38px, 4.6vw, 56px);
     line-height: 1.05;
@@ -2517,7 +2517,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .podcast-sub {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 14px;
     line-height: 1.5;
     color: var(--ink-soft);
@@ -2539,7 +2539,7 @@
     background: rgba(255, 255, 255, 0.55);
     border-radius: 12px;
     padding: 13px 16px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 14px;
     color: var(--ink);
     outline: none;
@@ -2558,7 +2558,7 @@
     color: var(--cream);
     border-radius: 12px;
     padding: 13px 22px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.02em;
@@ -2570,7 +2570,7 @@
   .podcast-form button:active { transform: scale(0.98); }
   .podcast-thanks {
     display: none;
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-size: 16px;
     color: var(--moss);
@@ -2585,7 +2585,7 @@
     padding-top: 120px;
   }
   .mob-podcast-headline {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-weight: 400;
     font-size: clamp(30px, 8.5vw, 38px);
     line-height: 1.1;
@@ -2600,7 +2600,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .mob-podcast-sub {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 14px;
     line-height: 1.5;
     color: var(--ink-soft);
@@ -2621,7 +2621,7 @@
     background: rgba(255, 255, 255, 0.55);
     border-radius: 12px;
     padding: 13px 16px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 14px;
     color: var(--ink);
     outline: none;
@@ -2639,7 +2639,7 @@
     color: var(--cream);
     border-radius: 12px;
     padding: 13px 20px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 13px;
     font-weight: 500;
     white-space: nowrap;
@@ -2647,7 +2647,7 @@
   .mob-podcast-form button:active { transform: scale(0.98); }
   .mob-podcast-thanks {
     display: none;
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-size: 16px;
     color: var(--moss);
@@ -2673,7 +2673,7 @@
     max-width: 880px;
   }
   .shop-head h2 {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-weight: 400;
     font-size: 50px;
     line-height: 0.96;
@@ -2687,14 +2687,14 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .shop-lead {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 16px;
     line-height: 1.45;
     color: var(--ink-soft);
     margin-bottom: 6px;
   }
   .shop-disclosure {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10px;
     letter-spacing: 0.18em;
     color: var(--sage);
@@ -2715,7 +2715,7 @@
      of that type from across all brands. */
   .shop-types-head { margin: 4px 0 18px; max-width: 880px; }
   .shop-types-eyebrow {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.28em;
@@ -2724,7 +2724,7 @@
     margin-bottom: 10px;
   }
   .shop-types-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 32px;
     line-height: 1.05;
     letter-spacing: -0.02em;
@@ -2770,7 +2770,7 @@
   }
   .shop-type-tile:hover .shop-type-icon { transform: rotate(-6deg) scale(1.08); }
   .shop-type-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-weight: 400;
     font-size: 24px;
@@ -2781,7 +2781,7 @@
     margin-bottom: 10px;
   }
   .shop-type-line {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 12px;
     line-height: 1.5;
     color: var(--ink-soft);
@@ -2789,7 +2789,7 @@
     flex: 1;
   }
   .shop-type-foot {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -2800,7 +2800,7 @@
      unified makers section that includes brand color signatures. */
   .shop-makers-head { margin: 4px 0 18px; max-width: 880px; }
   .shop-featured-eyebrow {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.28em;
@@ -2809,7 +2809,7 @@
     margin-bottom: 10px;
   }
   .shop-featured-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 32px;
     line-height: 1.05;
     letter-spacing: -0.02em;
@@ -2854,7 +2854,7 @@
   .product-featured .product-price { font-size: 16px; }
   .product-featured-tag {
     display: inline-block;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 9px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -2870,7 +2870,7 @@
      sit a beat apart. */
   .shop-makers-head { margin: 0 0 18px; max-width: 880px; }
   .shop-makers-eyebrow {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.28em;
@@ -2879,7 +2879,7 @@
     margin-bottom: 10px;
   }
   .shop-makers-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 32px;
     line-height: 1.05;
     letter-spacing: -0.02em;
@@ -2942,7 +2942,7 @@
   .shop-maker-tile:nth-child(6) { animation-delay: -6.0s; }
   .shop-maker-tile:hover { animation-play-state: paused; }
   .shop-maker-tile-where {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.22em;
@@ -2951,7 +2951,7 @@
     margin-bottom: 12px;
   }
   .shop-maker-tile-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-weight: 400;
     font-size: 30px;
@@ -2963,7 +2963,7 @@
     transition: color 0.25s;
   }
   .shop-maker-tile-line {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 12.5px;
     line-height: 1.5;
     color: var(--ink-soft);
@@ -2974,7 +2974,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 11px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -3008,7 +3008,7 @@
     background: transparent;
     border: none;
     color: var(--ink-soft);
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 11.5px;
     font-weight: 500;
     letter-spacing: 0.22em;
@@ -3023,7 +3023,7 @@
 
   .shop-brand-intro { max-width: 720px; margin-bottom: 40px; }
   .shop-brand-intro-where {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.28em;
@@ -3032,7 +3032,7 @@
     margin-bottom: 14px;
   }
   .shop-brand-intro-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-weight: 400;
     font-size: 56px;
@@ -3043,7 +3043,7 @@
     margin-bottom: 18px;
   }
   .shop-brand-intro-story {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 17px;
     line-height: 1.5;
     color: var(--ink-soft);
@@ -3069,7 +3069,7 @@
     .product-featured, .shop-maker-tile { animation: none; }
   }
   .shop-section-num {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 11px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -3077,7 +3077,7 @@
     font-weight: 500;
   }
   .shop-section-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 24px;
     letter-spacing: -0.02em;
     color: var(--ink);
@@ -3108,7 +3108,7 @@
     box-shadow: 0 6px 18px rgba(27, 36, 24, 0.06);
   }
   .product-brand {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 9.5px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -3117,7 +3117,7 @@
     margin-bottom: 6px;
   }
   .product-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 17px;
     line-height: 1.18;
     letter-spacing: -0.012em;
@@ -3130,7 +3130,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .product-note {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 11.5px;
     line-height: 1.5;
     color: var(--ink-soft);
@@ -3144,7 +3144,7 @@
     gap: 12px;
   }
   .product-price {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 13px;
     font-weight: 500;
     color: var(--ink);
@@ -3159,7 +3159,7 @@
     color: var(--moss);
     border: 1px solid var(--moss);
     border-radius: 99px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.1em;
@@ -3181,7 +3181,7 @@
   /* — Shop page CSS, mobile (lines 3627–3995); verbatim — */
   /* ─── MOBILE SHOP — product cards, brand chips, buy buttons ─── */
   .mob-shop-disclosure {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10px;
     letter-spacing: 0.18em;
     color: var(--sage);
@@ -3199,7 +3199,7 @@
     margin-bottom: 14px;
   }
   .mob-shop-section-num {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -3207,7 +3207,7 @@
     font-weight: 500;
   }
   .mob-shop-section-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 22px;
     letter-spacing: -0.02em;
     color: var(--ink);
@@ -3223,7 +3223,7 @@
 
   /* Mobile featured picks — three stacked cards, breathing animation. */
   .mob-shop-featured-eyebrow {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.28em;
@@ -3232,7 +3232,7 @@
     margin: 8px 0 8px;
   }
   .mob-shop-featured-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 26px;
     line-height: 1.1;
     letter-spacing: -0.02em;
@@ -3258,7 +3258,7 @@
   .mob-product-featured:nth-of-type(3) { animation-delay: -4s; }
   .mob-product-featured-tag {
     display: inline-block;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 9px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -3271,7 +3271,7 @@
 
   /* Mobile product type tiles */
   .mob-shop-types-eyebrow {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.28em;
@@ -3280,7 +3280,7 @@
     margin: 8px 0 8px;
   }
   .mob-shop-types-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 26px;
     line-height: 1.1;
     letter-spacing: -0.02em;
@@ -3318,7 +3318,7 @@
   }
   .mob-shop-type-body { flex: 1; min-width: 0; }
   .mob-shop-type-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-weight: 400;
     font-size: 22px;
@@ -3329,7 +3329,7 @@
     margin-bottom: 4px;
   }
   .mob-shop-type-foot {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -3338,7 +3338,7 @@
 
   /* Mobile maker tiles — six stacked editorial tiles */
   .mob-shop-makers-eyebrow {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.28em;
@@ -3347,7 +3347,7 @@
     margin: 38px 0 8px;
   }
   .mob-shop-makers-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 26px;
     line-height: 1.1;
     letter-spacing: -0.02em;
@@ -3396,7 +3396,7 @@
   .mob-shop-maker-tile:nth-of-type(5) { animation-delay: -4.8s; }
   .mob-shop-maker-tile:nth-of-type(6) { animation-delay: -6.0s; }
   .mob-shop-maker-tile-where {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.22em;
@@ -3405,7 +3405,7 @@
     margin-bottom: 10px;
   }
   .mob-shop-maker-tile-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-weight: 400;
     font-size: 28px;
@@ -3416,14 +3416,14 @@
     margin-bottom: 12px;
   }
   .mob-shop-maker-tile-line {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 13px;
     line-height: 1.5;
     color: var(--ink-soft);
     margin-bottom: 16px;
   }
   .mob-shop-maker-tile-foot {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 11px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -3438,7 +3438,7 @@
     background: transparent;
     border: none;
     color: var(--ink-soft);
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 11.5px;
     font-weight: 500;
     letter-spacing: 0.22em;
@@ -3450,7 +3450,7 @@
   .mob-shop-back svg { width: 16px; height: 16px; }
   .mob-shop-brand-intro { margin-bottom: 28px; }
   .mob-shop-brand-intro-where {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.28em;
@@ -3459,7 +3459,7 @@
     margin-bottom: 12px;
   }
   .mob-shop-brand-intro-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-weight: 400;
     font-size: 44px;
@@ -3470,7 +3470,7 @@
     margin-bottom: 16px;
   }
   .mob-shop-brand-intro-story {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 16px;
     line-height: 1.55;
     color: var(--ink-soft);
@@ -3492,7 +3492,7 @@
     padding: 14px 16px;
   }
   .mob-product-brand {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 9.5px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -3501,7 +3501,7 @@
     margin-bottom: 6px;
   }
   .mob-product-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 17px;
     line-height: 1.18;
     letter-spacing: -0.012em;
@@ -3514,7 +3514,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .mob-product-note {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 12.5px;
     line-height: 1.5;
     color: var(--ink-soft);
@@ -3527,7 +3527,7 @@
     gap: 12px;
   }
   .mob-product-price {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 14px;
     font-weight: 500;
     color: var(--ink);
@@ -3540,7 +3540,7 @@
     background: var(--moss);
     color: var(--cream);
     border-radius: 99px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.1em;
@@ -3598,7 +3598,7 @@
   }
   .contact-channels a:hover { padding-left: 10px; }
   .contact-channels .ch-value {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 16px;
     letter-spacing: -0.01em;
   }
@@ -3642,7 +3642,7 @@
     border-bottom: 1px solid var(--rule);
   }
   .test-hero .qmark {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-size: 64px;
     line-height: 0.4;
@@ -3652,7 +3652,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .test-hero .test-text {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 22px;
     line-height: 1.4;
     letter-spacing: -0.012em;
@@ -3670,7 +3670,7 @@
     flex-direction: column;
     align-items: flex-end;
     gap: 4px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -3697,7 +3697,7 @@
     padding-top: 18px;
   }
   .test .qmark {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-size: 56px;
     line-height: 0.4;
@@ -3708,7 +3708,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .test-text {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 16px;
     line-height: 1.45;
     letter-spacing: -0.01em;
@@ -3725,7 +3725,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -3754,7 +3754,7 @@
     flex-wrap: wrap;
   }
   .suppliers-eyebrow {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10px;
     letter-spacing: 0.26em;
     text-transform: uppercase;
@@ -3782,7 +3782,7 @@
     filter: grayscale(0) opacity(0.95);
   }
   .suppliers-accred {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: italic;
     font-size: 13px;
     color: var(--moss);
@@ -3811,7 +3811,7 @@
   }
   .mob-contact-eyebrow {
     display: inline-block;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.26em;
@@ -3831,7 +3831,7 @@
     transform: translateY(-1px);
   }
   .mob-contact-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: normal;
     font-weight: 400;
     font-size: clamp(28px, 7.6vw, 38px);
@@ -3876,7 +3876,7 @@
   .mob-contact-label {
     grid-column: 1;
     grid-row: 1;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.24em;
@@ -3886,7 +3886,7 @@
   .mob-contact-value {
     grid-column: 1;
     grid-row: 2;
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: normal;
     font-weight: 400;
     font-size: clamp(18px, 5.2vw, 22px);
@@ -3900,7 +3900,7 @@
     grid-column: 2;
     grid-row: 1 / 3;
     align-self: end;
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: normal;
     font-size: 20px;
     color: var(--moss);
@@ -3911,7 +3911,7 @@
   .mob-contact-row:active .mob-contact-arrow { transform: translateX(5px); }
   .mob-contact-foot {
     margin: 22px 0 0;
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-style: normal !important;
     font-weight: 400;
     font-size: 13px;
@@ -3940,7 +3940,7 @@
     background: transparent;
     border: none;
     color: var(--ink-soft);
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 11.5px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -3975,7 +3975,7 @@
   .case-text::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
 
   .case-eyebrow {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     letter-spacing: 0.26em;
     text-transform: uppercase;
@@ -3984,7 +3984,7 @@
     margin-bottom: 16px;
   }
   .case-eyebrow {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10.5px;
     letter-spacing: 0.26em;
     text-transform: uppercase;
@@ -3993,7 +3993,7 @@
     margin-bottom: 12px;
   }
   .case-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-weight: 400;
     font-size: 40px;
     line-height: 1.0;
@@ -4007,7 +4007,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .case-lead {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 19px;
     line-height: 1.5;
     color: var(--ink);
@@ -4015,7 +4015,7 @@
     letter-spacing: -0.005em;
   }
   .case-text p {
-    font-family: 'Fraunces', serif;
+    font-family: 'IM Fell Double Pica', serif;
     font-size: 15px;
     line-height: 1.65;
     color: var(--ink-soft);
@@ -4031,7 +4031,7 @@
     grid-template-columns: 110px 1fr;
     gap: 18px;
     padding: 10px 0;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 12.5px;
   }
   .case-meta-row .k {
@@ -4153,7 +4153,7 @@
   .ba-label {
     position: absolute;
     top: 18px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'IM Fell Double Pica', sans-serif;
     font-size: 10px;
     letter-spacing: 0.26em;
     text-transform: uppercase;
