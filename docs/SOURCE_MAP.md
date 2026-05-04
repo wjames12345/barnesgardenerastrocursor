@@ -78,63 +78,63 @@ The single inline `<style>` runs `34`–`5426`. Tokens + reset (`35`–`101`) ar
 
 | Block | Lines | Notes |
 |---|---|---|
-| Fixed canvas / stage (`.viewport`, `.stage`, `.stage-shell`) | `103`–`110` | |
-| Persistent UI: logo, sidenav, begin button | `111`–`225` | Desktop nav chrome |
-| Page indicator (`#pageIndicator`) | `226`–`268` | |
-| Page system (`.pages`, `.page`, `.page-inner` base, `.fade-in` base) | `269`–`339` | The base `.page` rules every route inherits |
-| Sidenav menu rule + display-heading flourish | `579`–`674` | Used by sidenav and headings — multi-route |
-| `prefers-reduced-motion` (global) | `1746`–`2006` | Wraps many per-component rules |
-| Bulb-loader cascade (`.loader`, layer flash) | `2660`–`2691` | Loader for every nav transition |
-| Atmospheric paper layers + global polish | `5081`–`5374` | Type smoothing, selection, in-prose link underline, fade-in animation, atmospheric overlays |
-| Universal reduced-motion safety net | `5375`–`5400` | |
+| Fixed canvas / stage (`.viewport`, `.stage`, `.stage-shell`) | `136`–`143` | |
+| Persistent UI: logo, sidenav, begin button | `144`–`258` | Desktop nav chrome |
+| Page indicator (`#pageIndicator`) | `259`–`301` | |
+| Page system (`.pages`, `.page`, `.page-inner` base, `.fade-in` base) | `302`–`372` | The base `.page` rules every route inherits |
+| Sidenav menu rule + display-heading flourish | `612`–`707` | Used by sidenav and headings — multi-route |
+| `prefers-reduced-motion` (global) | `1779`–`2039` | Wraps many per-component rules |
+| Bulb-loader cascade (`.loader`, layer flash) | `2693`–`2724` | Loader for every nav transition |
+| Atmospheric paper layers + global polish | `5114`–`5407` | Type smoothing, selection, in-prose link underline, fade-in animation, atmospheric overlays |
+| Universal reduced-motion safety net | `5408`–`5433` | |
 
 ### Desktop per-route blocks
 
 | Route | Lines | Notes |
 |---|---|---|
-| `#home` | `340`–`462` | `.page-home` overrides + `.wordmark` + `.conveyor` belt |
-| `#about` | `464`–`578` | `.page-about` + about-text + Gary cut-out |
-| `#services` | `676`–`896` | `.page-services` + service-card grid + numbered steps |
-| `#latelier` | `898`–`1172` | Typewriter cursor, Mac file-button, `.lat-form`, `.form-success` confirmation |
-| `#contact` | `1174`–`1380` | Lead quote, `.contact-form`, trusted-by mark strip |
-| `#shop` | `1382`–`1745` | Three views: `.shop-landing`, `.shop-brand`, type-detail; brand chips, maker doors, breathing animation |
-| `#blog` | `1895`–`2006` (rules cluster around `.page-blog`) | Post grid; the `.blog-popup` lens-blur is in the mobile section (`4290`–`4405`) — applies on desktop too via shared selectors |
-| `#podcast` | `2007`–`2064` | `.page-podcast` + Apple-style email capture |
-| `#case` | `2065`–`2328` | `.page-case` + before/after slider (`.ba-frame`, `.ba-handle`, train-jolt animation) |
-| `#map` *(dead — see §1)* | `2329`–`2587` | `.page-map`, overview canvas + numbered SVG hit overlay + map-case grid |
-| `#gardens` | `2588`–`2659` | `.page-gardens` + tile grid |
+| `#home` | `373`–`495` | `.page-home` overrides + `.wordmark` + `.conveyor` belt |
+| `#about` | `497`–`611` | `.page-about` + about-text + Gary cut-out |
+| `#services` | `709`–`929` | `.page-services` + service-card grid + numbered steps |
+| `#latelier` | `931`–`1205` | Typewriter cursor, Mac file-button, `.lat-form`, `.form-success` confirmation |
+| `#contact` | `1207`–`1413` | Lead quote, `.contact-form`, trusted-by mark strip |
+| `#shop` | `1415`–`1778` | Three views: `.shop-landing`, `.shop-brand`, type-detail; brand chips, maker doors, breathing animation |
+| `#blog` | `1928`–`2039` (rules cluster around `.page-blog`) | Post grid; the `.blog-popup` lens-blur is in the mobile section (`4323`–`4438`) — applies on desktop too via shared selectors |
+| `#podcast` | `2040`–`2097` | `.page-podcast` + Apple-style email capture |
+| `#case` | `2098`–`2361` | `.page-case` + before/after slider (`.ba-frame`, `.ba-handle`, train-jolt animation) |
+| `#map` *(dead — see §1)* | `2362`–`2620` | `.page-map`, overview canvas + numbered SVG hit overlay + map-case grid |
+| `#gardens` | `2621`–`2692` | `.page-gardens` + tile grid |
 
-> **Multi-route flag.** The `.page-inner` scrollbar rules (`::-webkit-scrollbar*`) repeat for `#blog`, `#shop`, `#gardens` (lines `1380`–`1381`, `1902`–`1903`, `2598`–`2599`). The `.fade-in` animation (lines `5081`+) drives stagger for every page. The `.case-text a` underline rule shares with `.about-text a` and `.post-excerpt a`.
+> **Multi-route flag.** The `.page-inner` scrollbar rules (`::-webkit-scrollbar*`) repeat for `#blog`, `#shop`, `#gardens` (lines `1413`–`1414`, `1935`–`1936`, `2631`–`2632`). The `.fade-in` animation (lines `5114`+) drives stagger for every page. The `.case-text a` underline rule shares with `.about-text a` and `.post-excerpt a`.
 
-### Mobile (everything inside `@media (max-width: 900px)…`)
+### Mobile (`.mob-*` rules — most are at root scope; the `@media` gate that hides desktop / shows mobile is at `2725`–`2731`)
 
-The desktop breakpoint at line `2692` opens an enormous mobile block that runs to the end. Within it:
+The mobile breakpoint gate at line `2725` is short — it just flips `.viewport`/`.mobile-shell` visibility and shows the hamburger. The bulk of mobile-prefixed rules below sit at root scope, scoped purely by the `.mob-*` selectors. Within the mobile block:
 
 | Block | Lines |
 |---|---|
-| Mobile hero / `#m-home` content (wordmark + content blocks below) | `2700`–`2825` |
-| Mobile contact block on home | `2826`–`2857` |
-| Mobile services list on home | `2858`–`2887` |
-| Mobile photo→render steps on home | `2888`–`2943` |
-| Mobile footer | `2944`–`2955` |
-| Hamburger toggle + cream overlay menu | `2956`–`3168` |
-| Apple Watch / extra-small viewports | `3169`–`3228` |
-| Accordion menu (expanded panels) | `3229`–`3349` |
-| Mobile page sections base | `3350`–`3408` |
-| `#m-contact` editorial directory | `3409`–`3540` |
-| Mobile back chevron + brand mark | `3541`–`3593` |
-| `#m-shop` (landing → brand → type) | `3594`–`3963` |
-| `#m-blog` (post cards) | `3964`–`4031` |
-| `#m-podcast` (headline + email box) | `4032`–`4107` |
-| Mobile page visibility (active-only) | `4108`–`4117` |
-| `#m-contact` flex distribution + reduced-motion + max-width:900 wrappers | `4118`–`4289` |
-| Blog popup (centered modal + cursor-tracked lens) | `4290`–`4405` |
-| Mobile loader (Apple-style ring + bulb flipbook) | `4406`–`4537` |
-| `#m-services` (2-up grid + popup) | `4538`–`4642` |
-| `#m-map` *(dead per §1)* (full-screen pinch-zoom + pan) | `4643`–`4853` |
-| `#m-gardens` (vertical scrollable list) | `4854`–`4909` |
-| `#m-generator` (1·2·3 photo upload form) | `4910`–`5034` |
-| `#m-latelier` Vision & Quote | `5035`–`5080` |
+| Mobile hero / `#m-home` content (wordmark + content blocks below) | `2733`–`2858` |
+| Mobile contact block on home | `2859`–`2890` |
+| Mobile services list on home | `2891`–`2920` |
+| Mobile photo→render steps on home | `2921`–`2976` |
+| Mobile footer | `2977`–`2988` |
+| Hamburger toggle + cream overlay menu | `2989`–`3201` |
+| Apple Watch / extra-small viewports | `3202`–`3261` |
+| Accordion menu (expanded panels) | `3262`–`3382` |
+| Mobile page sections base | `3383`–`3441` |
+| `#m-contact` editorial directory | `3442`–`3573` |
+| Mobile back chevron + brand mark | `3574`–`3626` |
+| `#m-shop` (landing → brand → type) | `3627`–`3996` |
+| `#m-blog` (post cards) | `3997`–`4064` |
+| `#m-podcast` (headline + email box) | `4065`–`4140` |
+| Mobile page visibility (active-only) | `4141`–`4150` |
+| `#m-contact` flex distribution + reduced-motion + max-width:900 wrappers | `4151`–`4322` |
+| Blog popup (centered modal + cursor-tracked lens) | `4323`–`4438` |
+| Mobile loader (Apple-style ring + bulb flipbook) | `4439`–`4570` |
+| `#m-services` (2-up grid + popup) | `4571`–`4675` |
+| `#m-map` *(dead per §1)* (full-screen pinch-zoom + pan) | `4676`–`4886` |
+| `#m-gardens` (vertical scrollable list) | `4887`–`4942` |
+| `#m-generator` (1·2·3 photo upload form) | `4943`–`5067` |
+| `#m-latelier` Vision & Quote | `5068`–`5113` |
 
 > **Note.** Boundaries inside the mobile `@media` block are derived from the section-comment headers — they're tight but not bit-perfect. When porting a route, read from one comment header to the next and verify.
 
