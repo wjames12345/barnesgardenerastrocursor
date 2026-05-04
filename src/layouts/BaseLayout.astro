@@ -68,6 +68,26 @@ const localBusinessJsonLd = {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+
+<!-- Hash-route migration shim: catches inbound links from the old SPA's
+     /#about /#services etc. and redirects to /about /services etc. before paint.
+     Inert when no hash is present. /#case and /#map fall back to /gardens since
+     deep-link road state isn't preserved across the migration. -->
+<script is:inline>
+  (function () {
+    var h = location.hash.replace(/^#m?-?/, '');
+    if (!h) return;
+    var map = {
+      home: '/', about: '/about', services: '/services', gardens: '/gardens',
+      latelier: '/latelier', generator: '/latelier', blog: '/blog',
+      podcast: '/podcast', shop: '/shop', contact: '/contact',
+      'case': '/gardens', map: '/gardens'
+    };
+    var target = map[h];
+    if (target && location.pathname !== target) location.replace(target);
+  })();
+</script>
+
 <title>{title}</title>
 <meta name="description" content={description}>
 <meta name="theme-color" content="#F7F2E5">
