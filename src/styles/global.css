@@ -138,7 +138,7 @@
     flex-direction: column;
     gap: 14px;
     font-family: 'IM Fell Double Pica', serif;
-    font-size: 14.5px;
+    font-size: 17.5px;
     letter-spacing: -0.005em;
   }
   .sidenav a {
@@ -4190,3 +4190,22 @@
     85%  { margin-left: -1px; }
     100% { margin-left: 0; }
   }
+
+  /* — Corner-logo: stamp mark masked as moss green — */
+  .corner-logo { width: 72px; height: auto; }
+  .corner-logo-mark {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1612 / 2056;
+    background-color: var(--moss);
+    -webkit-mask-image: url('/barnes_gardener_stamp_2x.png');
+            mask-image: url('/barnes_gardener_stamp_2x.png');
+    -webkit-mask-size: contain;
+            mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+            mask-position: center;
+    transition: background-color 0.3s var(--ease);
+  }
+  .corner-logo:hover .corner-logo-mark { background-color: var(--moss-deep); }
