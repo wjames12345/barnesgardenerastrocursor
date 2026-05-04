@@ -138,7 +138,7 @@
     flex-direction: column;
     gap: 14px;
     font-family: 'IM Fell Double Pica', serif;
-    font-size: 17.5px;
+    font-size: 24px;
     letter-spacing: -0.005em;
   }
   .sidenav a {
@@ -4192,7 +4192,7 @@
   }
 
   /* — Corner-logo: stamp mark masked as moss green — */
-  .corner-logo { width: 72px; height: auto; }
+  .corner-logo { width: 130px; height: auto; }
   .corner-logo-mark {
     display: block;
     width: 100%;
@@ -4209,3 +4209,70 @@
     transition: background-color 0.3s var(--ease);
   }
   .corner-logo:hover .corner-logo-mark { background-color: var(--moss-deep); }
+
+  /* — Custom cursor: moss dot + lerping ring (lines 5238–5302); verbatim — */
+  /* Refined custom cursor — desktop only, hidden on touch / small screens.
+     Small moss dot follows mouse instantly; the ring lerps behind on a
+     requestAnimationFrame loop wired up in script. */
+  .cursor-dot,
+  .cursor-ring {
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    will-change: transform;
+    opacity: 0;
+    transition: opacity 0.4s ease,
+                width 0.3s var(--ease),
+                height 0.3s var(--ease),
+                background 0.3s ease,
+                border-color 0.3s ease;
+  }
+  body.cursor-ready .cursor-dot,
+  body.cursor-ready .cursor-ring { opacity: 1; }
+  .cursor-dot {
+    width: 5px;
+    height: 5px;
+    background: var(--moss);
+    border-radius: 50%;
+  }
+  .cursor-ring {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--moss);
+    border-radius: 50%;
+    background: transparent;
+  }
+  body.cursor-active .cursor-ring {
+    width: 44px;
+    height: 44px;
+    background: rgba(47, 64, 48, 0.06);
+    border-color: var(--moss);
+  }
+  body.cursor-pressing .cursor-dot {
+    background: var(--moss-deep);
+  }
+  body.cursor-pressing .cursor-ring {
+    width: 22px;
+    height: 22px;
+  }
+  /* Hide cursor on hover-incapable + small viewports + native cursor regions */
+  @media (hover: none), (pointer: coarse), (max-width: 1199px) {
+    .cursor-dot, .cursor-ring { display: none; }
+  }
+  /* Hide native cursor on desktop where our custom one runs */
+  /* The custom cursor only runs on real desktops with fine pointers and a
+     viewport wide enough for the editorial canvas to feel native. Gating
+     the min-width at 1200px keeps cursor-aware UI off small laptop windows
+     and tablets where the standard pointer reads as more competent. */
+  @media (hover: hover) and (pointer: fine) and (min-width: 1200px) {
+    body.cursor-ready,
+    body.cursor-ready a,
+    body.cursor-ready button,
+    body.cursor-ready [role="button"],
+    body.cursor-ready .product,
+    body.cursor-ready .post-card { cursor: none; }
+    /* Keep the native I-beam in text inputs so people can place a caret */
+    body.cursor-ready input,
+    body.cursor-ready textarea { cursor: text; }
+  }

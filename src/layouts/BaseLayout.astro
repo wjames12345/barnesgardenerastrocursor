@@ -150,8 +150,80 @@ const localBusinessJsonLd = {
     });
   })();
 </script>
+
+<!-- Custom cursor IIFE — lifted verbatim from source script B 8051–8110.
+     Runs once on initial load; window listeners + persisted DOM survive view transitions. -->
+<script is:inline>
+  (function () {
+    var fineMQ = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1200px)');
+    if (!fineMQ.matches) return;
+
+    var dot, ring;
+    function ensureRefs() {
+      dot  = document.getElementById('cursorDot');
+      ring = document.getElementById('cursorRing');
+      return dot && ring;
+    }
+    if (!ensureRefs()) return;
+
+    var mouseX = -100, mouseY = -100;
+    var ringX  = -100, ringY  = -100;
+    var lerp = 0.18;
+
+    function activate() {
+      document.body.classList.add('cursor-ready');
+      window.removeEventListener('mousemove', activate);
+    }
+    window.addEventListener('mousemove', activate);
+
+    window.addEventListener('mousemove', function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (dot) dot.style.transform = 'translate3d(' + mouseX + 'px, ' + mouseY + 'px, 0) translate(-50%, -50%)';
+    }, { passive: true });
+
+    function tick() {
+      ringX += (mouseX - ringX) * lerp;
+      ringY += (mouseY - ringY) * lerp;
+      if (ring) ring.style.transform = 'translate3d(' + ringX.toFixed(2) + 'px, ' + ringY.toFixed(2) + 'px, 0) translate(-50%, -50%)';
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    var interactiveSelector = 'a, button, [role="button"], input, textarea, select, [data-mob-go], [data-mob-back], [data-popup-close], .product, .post-card, .map-case-thumb, .map-hotspot, .ba-grip, .expand-toggle';
+    document.addEventListener('mouseover', function (e) {
+      if (e.target.closest && e.target.closest(interactiveSelector)) {
+        document.body.classList.add('cursor-active');
+      }
+    });
+    document.addEventListener('mouseout', function (e) {
+      if (e.target.closest && e.target.closest(interactiveSelector)) {
+        document.body.classList.remove('cursor-active');
+      }
+    });
+    document.addEventListener('mousedown', function () { document.body.classList.add('cursor-pressing'); });
+    document.addEventListener('mouseup',   function () { document.body.classList.remove('cursor-pressing'); });
+    document.addEventListener('mouseleave', function () {
+      if (dot)  dot.style.opacity  = '0';
+      if (ring) ring.style.opacity = '0';
+    });
+    document.addEventListener('mouseenter', function () {
+      if (dot)  dot.style.opacity  = '';
+      if (ring) ring.style.opacity = '';
+    });
+
+    // After astro:after-swap the cursor elements may have been re-created
+    // (transition:persist makes that rare, but be defensive).
+    document.addEventListener('astro:after-swap', function () { ensureRefs(); });
+  })();
+</script>
 </head>
 <body data-mob-page={mobPage}>
+
+<!-- Custom cursor — moss dot + lerping ring; desktop fine-pointer only.
+     Persisted across view transitions so the cursor doesn't blink between routes. -->
+<div class="cursor-ring" id="cursorRing" aria-hidden="true" transition:persist></div>
+<div class="cursor-dot"  id="cursorDot"  aria-hidden="true" transition:persist></div>
 
 <!-- ═════════════════════════════════════════════════════════════════════
      DESKTOP / FIXED-CANVAS VIEWPORT
