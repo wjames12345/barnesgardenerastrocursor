@@ -1,9 +1,9 @@
 <!-- Brand mark — swan + leaves logo at the top of every non-home mobile
      page. Reuses data-mob-back so the existing handler routes the user
      to home (loader + page swap). Hidden on home via CSS. -->
-<button class="mob-brand" type="button" data-mob-back aria-label="Home">
+<a class="mob-brand" href="/" data-mob-back aria-label="Home">
   <img src="logo-wordmark.png" alt="The Barnes Gardener" decoding="async">
-</button>
+</a>
 
 <!-- Hamburger toggle — sits top-right on every mobile screen. Tap to fade
      the page to the cream background and reveal the all-caps overlay
@@ -20,117 +20,117 @@
   <ul class="mob-menu-list" id="mobMenuList">
     <li class="mob-menu-item" data-mob-key="home">
       <div class="mob-menu-row">
-        <button class="mob-menu-label" type="button" data-mob-go="home">Home</button>
+        <a class="mob-menu-label" href="/" data-mob-go="home">Home</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <button class="mob-menu-go" type="button" data-mob-go="home" aria-label="Open home">
+        <a class="mob-menu-go" href="/" data-mob-go="home" aria-label="Open home">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
+        </a>
       </div>
       <div class="mob-menu-desc"><p>The wordmark and the wind. Always one tap away.</p></div>
     </li>
 
     <li class="mob-menu-item" data-mob-key="about">
       <div class="mob-menu-row">
-        <button class="mob-menu-label" type="button" data-mob-go="about">About</button>
+        <a class="mob-menu-label" href="/about" data-mob-go="about">About</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <button class="mob-menu-go" type="button" data-mob-go="about" aria-label="Open about">
+        <a class="mob-menu-go" href="/about" data-mob-go="about" aria-label="Open about">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
+        </a>
       </div>
       <div class="mob-menu-desc"><p>An independent gardener renovating gardens across Barnes and South West London since 2016.</p></div>
     </li>
 
     <li class="mob-menu-item" data-mob-key="services">
       <div class="mob-menu-row">
-        <button class="mob-menu-label" type="button" data-mob-go="services">Services</button>
+        <a class="mob-menu-label" href="/services" data-mob-go="services">Services</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <button class="mob-menu-go" type="button" data-mob-go="services" aria-label="Open services">
+        <a class="mob-menu-go" href="/services" data-mob-go="services" aria-label="Open services">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
+        </a>
       </div>
       <div class="mob-menu-desc"><p>Renovation, lawn care, planting, hedges, productive gardens and vintage materials.</p></div>
     </li>
 
     <li class="mob-menu-item" data-mob-key="gardens">
       <div class="mob-menu-row">
-        <button class="mob-menu-label" type="button" data-mob-go="gardens">Testimonial Gardens</button>
+        <a class="mob-menu-label" href="/gardens" data-mob-go="gardens">Testimonial Gardens</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <button class="mob-menu-go" type="button" data-mob-go="gardens" aria-label="Open testimonial gardens">
+        <a class="mob-menu-go" href="/gardens" data-mob-go="gardens" aria-label="Open testimonial gardens">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
+        </a>
       </div>
       <div class="mob-menu-desc"><p>A portfolio of past gardens, grouped by area. Tap a tile for the case study.</p></div>
     </li>
 
     <li class="mob-menu-item" data-mob-key="generator">
       <div class="mob-menu-row">
-        <button class="mob-menu-label" type="button" data-mob-go="generator">Vision &amp; Quote</button>
+        <a class="mob-menu-label" href="/latelier" data-mob-go="generator">Vision &amp; Quote</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <button class="mob-menu-go" type="button" data-mob-go="generator" aria-label="Open vision and quote">
+        <a class="mob-menu-go" href="/latelier" data-mob-go="generator" aria-label="Open vision and quote">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
+        </a>
       </div>
       <div class="mob-menu-desc"><p>Send a photograph. Get a rendering and a written quote within 24 hours, no obligation.</p></div>
     </li>
 
     <li class="mob-menu-item" data-mob-key="blog">
       <div class="mob-menu-row">
-        <button class="mob-menu-label" type="button" data-mob-go="blog">What's Growing</button>
+        <a class="mob-menu-label" href="/blog" data-mob-go="blog">What's Growing</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <button class="mob-menu-go" type="button" data-mob-go="blog" aria-label="Open what's growing">
+        <a class="mob-menu-go" href="/blog" data-mob-go="blog" aria-label="Open what's growing">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
+        </a>
       </div>
       <div class="mob-menu-desc"><p>Notes from the garden — what Gary is planting, pruning and watching this week.</p></div>
     </li>
 
     <li class="mob-menu-item" data-mob-key="podcast">
       <div class="mob-menu-row">
-        <button class="mob-menu-label" type="button" data-mob-go="podcast">Podcast</button>
+        <a class="mob-menu-label" href="/podcast" data-mob-go="podcast">Podcast</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <button class="mob-menu-go" type="button" data-mob-go="podcast" aria-label="Open podcast">
+        <a class="mob-menu-go" href="/podcast" data-mob-go="podcast" aria-label="Open podcast">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
+        </a>
       </div>
       <div class="mob-menu-desc"><p>Gardening with Gary. Conversations from the gate, recorded between jobs.</p></div>
     </li>
 
     <li class="mob-menu-item" data-mob-key="shop">
       <div class="mob-menu-row">
-        <button class="mob-menu-label" type="button" data-mob-go="shop">Gary's Kit Shop</button>
+        <a class="mob-menu-label" href="/shop" data-mob-go="shop">Gary's Kit Shop</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <button class="mob-menu-go" type="button" data-mob-go="shop" aria-label="Open kit shop">
+        <a class="mob-menu-go" href="/shop" data-mob-go="shop" aria-label="Open kit shop">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
+        </a>
       </div>
       <div class="mob-menu-desc"><p>The tools, gloves and compost Gary actually uses. Independent, tested, recommended.</p></div>
     </li>
 
     <li class="mob-menu-item" data-mob-key="contact">
       <div class="mob-menu-row">
-        <button class="mob-menu-label" type="button" data-mob-go="contact">Contact</button>
+        <a class="mob-menu-label" href="/contact" data-mob-go="contact">Contact</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <button class="mob-menu-go" type="button" data-mob-go="contact" aria-label="Open contact">
+        <a class="mob-menu-go" href="/contact" data-mob-go="contact" aria-label="Open contact">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
+        </a>
       </div>
       <div class="mob-menu-desc"><p>Phone, email, Instagram. Gary replies the same day, usually after the morning's first job.</p></div>
     </li>
