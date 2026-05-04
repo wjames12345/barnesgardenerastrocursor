@@ -835,3 +835,92 @@
     transform: translateY(-1px);
   }
 
+
+  /* — Mobile home hero (lines 2733–2819); verbatim. The .mob-home-* legacy classes (2821–2987) are NOT lifted — current m-home markup uses only .mob-hero family — */
+  /* ─── HERO — wordmark + content sections, scrollable. The desktop
+         home page's leaves drift in the background through everything. ─── */
+  .mob-hero {
+    min-height: 100svh;
+    padding: max(40px, env(safe-area-inset-top))
+             24px
+             max(40px, env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-top: none !important;
+  }
+  /* Soft moss gradient halos to give the cream paper some atmosphere */
+  .mob-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(120% 60% at 12% 8%,  rgba(74, 93, 67, 0.06) 0%, transparent 50%),
+      radial-gradient(120% 60% at 90% 96%, rgba(74, 93, 67, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .mob-hero > * { position: relative; z-index: 1; }
+
+  /* Elongated hero wordmark — three lines stacked tight, then the WHOLE
+     block is stretched vertically as a single unit (transform on the h1,
+     not per-line). All three words share the same upright Fraunces — no
+     italic on "Barnes". */
+  .mob-hero-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(58px, 21vw, 110px);
+    line-height: 0.82;
+    letter-spacing: -0.05em;
+    color: var(--moss);
+    margin: 4px 0 0;
+    transform: scaleY(2.2);
+    transform-origin: left top;
+    font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 0;
+  }
+  .mob-hero-title .lc { display: block; font-style: normal; }
+  /* "Barnes" is no longer italic — kept upright like the other lines.
+     Only the moss colour separates it visually. */
+  .mob-hero-title .lc-em {
+    font-style: normal;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 0;
+  }
+  .mob-hero-title .stop {
+    color: var(--moss);
+    font-style: normal;
+  }
+
+  /* Staggered fade-in for each line on first paint. The scaleY stretch
+     lives on the parent so it isn't fought here — these only animate
+     opacity + a small translateY. */
+  .mob-hero-title .lc {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: lineRise 1.1s var(--ease) forwards;
+  }
+  .mob-hero-title .lc:nth-child(1) { animation-delay: 0.20s; }
+  .mob-hero-title .lc:nth-child(2) { animation-delay: 0.36s; }
+  .mob-hero-title .lc:nth-child(3) { animation-delay: 0.52s; }
+
+  /* Logo variant — when the mobile hero contains the wordmark image
+     instead of stretched type, kill the scaleY transform and let the
+     image size itself naturally. Fade-in inherits from .mob-hero-title. */
+  .mob-hero-title--logo {
+    transform: none;
+    margin: 14px 0 0;
+    line-height: 1;
+  }
+  .mob-hero-logo-img {
+    display: block;
+    width: 88%;
+    max-width: 520px;
+    height: auto;
+    user-select: none;
+    -webkit-user-drag: none;
+    opacity: 0;
+    animation: lineRise 1.1s var(--ease) 0.20s forwards;
+  }
+  @keyframes lineRise {
+    to { opacity: 1; transform: translateY(0); }
+  }
