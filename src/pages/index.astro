@@ -2,5 +2,20 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout>
-  <h1>The Barnes Gardener</h1>
+  <section class="page page-home active" id="home">
+    <div class="page-inner">
+      <h1 class="wordmark" id="wordmark">
+        <img class="wordmark-img" src="logo-wordmark.png" alt="The Barnes Gardener">
+      </h1>
+
+      <div class="home-signature">Established by Gary Hazell in 2016 <img class="amp-symbol" src="ampersand.png" alt="and"> independent ever since.</div>
+
+      <!-- Conveyor belt of areas served -->
+      <div class="conveyor" id="conveyor">
+        <div class="conveyor-track" id="conveyorTrack">
+          <!-- pills injected here by JS, doubled for seamless loop -->
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>

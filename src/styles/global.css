@@ -698,3 +698,140 @@
     body[data-mob-page="shop"]      .mob-hero { display: none; }
   }
 
+
+  /* — Home page CSS (lines 358–492); verbatim — */
+  /* ════════════════════════════════════════════════════════════════════
+     HOME PAGE
+     ════════════════════════════════════════════════════════════════════ */
+  .page-home .page-inner {
+    /* Home overrides the base inset (left: 220px / right: 60px) so the
+       wordmark + conveyor centre across the full stage. Padding bakes in
+       both the sidenav offset (220px left) and the standard rhythm so
+       nothing kisses the edges. */
+    left: 0;
+    right: 0;
+    align-items: center;
+    justify-content: center;
+    padding: calc(var(--page-pad-y) + 30px) var(--page-pad-x) calc(var(--page-pad-y) + 20px) 220px;
+  }
+
+  /* Home page is the leaf-clicking playground — nothing here should be
+     selectable, so dragging the cursor to drop leaves never accidentally
+     highlights the wordmark, signature line, or area pills. Mirrored on
+     the mobile hero. */
+  .page-home,
+  .page-home *,
+  .mob-hero,
+  .mob-hero * {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .wordmark {
+    display: inline-block;
+    position: relative;
+    cursor: default;
+    text-align: center;
+    padding: 18px 24px 60px;  /* generous padding so nothing crops, room for grass */
+    overflow: visible;
+  }
+  .wordmark .line {
+    display: block;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 144px;
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+    color: var(--ink);
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    transition: color 0.6s var(--ease);
+    overflow: visible;  /* never clip */
+    padding-bottom: 0.04em;
+  }
+  .wordmark .line em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    transition: color 0.6s var(--ease);
+  }
+  /* The wordmark: static moss-green text, present from first paint.
+     No entrance animation, no hover, no bee, no grass — just the three
+     lines sitting on the page. */
+  .wordmark { position: relative; }
+  .wordmark .line { color: var(--moss); }
+  .wordmark .line em { color: var(--moss); }
+  .wordmark-img {
+    display: block;
+    width: min(620px, 72vw);
+    height: auto;
+    margin: 0 auto;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  /* lineRise kept because the mobile hero still uses the same keyframe. */
+  @keyframes lineRise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .home-signature {
+    margin-top: 28px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--moss);
+    letter-spacing: 0;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    text-align: center;
+    opacity: 0;
+    animation: fadeUp 0.9s var(--ease) forwards;
+    animation-delay: 1.05s;
+  }
+
+  /* CONVEYOR BELT of area pills */
+  .conveyor {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    overflow: hidden;
+    pointer-events: auto;
+    mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    opacity: 0;
+    animation: fadeUp 0.9s var(--ease) forwards;
+    animation-delay: 1.3s;
+  }
+  .conveyor-track {
+    display: flex;
+    width: max-content;
+    gap: 9px;
+    padding: 6px 0;
+    animation: scrollLeft 60s linear infinite;
+    will-change: transform;
+  }
+  .conveyor:hover .conveyor-track { animation-play-state: paused; }
+  @keyframes scrollLeft {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .area-pill {
+    flex-shrink: 0;
+    padding: 7px 15px;
+    border: 1px solid var(--rule-strong);
+    border-radius: 99px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    transition: all 0.3s;
+    cursor: default;
+    white-space: nowrap;
+    background: transparent;
+  }
+  .area-pill:hover {
+    background: var(--moss);
+    color: var(--cream);
+    border-color: var(--moss);
+    transform: translateY(-1px);
+  }
+
