@@ -1,5 +1,8 @@
 ---
 import '../styles/global.css';
+import SideNav from '../components/SideNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import MobileMenu from '../components/MobileMenu.astro';
 ---
 <!DOCTYPE html>
 <html lang="en-GB">
@@ -24,7 +27,71 @@ import '../styles/global.css';
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:opsz,wght@9..40,300..700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="BULB TO FLOWER.png" fetchpriority="high">
 </head>
-<body>
-  <slot />
+<body data-mob-page="home">
+
+<!-- ═════════════════════════════════════════════════════════════════════
+     DESKTOP / FIXED-CANVAS VIEWPORT
+     ═════════════════════════════════════════════════════════════════════ -->
+<div class="viewport" id="viewport">
+
+  <div class="stage-shell" id="stageShell">
+  <div class="stage" id="stage">
+
+    <!-- Persistent UI: logo top-left, begin top-right, sidenav left -->
+    <a href="#home" class="corner-logo" data-link aria-label="The Barnes Gardener, home">
+      <img src="logo-wordmark.png" alt="The Barnes Gardener">
+    </a>
+
+    <a href="#latelier" class="begin-btn" data-link>
+      Begin a vision <span class="arr" aria-hidden="true">→</span>
+    </a>
+
+    <SideNav />
+
+    <SiteFooter />
+
+    <!-- Pages -->
+    <div class="pages" id="pages">
+      <slot />
+    </div><!-- /.pages -->
+
+    <!-- LOADING OVERLAY (4 stacked composites, each clipped to one bulb, cascading flash) -->
+    <div class="loader" id="loader" aria-hidden="true">
+      <div class="bulb-stage">
+        <img src="BULB TO FLOWER.png" alt="" style="--i: 0">
+        <img src="BULB TO FLOWER.png" alt="" style="--i: 1">
+        <img src="BULB TO FLOWER.png" alt="" style="--i: 2">
+        <img src="BULB TO FLOWER.png" alt="" style="--i: 3">
+      </div>
+    </div>
+
+  </div><!-- /.stage -->
+  </div><!-- /.stage-shell -->
+</div><!-- /.viewport -->
+
+
+<!-- ═════════════════════════════════════════════════════════════════════
+     MOBILE FALLBACK (separate scrollable layout, hidden on desktop)
+     ═════════════════════════════════════════════════════════════════════ -->
+<div class="mobile-shell">
+  <MobileMenu />
+</div>
+
+<!-- Mobile loader — thin moss circle with the bulb stop-motion growing inside -->
+<div class="mob-loader" id="mobLoader" aria-hidden="true">
+  <div class="mob-stage">
+    <svg class="mob-ring" viewBox="0 0 132 132" aria-hidden="true">
+      <circle class="mob-ring__track" cx="66" cy="66" r="60"></circle>
+      <circle class="mob-ring__arc"   cx="66" cy="66" r="60"
+              stroke-dasharray="95 282"></circle>
+    </svg>
+
+    <div class="mob-bulb-frame" data-i="0" role="img" aria-label="Bulb growing into flower"></div>
+    <div class="mob-bulb-frame" data-i="1" aria-hidden="true"></div>
+    <div class="mob-bulb-frame" data-i="2" aria-hidden="true"></div>
+    <div class="mob-bulb-frame" data-i="3" aria-hidden="true"></div>
+  </div>
+</div>
+
 </body>
 </html>

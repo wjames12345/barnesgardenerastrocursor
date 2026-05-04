@@ -65,3 +65,636 @@
     letter-spacing: -0.02em;
     font-variation-settings: "opsz" 144;
   }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     Chrome lift from THE WEBSITE.html — verbatim ranges follow
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* — Desktop chrome: viewport, stage, persistent UI, page indicator, page system, fade-in (lines 103–357) — */
+  /* ────────────────── FIXED CANVAS / STAGE ────────────────── */
+  .viewport {
+    position: fixed;
+    inset: 0;
+    background: var(--cream);
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .stage {
+    position: relative;
+    width: 1440px;
+    height: 900px;
+    /* Transparent so the leaf canvas behind the stage shows through.
+       Viewport's cream bg paints through and is visually identical. */
+    background: transparent;
+    overflow: hidden;
+  }
+  .stage-shell {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
+    transform: translate(-50%, -50%);
+    width: 1440px;
+    height: 900px;
+    will-change: transform;
+  }
+
+  /* faint paper grain on the stage */
+  .stage::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.045;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+  }
+
+  /* ────────────────── PERSISTENT UI: LOGO, NAV, BEGIN ────────────────── */
+  .corner-logo {
+    position: absolute;
+    top: 36px;
+    left: 44px;
+    width: 110px;
+    height: auto;
+    z-index: 30;
+    transition: transform 0.5s var(--ease);
+  }
+  .corner-logo:hover { transform: scale(1.04); }
+  .corner-logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .sidenav {
+    position: absolute;
+    top: 220px;
+    left: 50px;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-family: 'Fraunces', serif;
+    font-size: 14.5px;
+    letter-spacing: -0.005em;
+  }
+  .sidenav a {
+    color: var(--navy);
+    opacity: 0.55;
+    transition: opacity 0.25s, transform 0.25s, color 0.25s;
+    position: relative;
+    padding-left: 0;
+    width: max-content;
+    cursor: pointer;
+  }
+  .sidenav a::before {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0;
+    transition: opacity 0.25s, width 0.25s;
+  }
+  .sidenav a:hover {
+    opacity: 1;
+  }
+  .sidenav a.active {
+    opacity: 1;
+    color: var(--moss);
+    letter-spacing: 0.06em;
+    animation: navBreathe 3.6s ease-in-out infinite;
+  }
+  .sidenav a.active::before {
+    opacity: 1;
+    width: 10px;
+  }
+  @keyframes navBreathe {
+    0%, 100% { letter-spacing: 0.04em; opacity: 0.92; }
+    50%      { letter-spacing: 0.085em; opacity: 1; }
+  }
+
+  .begin-btn {
+    position: absolute;
+    top: 36px;
+    right: 44px;
+    z-index: 30;
+    padding: 11px 22px 11px 24px;
+    background: var(--moss);
+    color: var(--cream);
+    border: none;
+    border-radius: 99px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.3s, transform 0.2s, padding-right 0.3s;
+    text-transform: uppercase;
+  }
+  .begin-btn:hover {
+    background: var(--moss-deep);
+    transform: translateY(-1px);
+    padding-right: 28px;
+  }
+  .begin-btn .arr {
+    transition: transform 0.3s;
+    display: inline-block;
+  }
+  .begin-btn:hover .arr { transform: translateX(3px); }
+
+  .stage-footer {
+    position: absolute;
+    bottom: 26px;
+    left: 50px;
+    right: 50px;
+    z-index: 25;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(27, 36, 24, 0.42);
+    pointer-events: none;
+  }
+  /* The page indicator on the right of the footer is interactive — clicking
+     it advances to the next section in the editorial sequence. Cursor
+     state and pointer events are scoped to the indicator only so the
+     copyright line on the left stays inert. */
+  .stage-footer .right {
+    pointer-events: auto;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 4px 0;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    transition: color var(--dur-base) var(--ease), letter-spacing var(--dur-base) var(--ease);
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+  }
+  .stage-footer .right:hover {
+    color: var(--moss);
+    letter-spacing: 0.26em;
+  }
+  .stage-footer .right .next-arrow {
+    display: inline-block;
+    margin-left: 8px;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity var(--dur-base) var(--ease), transform var(--dur-base) var(--ease);
+  }
+  .stage-footer .right:hover .next-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .stage-footer .left em {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+
+  /* ────────────────── PAGE SYSTEM ────────────────── */
+  .pages {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+  }
+  .page {
+    position: absolute;
+    inset: 0;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.55s ease;
+  }
+  .page.active {
+    display: block;
+    opacity: 1;
+  }
+  .page-inner {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 220px;   /* leaves room for sidenav */
+    right: 60px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Reusable bits */
+  .eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--moss);
+  }
+  .eyebrow::before {
+    content: '';
+    width: 26px;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  .page.active .fade-in {
+    animation: fadeUp var(--dur-slow) var(--ease) forwards;
+    animation-delay: var(--fade-delay, 0.2s);
+  }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+
+  /* — Desktop loader: bulb-to-flower cascade (lines 2657–2710); markup present in BaseLayout, animation JS deferred — */
+  /* ════════════════════════════════════════════════════════════════════
+     LOADING OVERLAY — single bulb-to-flower composite, fade in/out.
+     Total cycle under 1s. Plays once per page transition.
+     ════════════════════════════════════════════════════════════════════ */
+  .loader {
+    position: absolute;
+    inset: 0;
+    background: var(--cream);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease;
+  }
+  .loader.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .bulb-stage {
+    position: relative;
+    width: 85%;
+    max-width: 1200px;
+    aspect-ratio: 2560 / 1664;
+  }
+  .bulb-stage img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+  /* Each layer is the full composite, clipped to only its bulb's quarter */
+  .bulb-stage img:nth-child(1) { clip-path: inset(0 75%  0 0);   }
+  .bulb-stage img:nth-child(2) { clip-path: inset(0 50%  0 25%); }
+  .bulb-stage img:nth-child(3) { clip-path: inset(0 25%  0 50%); }
+  .bulb-stage img:nth-child(4) { clip-path: inset(0 0    0 75%); }
+
+  /* Cascading flash — each bulb fades in then away, staggered over ~1s total.
+     --i is set on each <img> in the HTML so this rule covers all four. */
+  .loader.visible .bulb-stage img {
+    animation: bulbFlash 0.55s ease-in-out forwards;
+    animation-delay: calc(var(--i) * 0.15s);
+  }
+
+  @keyframes bulbFlash {
+    0%   { opacity: 0; }
+    45%  { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  /* — Mobile shell base + breakpoint gate (lines 2712–2731) — */
+  /* ════════════════════════════════════════════════════════════════════
+     MOBILE — editorial single-page with constellation loader.
+     Activates at <=760px width or aspect-ratio narrower than 4/5.
+     The desktop .viewport stays hidden on mobile via the same media query.
+     ════════════════════════════════════════════════════════════════════ */
+  .mobile-shell {
+    display: none;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100svh;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  @media (max-width: 900px), (max-aspect-ratio: 4/5) {
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; overflow-y: auto; }
+    .viewport { display: none; }
+    .mobile-shell { display: block; }
+    .mob-menu-toggle { display: flex !important; }
+  }
+
+  /* — Mobile hamburger toggle + cream overlay menu (lines 2989–3201); JS open/close deferred — */
+  /* ─── HAMBURGER + CREAM OVERLAY MENU ───
+     Top-right button on every mobile screen. Tapping fades the entire
+     viewport to the cream background colour and reveals a light, all-caps
+     menu. Tapping a link fires the existing setMobPage() flow; the
+     overlay closes itself. */
+  .mob-menu-toggle {
+    position: fixed;
+    top: max(22px, env(safe-area-inset-top));
+    right: 22px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    z-index: 90;
+    color: var(--ink);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    display: none;            /* shown only inside the mobile breakpoint */
+    align-items: center;
+    justify-content: center;
+  }
+  .mob-menu-toggle .bars {
+    position: relative;
+    width: 24px;
+    height: 16px;
+  }
+  .mob-menu-toggle .bars::before,
+  .mob-menu-toggle .bars::after,
+  .mob-menu-toggle .bars span {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1.6px;
+    background: currentColor;
+    border-radius: 1px;
+    transition: transform 0.45s var(--ease), opacity 0.25s ease, top 0.45s var(--ease);
+  }
+  .mob-menu-toggle .bars::before { top: 0; }
+  .mob-menu-toggle .bars span    { top: 50%; transform: translateY(-50%); display: block; }
+  .mob-menu-toggle .bars::after  { top: auto; bottom: 0; }
+  /* Open state: morph into an X. Stays in --ink because the overlay is cream. */
+  body.mob-menu-open .mob-menu-toggle { color: var(--ink); }
+  body.mob-menu-open .mob-menu-toggle .bars::before {
+    top: 50%; transform: translateY(-50%) rotate(45deg);
+  }
+  body.mob-menu-open .mob-menu-toggle .bars::after {
+    bottom: auto; top: 50%; transform: translateY(-50%) rotate(-45deg);
+  }
+  body.mob-menu-open .mob-menu-toggle .bars span { opacity: 0; }
+
+  /* Cream backdrop — sits BELOW the leaf canvas (z=50) so leaves keep
+     drifting visibly over the wash. Effectively hides the page content
+     by fading to the background colour while the menu is open. */
+  .mob-menu-backdrop {
+    position: fixed;
+    inset: 0;
+    background: var(--cream);
+    z-index: 30;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--dur-mid) var(--ease), visibility 0s linear 0.55s;
+    pointer-events: none;
+  }
+  body.mob-menu-open .mob-menu-backdrop {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity var(--dur-mid) var(--ease), visibility 0s linear 0s;
+    pointer-events: auto;
+  }
+
+  /* Menu items live ABOVE the leaves so they stay readable. The container
+     itself is transparent — only the list is visible. */
+  .mob-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    z-index: 80;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s var(--ease), visibility 0s linear 0.5s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: calc(env(safe-area-inset-top, 0px) + 88px) 26px max(24px, env(safe-area-inset-bottom));
+    overflow: hidden;
+    pointer-events: none;
+  }
+  body.mob-menu-open .mob-menu-overlay {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.5s var(--ease), visibility 0s linear 0s;
+  }
+  /* Lock body scroll while the overlay is open */
+  body.mob-menu-open { overflow: hidden; }
+
+  /* Menu list — caps, light weight, with horizontal dividers between items.
+     Each row: label · expand-chevron (toggles a small description) · arrow
+     (navigates to the page). The whole list reads like an editorial index. */
+  .mob-menu-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(27, 36, 24, 0.18);
+  }
+  .mob-menu-item {
+    border-bottom: 1px solid rgba(27, 36, 24, 0.18);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+  }
+  body.mob-menu-open .mob-menu-item { opacity: 1; transform: translateY(0); }
+  body.mob-menu-open .mob-menu-item:nth-child(1) { transition-delay: 0.18s; }
+  body.mob-menu-open .mob-menu-item:nth-child(2) { transition-delay: 0.24s; }
+  body.mob-menu-open .mob-menu-item:nth-child(3) { transition-delay: 0.30s; }
+  body.mob-menu-open .mob-menu-item:nth-child(4) { transition-delay: 0.36s; }
+  body.mob-menu-open .mob-menu-item:nth-child(5) { transition-delay: 0.42s; }
+  body.mob-menu-open .mob-menu-item:nth-child(6) { transition-delay: 0.48s; }
+  body.mob-menu-open .mob-menu-item:nth-child(7) { transition-delay: 0.54s; }
+  body.mob-menu-open .mob-menu-item:nth-child(8) { transition-delay: 0.60s; }
+  body.mob-menu-open .mob-menu-item:nth-child(9) { transition-delay: 0.66s; }
+
+  .mob-menu-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 4px;
+  }
+  .mob-menu-label {
+    font-family: 'DM Sans', 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: clamp(15px, 3.6vw, 18px);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    line-height: 1.05;
+    appearance: none;
+    background: transparent;
+    border: none;
+    padding: 8px 0;
+    margin: 0;
+    text-align: left;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mob-menu-label:active { opacity: 0.55; }
+  .mob-menu-expand,
+  .mob-menu-go {
+    appearance: none;
+    background: transparent;
+    border: none;
+    color: var(--ink);
+    width: 38px;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    padding: 0;
+    transition: transform var(--dur-base) var(--ease), opacity 0.2s ease;
+  }
+  .mob-menu-expand svg,
+  .mob-menu-go svg {
+    width: 22px;
+    height: 22px;
+  }
+  .mob-menu-expand[aria-expanded="true"] {
+    transform: rotate(180deg);
+  }
+  .mob-menu-go:active { opacity: 0.55; }
+
+  /* Description panel — collapsed by default, expands when the chevron is
+     tapped. Uses a max-height transition for a clean accordion feel. */
+  .mob-menu-desc {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s var(--ease), opacity 0.3s ease, padding 0.3s ease;
+    opacity: 0;
+    padding: 0 4px;
+  }
+  .mob-menu-item.is-open .mob-menu-desc {
+    max-height: 200px;
+    opacity: 1;
+    padding: 0 4px 18px;
+  }
+  .mob-menu-desc p {
+    margin: 0;
+    font-family: 'DM Sans', 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 13.5px;
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+    color: rgba(27, 36, 24, 0.72);
+    max-width: 36ch;
+  }
+
+  .mob-menu-foot {
+    margin-top: 22px;
+    padding-top: 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(27, 36, 24, 0.45);
+  }
+
+
+  /* — Mobile back chevron + brand mark (lines 3574–3625) — */
+  /* Back chevron — top-left of every page, returns to home */
+  /* ─── Mobile brand mark — small swan-and-leaves logo at the top of every
+         non-home mobile page. Tapping returns to home (uses the existing
+         data-mob-back routing). Hidden on home where the big wordmark
+         already brands the page. ─── */
+  .mob-brand {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 78px;
+    height: auto;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    z-index: 6;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.25s var(--ease), opacity 0.2s var(--ease);
+  }
+  .mob-brand img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .mob-brand:active { transform: translateX(-50%) scale(0.94); opacity: 0.75; }
+  /* Hide the brand on home (wordmark covers it). */
+  body[data-mob-page="home"] .mob-brand { display: none; }
+  /* Push the back arrow down a touch so it sits beneath the centred brand
+     visually balanced rather than competing for the same horizontal axis. */
+  .mob-page-back {
+    position: absolute;
+    top: 26px;
+    left: 22px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    color: var(--moss);
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+  }
+  .mob-page-back svg {
+    width: 22px;
+    height: 22px;
+    transition: transform 0.3s var(--ease);
+  }
+  .mob-page-back:active svg { transform: translateX(-3px); }
+
+  /* — Mobile page visibility (lines 4141–4163); flips display per data-mob-page on body — */
+  @media (max-width: 900px), (max-aspect-ratio: 4/5) {
+    body[data-mob-page="generator"] #m-generator,
+    body[data-mob-page="about"]     #m-about,
+    body[data-mob-page="services"]  #m-services,
+    body[data-mob-page="contact"]   #m-contact,
+    body[data-mob-page="gardens"]   #m-gardens,
+    body[data-mob-page="blog"]      #m-blog,
+    body[data-mob-page="podcast"]   #m-podcast,
+    body[data-mob-page="shop"]      #m-shop { display: block; }
+    /* Contact uses a flex column to distribute its rows over the viewport
+       without scroll — keep the active-page selector but flip to flex. */
+    body[data-mob-page="contact"] #m-contact.mob-section { display: flex; }
+
+    body[data-mob-page="generator"] .mob-hero,
+    body[data-mob-page="about"]     .mob-hero,
+    body[data-mob-page="services"]  .mob-hero,
+    body[data-mob-page="contact"]   .mob-hero,
+    body[data-mob-page="gardens"]   .mob-hero,
+    body[data-mob-page="blog"]      .mob-hero,
+    body[data-mob-page="podcast"]   .mob-hero,
+    body[data-mob-page="shop"]      .mob-hero { display: none; }
+  }
+
