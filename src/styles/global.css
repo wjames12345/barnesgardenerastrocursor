@@ -2490,3 +2490,167 @@
       pointer-events: none !important;
     }
   }
+
+  /* — Podcast page CSS, desktop (lines 2008–2092); verbatim — */
+  /* ════════════════════════════════════════════════════════════════════
+     PODCAST PAGE — single headline, sub-line, Apple-style email capture
+     ════════════════════════════════════════════════════════════════════ */
+  .page-podcast .page-inner {
+    padding: var(--page-pad-y-tight) var(--page-pad-x) var(--page-pad-y-tight) 0;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .podcast-headline {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(38px, 4.6vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    max-width: 880px;
+    margin: 0 auto 18px;
+  }
+  .podcast-headline em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .podcast-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0 auto 28px;
+    max-width: 460px;
+  }
+  /* Apple-style email capture — soft cream field, paired filled button */
+  .podcast-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .podcast-form input[type="email"] {
+    flex: 1;
+    border: 1px solid var(--rule);
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: 12px;
+    padding: 13px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    min-width: 0;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  }
+  .podcast-form input[type="email"]::placeholder { color: var(--sage); }
+  .podcast-form input[type="email"]:focus {
+    border-color: var(--moss);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 0 3px rgba(47, 64, 48, 0.10);
+  }
+  .podcast-form button {
+    border: 0;
+    background: var(--moss);
+    color: var(--cream);
+    border-radius: 12px;
+    padding: 13px 22px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .podcast-form button:hover { background: var(--ink); }
+  .podcast-form button:active { transform: scale(0.98); }
+  .podcast-thanks {
+    display: none;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--moss);
+    margin-top: 18px;
+  }
+  .podcast-thanks.visible { display: block; }
+
+  /* — Podcast page CSS, mobile (lines 4065–4139); verbatim — */
+  /* ─── MOBILE PODCAST — headline + sub-line + Apple-style email box ─── */
+  #m-podcast {
+    text-align: center;
+    padding-top: 120px;
+  }
+  .mob-podcast-headline {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(30px, 8.5vw, 38px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0 auto 16px;
+    max-width: 380px;
+  }
+  .mob-podcast-headline em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .mob-podcast-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0 auto 24px;
+    max-width: 340px;
+  }
+  .mob-podcast-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .mob-podcast-form input[type="email"] {
+    flex: 1;
+    border: 1px solid var(--rule);
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: 12px;
+    padding: 13px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    min-width: 0;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .mob-podcast-form input::placeholder { color: var(--sage); }
+  .mob-podcast-form input[type="email"]:focus {
+    border-color: var(--moss);
+    background: rgba(255, 255, 255, 0.9);
+  }
+  .mob-podcast-form button {
+    border: 0;
+    background: var(--moss);
+    color: var(--cream);
+    border-radius: 12px;
+    padding: 13px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .mob-podcast-form button:active { transform: scale(0.98); }
+  .mob-podcast-thanks {
+    display: none;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--moss);
+    margin-top: 18px;
+  }
+  .mob-podcast-thanks.visible { display: block; }
