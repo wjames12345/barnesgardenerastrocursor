@@ -18,7 +18,10 @@ const PATH_TO_MOB_PAGE: Record<string, string> = {
   '/shop':     'shop',
   '/contact':  'contact',
 };
-const mobPage = PATH_TO_MOB_PAGE[Astro.url.pathname.replace(/\/$/, '') || '/'] ?? 'home';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+// /case/[road] sub-routes have no mobile equivalent in source; fall back to
+// "gardens" so mobile users land on the gardens grid rather than the home wordmark.
+const mobPage = path.startsWith('/case/') ? 'gardens' : (PATH_TO_MOB_PAGE[path] ?? 'home');
 ---
 <!DOCTYPE html>
 <html lang="en-GB">

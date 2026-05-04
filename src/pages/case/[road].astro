@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const cases = [
+    { road: 'Castelnau',         area: 'Barnes' },
+    { road: 'Lonsdale Road',     area: 'Barnes' },
+    { road: 'Riverview Gardens', area: 'Barnes' },
+    { road: 'Westmoreland Road', area: 'Barnes' },
+    { road: 'Lytton Grove',      area: 'Putney' },
+    { road: 'Carlton Drive',     area: 'Putney' },
+    { road: 'Disraeli Road',     area: 'Putney' },
+    { road: 'Erpingham Road',    area: 'Putney' },
+  ];
+  return cases.map((c) => ({
+    params: { road: c.road.toLowerCase().replace(/\s+/g, '-') },
+    props:  { road: c.road, area: c.area },
+  }));
+}
+
+const { road, area } = Astro.props;
+
+// Mirrors source 7503–7515: split road, last word goes italic moss.
+const parts = road.split(' ');
+const tail  = parts.pop()!;
+const head  = parts.join(' ');
+---
+<BaseLayout>
+  <section class="page page-case active" id="case">
+    <div class="page-inner">
+      <button class="case-back" id="caseBack" type="button" aria-label="Back to case studies">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        <span>Back</span>
+      </button>
+
+      <div class="case-grid">
+        <div class="case-text">
+          <p class="case-eyebrow">{area}</p>
+          <h2 class="case-title">{head ? <>{head + ' '}<em>{tail}</em>.</> : <><em>{tail}</em>.</>}</h2>
+
+          <p class="case-lead">A narrow north facing courtyard behind a Barnes terrace. Patchy paving, a tired pergola, and a fence the brambles had eaten. But with the right bones beneath it all.</p>
+
+          <p>Pete first wrote in February. They'd lived with the garden for nine years and finally accepted it wasn't going to fix itself. The brief was modest: somewhere to sit in the morning, something green to look at when the weather was foul, and to lose the impression of being walled in.</p>
+
+          <p>The work was done across three short visits. The pergola came down. The flagstones were lifted, levelled and relaid. A box tipped privet hedge was planted along the rear boundary in place of the old trellis, with star jasmine threaded through the side wall to take the eye upward. The bench was kept, oiled, and put back where it had always lived.</p>
+
+          <p>What changed isn't the footprint, that's exactly the same. It's the feeling of being held by green on three sides instead of stared at by three fences. That, and the bench is now somewhere you'd actually want to sit.</p>
+        </div>
+
+        <div class="case-visual" id="caseVisual">
+          <!-- Slider: AFTER on top, BEFORE underneath. The handle clips the AFTER image, revealing BEFORE on its left. -->
+          <div class="ba-frame" id="baFrame">
+            <img class="ba-img ba-before" src="/before.jpg" alt="The garden before, overgrown trellis and bare paving" draggable="false" loading="lazy" decoding="async">
+            <div class="ba-after-clip" id="baAfterClip">
+              <img class="ba-img ba-after" src="/after.jpg" alt="The garden after, boxed hedge, oiled bench, ivy clad walls" draggable="false" loading="lazy" decoding="async">
+            </div>
+
+            <!-- Vertical handle / divider -->
+            <div class="ba-handle" id="baHandle">
+              <div class="ba-line"></div>
+              <div class="ba-grip" aria-label="Drag to compare before and after" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+            </div>
+
+            <!-- Tiny labels in the top corners -->
+            <div class="ba-label ba-label-left">Before</div>
+            <div class="ba-label ba-label-right">After</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -3925,3 +3925,268 @@
      contact directory uses its own typography and shouldn't pick that up. */
   #m-contact .mob-contact-row,
   #m-contact .mob-contact-row * { font-style: normal; }
+
+  /* — Case study page CSS, desktop (lines 2094–2356); verbatim — */
+  /* ════════════════════════════════════════════════════════════════════
+     CASE STUDY PAGE — text on left, before/after slider on right
+     ════════════════════════════════════════════════════════════════════ */
+  .page-case .page-inner {
+    /* Case study fills the stage with the before/after slider; no
+       horizontal padding so the slider can extend full-width. */
+    padding: var(--page-pad-y-tight) 0;
+    overflow: hidden;
+  }
+  .case-back {
+    background: transparent;
+    border: none;
+    color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+    margin-bottom: 28px;
+    transition: color 0.2s, gap 0.25s;
+    font-weight: 500;
+    align-self: flex-start;
+  }
+  .case-back:hover { color: var(--moss); gap: 14px; }
+
+  .case-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 70px;
+    align-items: start;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .case-text {
+    max-width: 460px;
+    overflow-y: auto;
+    max-height: 100%;
+    padding-right: 12px;
+  }
+  .case-text::-webkit-scrollbar { width: 4px; }
+  .case-text::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
+
+  .case-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .case-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .case-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .case-title em {
+    font-style: italic;
+    color: var(--moss);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .case-lead {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: 22px;
+    letter-spacing: -0.005em;
+  }
+  .case-text p {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .case-meta {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+  }
+  .case-meta-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 18px;
+    padding: 10px 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+  }
+  .case-meta-row .k {
+    color: var(--sage);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 10.5px;
+    font-weight: 500;
+  }
+  .case-meta-row .v {
+    color: var(--ink-soft);
+  }
+
+  /* VISUAL — slides in from off-canvas right whenever the page is entered */
+  .case-visual {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  .case-visual.is-entered {
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 1.05s cubic-bezier(0.18, 0.7, 0.22, 1) 0.25s,
+                opacity 0.4s ease 0.25s;
+  }
+
+  .ba-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    box-shadow: 0 12px 40px rgba(26, 36, 24, 0.12);
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  /* Base image styles — pinned to top-left, height fills, width is set per variant */
+  .ba-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    -webkit-user-drag: none;
+  }
+  /* The "before" image fills the entire frame */
+  .ba-before {
+    width: 100%;
+  }
+  /* The clip wraps the "after" image — its width = the slider position.
+     The image inside uses --frame-width (set by JS) so it doesn't squish
+     as the clip narrows. */
+  .ba-after-clip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 50%;
+    overflow: hidden;
+    will-change: width;
+  }
+  .ba-after {
+    width: var(--frame-width, 800px);
+    max-width: none;
+  }
+
+  .ba-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: var(--cream);
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 5;
+    box-shadow: 0 0 12px rgba(26, 36, 24, 0.3);
+  }
+  .ba-line {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.95);
+  }
+  .ba-grip {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 1.5px solid var(--moss);
+    color: var(--moss);
+    cursor: ew-resize;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    box-shadow: 0 4px 16px rgba(26, 36, 24, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s;
+  }
+  .ba-grip:hover {
+    transform: translate(-50%, -50%) scale(1.06);
+    box-shadow: 0 6px 22px rgba(26, 36, 24, 0.28);
+  }
+  .ba-grip:active {
+    cursor: grabbing;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+
+  .ba-label {
+    position: absolute;
+    top: 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: rgba(26, 36, 24, 0.55);
+    padding: 6px 12px;
+    border-radius: 99px;
+    font-weight: 500;
+    z-index: 4;
+    backdrop-filter: blur(4px);
+  }
+  .ba-label-left { left: 18px; }
+  .ba-label-right { right: 18px; }
+
+  /* Train-jolt animation: the handle plays this when user releases */
+  .ba-frame.is-jolting .ba-handle {
+    animation: trainJolt 0.45s var(--ease-spring);
+  }
+  @keyframes trainJolt {
+    0%   { transform: translateX(-50%) translateX(0); }
+    35%  { transform: translateX(-50%) translateX(-8px); }
+    62%  { transform: translateX(-50%) translateX(2px); }
+    85%  { transform: translateX(-50%) translateX(-1px); }
+    100% { transform: translateX(-50%) translateX(0); }
+  }
+  /* Same jolt on the after-clip (so the image edge moves with the handle) */
+  .ba-frame.is-jolting .ba-after-clip {
+    animation: trainJoltClip 0.45s var(--ease-spring);
+  }
+  @keyframes trainJoltClip {
+    0%   { margin-left: 0; }
+    35%  { margin-left: -8px; }
+    62%  { margin-left: 2px; }
+    85%  { margin-left: -1px; }
+    100% { margin-left: 0; }
+  }

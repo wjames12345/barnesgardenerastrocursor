@@ -1,5 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const TILES = [
+  { road: 'Castelnau',         area: 'Barnes' },
+  { road: 'Lonsdale Road',     area: 'Barnes' },
+  { road: 'Riverview Gardens', area: 'Barnes' },
+  { road: 'Westmoreland Road', area: 'Barnes' },
+  { road: 'Lytton Grove',      area: 'Putney' },
+  { road: 'Carlton Drive',     area: 'Putney' },
+  { road: 'Disraeli Road',     area: 'Putney' },
+  { road: 'Erpingham Road',    area: 'Putney' },
+];
+
+const slugify = (road: string) => road.toLowerCase().replace(/\s+/g, '-');
+const PIXEL = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 ---
 <BaseLayout>
   <section class="page page-gardens" id="gardens">
@@ -9,46 +23,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <div class="gardens-grid fade-in" style="--fade-delay: 0.12s;">
-        <a class="gardens-tile" data-road="Castelnau" data-area="Barnes" aria-label="Castelnau, Barnes">
-          <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" loading="lazy" decoding="async">
-          <span class="gardens-tile-name">Castelnau</span>
-          <span class="gardens-tile-area">Barnes</span>
-        </a>
-        <a class="gardens-tile" data-road="Lonsdale Road" data-area="Barnes" aria-label="Lonsdale Road, Barnes">
-          <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" loading="lazy" decoding="async">
-          <span class="gardens-tile-name">Lonsdale Road</span>
-          <span class="gardens-tile-area">Barnes</span>
-        </a>
-        <a class="gardens-tile" data-road="Riverview Gardens" data-area="Barnes" aria-label="Riverview Gardens, Barnes">
-          <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" loading="lazy" decoding="async">
-          <span class="gardens-tile-name">Riverview Gardens</span>
-          <span class="gardens-tile-area">Barnes</span>
-        </a>
-        <a class="gardens-tile" data-road="Westmoreland Road" data-area="Barnes" aria-label="Westmoreland Road, Barnes">
-          <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" loading="lazy" decoding="async">
-          <span class="gardens-tile-name">Westmoreland Road</span>
-          <span class="gardens-tile-area">Barnes</span>
-        </a>
-        <a class="gardens-tile" data-road="Lytton Grove" data-area="Putney" aria-label="Lytton Grove, Putney">
-          <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" loading="lazy" decoding="async">
-          <span class="gardens-tile-name">Lytton Grove</span>
-          <span class="gardens-tile-area">Putney</span>
-        </a>
-        <a class="gardens-tile" data-road="Carlton Drive" data-area="Putney" aria-label="Carlton Drive, Putney">
-          <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" loading="lazy" decoding="async">
-          <span class="gardens-tile-name">Carlton Drive</span>
-          <span class="gardens-tile-area">Putney</span>
-        </a>
-        <a class="gardens-tile" data-road="Disraeli Road" data-area="Putney" aria-label="Disraeli Road, Putney">
-          <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" loading="lazy" decoding="async">
-          <span class="gardens-tile-name">Disraeli Road</span>
-          <span class="gardens-tile-area">Putney</span>
-        </a>
-        <a class="gardens-tile" data-road="Erpingham Road" data-area="Putney" aria-label="Erpingham Road, Putney">
-          <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" loading="lazy" decoding="async">
-          <span class="gardens-tile-name">Erpingham Road</span>
-          <span class="gardens-tile-area">Putney</span>
-        </a>
+        {TILES.map((t) => (
+          <a class="gardens-tile" href={`/case/${slugify(t.road)}`} data-road={t.road} data-area={t.area} aria-label={`${t.road}, ${t.area}`}>
+            <img src={PIXEL} alt="" loading="lazy" decoding="async">
+            <span class="gardens-tile-name">{t.road}</span>
+            <span class="gardens-tile-area">{t.area}</span>
+          </a>
+        ))}
       </div>
     </div>
   </section>
@@ -60,46 +41,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <h2 class="mob-gardens-title">Testimonial Gardens</h2>
 
     <div class="mob-gardens-list">
-      <a class="mob-gardens-card" data-road="Castelnau" data-area="Barnes">
-        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" loading="lazy" decoding="async">
-        <span class="mob-gardens-card-name">Castelnau</span>
-        <span class="mob-gardens-card-area">Barnes</span>
-      </a>
-      <a class="mob-gardens-card" data-road="Lonsdale Road" data-area="Barnes">
-        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" loading="lazy" decoding="async">
-        <span class="mob-gardens-card-name">Lonsdale Road</span>
-        <span class="mob-gardens-card-area">Barnes</span>
-      </a>
-      <a class="mob-gardens-card" data-road="Riverview Gardens" data-area="Barnes">
-        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" loading="lazy" decoding="async">
-        <span class="mob-gardens-card-name">Riverview Gardens</span>
-        <span class="mob-gardens-card-area">Barnes</span>
-      </a>
-      <a class="mob-gardens-card" data-road="Westmoreland Road" data-area="Barnes">
-        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" loading="lazy" decoding="async">
-        <span class="mob-gardens-card-name">Westmoreland Road</span>
-        <span class="mob-gardens-card-area">Barnes</span>
-      </a>
-      <a class="mob-gardens-card" data-road="Lytton Grove" data-area="Putney">
-        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" loading="lazy" decoding="async">
-        <span class="mob-gardens-card-name">Lytton Grove</span>
-        <span class="mob-gardens-card-area">Putney</span>
-      </a>
-      <a class="mob-gardens-card" data-road="Carlton Drive" data-area="Putney">
-        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" loading="lazy" decoding="async">
-        <span class="mob-gardens-card-name">Carlton Drive</span>
-        <span class="mob-gardens-card-area">Putney</span>
-      </a>
-      <a class="mob-gardens-card" data-road="Disraeli Road" data-area="Putney">
-        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" loading="lazy" decoding="async">
-        <span class="mob-gardens-card-name">Disraeli Road</span>
-        <span class="mob-gardens-card-area">Putney</span>
-      </a>
-      <a class="mob-gardens-card" data-road="Erpingham Road" data-area="Putney">
-        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="" loading="lazy" decoding="async">
-        <span class="mob-gardens-card-name">Erpingham Road</span>
-        <span class="mob-gardens-card-area">Putney</span>
-      </a>
+      {TILES.map((t) => (
+        <a class="mob-gardens-card" href={`/case/${slugify(t.road)}`} data-road={t.road} data-area={t.area}>
+          <img src={PIXEL} alt="" loading="lazy" decoding="async">
+          <span class="mob-gardens-card-name">{t.road}</span>
+          <span class="mob-gardens-card-area">{t.area}</span>
+        </a>
+      ))}
     </div>
   </section>
 </BaseLayout>
