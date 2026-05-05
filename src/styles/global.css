@@ -4027,7 +4027,10 @@
     color: var(--ink-faded);
     text-align: center;
     max-width: 40ch;
-    margin: 140px auto 0;   /* sits well below the contact list */
+    /* #m-contact is display:flex column at the mobile breakpoint, so
+       margin-top:auto pushes the foot text to the bottom of the screen
+       — visually detached from the contact list above with maximum air. */
+    margin: auto auto 0;
   }
   .mob-contact-list {
     list-style: none;
@@ -4476,6 +4479,212 @@
      because the form below it is a single centred element, not a left-
      aligned column of content. */
   .pages .page-inner .podcast-sub { text-align: center; }
+
+  /* ────────── Quote & Render (latelier) — desktop layout v2 ──────────
+     Heading + lead in a top-left header block (left-aligned, overrides
+     the global centred-heading rule). Form and the Send-to-Gary pill
+     sit side by side beneath: form left, button right, vertically
+     centred. Inputs are minimal — hairline underline only. */
+  .page-latelier .lat-head {
+    text-align: left;
+    margin: 0 0 36px;
+    max-width: 720px;
+  }
+  .page-latelier .lat-head h2 {
+    text-align: left !important;        /* overrides the global heading rule */
+    white-space: normal !important;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: var(--ink-body);
+    margin: 0 0 14px;
+  }
+  .page-latelier .lat-lead {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink-faded);
+    text-align: left !important;
+    max-width: none;
+    margin: 0;
+    white-space: nowrap !important;   /* single line per request */
+  }
+  .page-latelier .lat-body {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 64px;
+    align-items: center;
+    max-width: 1000px;
+  }
+  .page-latelier .lat-form {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    text-align: left;
+  }
+  .page-latelier .lat-form,
+  .page-latelier .lat-form * {
+    text-align: left;
+  }
+  .page-latelier .lat-form label {
+    display: block;
+    text-align: left;
+    color: var(--ink-faded);
+  }
+  /* Pill submit on the right column. Filled moss, light text — the only
+     filled CTA on the page (overrides the outlined .begin-btn pattern
+     because this is the page's primary commit action). */
+  .page-latelier .lat-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-self: center;
+    gap: 10px;
+    padding: 22px 30px;
+    background: var(--ink-deep);
+    color: var(--bg-page);
+    border: none;
+    border-radius: 999px;
+    font-family: 'Cormorant Garamond', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.25s var(--ease), padding-right 0.25s var(--ease);
+  }
+  .page-latelier .lat-submit:hover { padding-right: 36px; }
+  .page-latelier .lat-submit .arr { font-family: 'Cormorant Garamond', serif; font-size: 14px; }
+  /* Right-column wrap so the no-spam line sits directly under the pill. */
+  .page-latelier .lat-submit-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .page-latelier .lat-nospam {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    color: var(--ink-faded);
+    text-align: center;
+    margin: 0;
+    white-space: nowrap;
+  }
+  /* Submit column needs to be wider than the pill so the no-spam line
+     renders on one line under it. The body grid right column also has
+     to grow to match. */
+  .page-latelier .lat-body { grid-template-columns: 1fr 320px; }
+
+  /* "What you'll get" promise — three quiet rows, no card, hairline rule
+     above to separate from the form. Renders below lat-body. */
+  .page-latelier .lat-promise {
+    list-style: none;
+    margin: 56px 0 0;
+    padding: 24px 0 0;
+    border-top: 0.5px solid var(--rule);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 1000px;
+  }
+  .page-latelier .lat-promise li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+  }
+  .page-latelier .lat-promise-k {
+    font-family: 'Cormorant Garamond', sans-serif;
+    font-weight: 500;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-body);
+  }
+  .page-latelier .lat-promise-v {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-faded);
+  }
+
+  /* Success state — replaces the form once submission succeeds. JS will
+     toggle [hidden] off on .lat-success and add .is-sent on the form
+     to fade it out. Keeps the same vertical real estate so the page
+     doesn't reflow. */
+  .page-latelier .lat-success {
+    margin-top: 32px;
+    max-width: 640px;
+    text-align: left;
+  }
+  .page-latelier .lat-success-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Cormorant Garamond', sans-serif;
+    font-weight: 500;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin: 0 0 14px;
+  }
+  .page-latelier .lat-success-eyebrow .pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #B25E3D;
+  }
+  .page-latelier .lat-success-h {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink-body);
+    margin: 0 0 10px;
+    text-align: left;
+  }
+  .page-latelier .lat-success-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-faded);
+    margin: 0 0 22px;
+  }
+  .page-latelier .lat-receipt {
+    margin: 0;
+    border-top: 0.5px solid var(--rule);
+  }
+  .page-latelier .lat-receipt > div {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .page-latelier .lat-receipt dt {
+    font-family: 'Cormorant Garamond', sans-serif;
+    font-weight: 500;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+  }
+  .page-latelier .lat-receipt dd {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 14.5px;
+    color: var(--ink-body);
+  }
 
   /* ────────── Services (essay v4 — three grouped columns) ──────────
      Eight services grouped into three categories laid out as three

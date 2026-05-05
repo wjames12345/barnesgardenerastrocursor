@@ -7,63 +7,67 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 >
   <section class="page page-latelier active" id="latelier">
     <div class="page-inner">
-      <div class="lat-grid">
-        <div class="lat-left">
-          <h2 class="fade-in" style="--fade-delay: 0.0s;">Upload a <em>photograph</em>.</h2>
-          <p class="lat-lead fade-in" style="--fade-delay: 0.15s;">Upload a photo and I will send you back my vision of what I can offer along with a quote within 24 hours.</p>
-        </div>
+      <header class="lat-head fade-in" style="--fade-delay: 0.0s;">
+        <h2>Upload a photograph.</h2>
+        <p class="lat-lead">Upload a photo and I will send you back my vision of what I can offer along with a quote within 24 hours.</p>
+      </header>
 
-        <div class="lat-right fade-in" style="--fade-delay: 0.45s;">
-          <form class="lat-form" id="envForm" novalidate>
-            <div class="form-row single">
-              <div class="field field-with-cursor" data-cursor>
-                <label for="env-vision">What would you like?</label>
-                <textarea id="env-vision" name="vision" placeholder="A few words. What you'd love, what isn't working."></textarea>
-                <span class="typewriter-cursor"></span>
-              </div>
-            </div>
-            <div class="form-row single" style="margin-bottom: 30px;">
-              <div class="field">
-                <label>A photograph of your garden</label>
-                <div class="file-button-row">
-                  <label class="file-button">
-                    <span class="dot"></span>
-                    <span>Choose File…</span>
-                    <input type="file" id="env-photo" name="photo" accept="image/*">
-                  </label>
-                  <span class="file-status" id="fileStatus"><span class="label">No file</span>selected</span>
-                </div>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="field field-with-cursor" data-cursor>
-                <label for="env-name">Your name</label>
-                <input type="text" id="env-name" name="name" placeholder="Jane Doe" required>
-                <span class="typewriter-cursor"></span>
-              </div>
-              <div class="field field-with-cursor" data-cursor>
-                <label for="env-email">Your email so we can get back to you</label>
-                <input type="email" id="env-email" name="email" placeholder="you@example.com" required>
-                <span class="typewriter-cursor"></span>
-              </div>
-            </div>
-            <button type="submit" class="submit">
-              <span>Send to Gary</span>
-              <span class="arrow" aria-hidden="true">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </span>
-            </button>
-          </form>
-          <div class="form-success" id="envSuccess">
-            <div class="success-eyebrow"><span class="pulse"></span>Received · in queue</div>
-            <h3>Your garden is on Gary's <em>bench</em>.</h3>
-            <p>He'll have something back to you within 24 hours.</p>
-            <div class="receipt">
-              <div class="row"><span class="k">Status</span><span class="v" id="receiptStatus">awaiting review</span></div>
-              <div class="row"><span class="k">Reply by</span><span class="v" id="receiptReply">·</span></div>
+      <div class="lat-body fade-in" style="--fade-delay: 0.3s;">
+        <form class="lat-form" id="envForm" novalidate>
+          <div class="form-row single">
+            <div class="field">
+              <label for="env-vision">What would you like?</label>
+              <textarea id="env-vision" name="vision" placeholder="A few words. What you'd love, what isn't working."></textarea>
             </div>
           </div>
+          <div class="form-row single">
+            <div class="field">
+              <label>A photograph of your garden</label>
+              <div class="file-button-row">
+                <label class="file-button">
+                  <span class="dot"></span>
+                  <span>Choose File…</span>
+                  <input type="file" id="env-photo" name="photo" accept="image/*">
+                </label>
+                <span class="file-status" id="fileStatus"><span class="label">No file</span> selected</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="env-name">Your name</label>
+              <input type="text" id="env-name" name="name" placeholder="Jane Doe" required>
+            </div>
+            <div class="field">
+              <label for="env-email">Your email so we can get back to you</label>
+              <input type="email" id="env-email" name="email" placeholder="you@example.com" required>
+            </div>
+          </div>
+        </form>
+
+        <div class="lat-submit-col">
+          <button type="submit" form="envForm" class="lat-submit">
+            <span>Send to Gary</span>
+            <span class="arr" aria-hidden="true">→</span>
+          </button>
+          <p class="lat-nospam">Your photo and email never leave Gary's inbox.</p>
         </div>
+      </div>
+
+      <ul class="lat-promise fade-in" style="--fade-delay: 0.45s;">
+        <li><span class="lat-promise-k">Photo rendering</span><span class="lat-promise-v">A visual of how your garden could look.</span></li>
+        <li><span class="lat-promise-k">Written quote</span><span class="lat-promise-v">Cost, scope and what's included.</span></li>
+        <li><span class="lat-promise-k">24-hour reply</span><span class="lat-promise-v">Direct from Gary, no third party.</span></li>
+      </ul>
+
+      <div class="lat-success" id="envSuccess" hidden>
+        <p class="lat-success-eyebrow"><span class="pulse"></span>Received · in queue</p>
+        <h3 class="lat-success-h">Your garden is on Gary's bench.</h3>
+        <p class="lat-success-body">He'll have something back to you within 24 hours.</p>
+        <dl class="lat-receipt">
+          <div><dt>Status</dt><dd id="receiptStatus">Awaiting review</dd></div>
+          <div><dt>Reply by</dt><dd id="receiptReply">·</dd></div>
+        </dl>
       </div>
     </div>
   </section>
