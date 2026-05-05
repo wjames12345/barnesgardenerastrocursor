@@ -1,19 +1,30 @@
   :root {
-    --cream: #DFE2D5;
-    --cream-deep: #DFE2D5;
-    --paper: #DFE2D5;
-    --ink: #425A44;
-    --ink-soft: #425A44;
-    --moss: #425A44;
-    --moss-deep: #425A44;
-    --sage: #425A44;
-    --sage-light: #425A44;
-    --terracotta: #B25E3D;
-    --terracotta-light: #D4886A;
-    --gold: #A8893E;
-    --navy: #1A2842;
-    --rule: rgba(27, 36, 24, 0.14);
-    --rule-strong: rgba(27, 36, 24, 0.28);
+    /* New tonal green-on-green palette — strict roles, six tokens.
+       Pure #475035 and pure white must not appear anywhere in the build. */
+    --bg-page:   #DFE2D5;  /* pale celadon — only page background */
+    --ink-deep:  #425A44;  /* unified moss — every text + logo on site */
+    --ink-body:  #425A44;
+    --ink-faded: #425A44;
+    --rule:      #B8BCAA;  /* hairline — 0.5px dividers */
+    --accent:    #425A44;  /* unified — accents collapse into the same moss */
+
+    /* Legacy aliases — every old token is mapped onto a role in the new
+       palette so existing CSS resolves without per-rule edits. Eventually
+       these can be inlined and removed. */
+    --cream:           var(--bg-page);
+    --cream-deep:      var(--bg-page);
+    --paper:           var(--bg-page);
+    --ink:             var(--ink-body);
+    --ink-soft:        var(--ink-body);
+    --moss:            var(--ink-deep);
+    --moss-deep:       var(--ink-deep);
+    --sage:            var(--ink-faded);
+    --sage-light:      var(--ink-faded);
+    --terracotta:      var(--accent);
+    --terracotta-light:var(--accent);
+    --gold:            var(--accent);
+    --navy:            var(--ink-body);
+    --rule-strong:     var(--rule);
 
     /* Motion language — single source of truth. Most transitions across
        the site use the same out-expo curve and one of three durations.
@@ -59,7 +70,7 @@
   img { max-width: 100%; display: block; }
 
   h1, h2, h3, h4 {
-    font-family: 'IM Fell English', Georgia, serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-weight: 400;
     line-height: 1;
     letter-spacing: -0.02em;
@@ -106,23 +117,21 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.045;
-    z-index: 1;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    mix-blend-mode: multiply;
+    /* Paper-grain overlay removed per spec ("no overlays"). */
+    display: none;
   }
 
   /* ────────────────── PERSISTENT UI: LOGO, NAV, BEGIN ────────────────── */
   .corner-logo {
-    /* The logo PNG has 26.2% left + 23.5% right + 25.9% top + 25.2%
-       bottom whitespace baked in. Bounding box widened/shifted so the
-       *visible* content (50% of box width) lands flush-left at canvas
-       x=50 and vertical-centred at y=102 (midpoint of page-top=0 and
-       sidenav-top=205). */
+    /* Single-row Hazell&Twigg PNG (2158×468, aspect 4.611:1) with baked-in
+       whitespace L:9.4% R:13.1% T:26.5% B:9.2%. Bounding box widened/
+       shifted so the *visible* content lands flush-left at canvas x=50
+       and vertical-centred at y=102 (midpoint of page-top=0 and sidenav-
+       top=205). */
     position: absolute;
-    top: -49px;
-    left: -75px;
-    width: 478px;
+    top: 63px;
+    left: 21px;
+    width: 310px;
     height: auto;
     z-index: 30;
     transition: transform 0.5s var(--ease);
@@ -143,13 +152,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    font-family: 'IM Fell English', Georgia, serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-weight: 400;
     font-size: 16px;
     letter-spacing: -0.005em;
   }
   .sidenav a {
-    color: #23522E;
+    color: var(--ink-deep);
     opacity: 0.55;
     transition: opacity 0.25s, transform 0.25s, color 0.25s;
     position: relative;
@@ -174,7 +183,7 @@
   }
   .sidenav a.active {
     opacity: 1;
-    color: #23522E;
+    color: var(--ink-deep);
     letter-spacing: 0.06em;
     animation: navBreathe 3.6s ease-in-out infinite;
   }
@@ -188,30 +197,31 @@
   }
 
   .begin-btn {
+    /* Outlined CTA per palette spec — transparent fill, 0.5px accent
+       border, accent text. No filled buttons, no rounded pills. */
     position: absolute;
     top: 36px;
     right: 44px;
     z-index: 30;
-    padding: 11px 22px 11px 24px;
-    background: var(--moss);
-    color: var(--cream);
-    border: none;
-    border-radius: 99px;
+    padding: 10px 18px;
+    background: transparent;
+    color: var(--accent);
+    border: 0.5px solid var(--accent);
+    border-radius: 2px;
     font-family: 'Cormorant Garamond', sans-serif;
     font-size: 12.5px;
     font-weight: 500;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.08em;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    transition: background 0.3s, transform 0.2s, padding-right 0.3s;
+    transition: color 0.3s, border-color 0.3s, transform 0.2s, padding-right 0.3s;
     text-transform: uppercase;
   }
   .begin-btn:hover {
-    background: var(--moss-deep);
     transform: translateY(-1px);
-    padding-right: 28px;
+    padding-right: 24px;
   }
   .begin-btn .arr {
     transition: transform 0.3s;
@@ -269,8 +279,8 @@
     transform: translateX(0);
   }
   .stage-footer .left em {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     text-transform: none;
     letter-spacing: 0;
     color: var(--moss);
@@ -296,7 +306,7 @@
   }
   .page-inner {
     position: absolute;
-    top: 0;
+    top: 205px;    /* aligns with sidenav top so first line sits next to "Home" */
     bottom: 0;
     left: 220px;   /* leaves room for sidenav */
     right: 60px;
@@ -548,12 +558,12 @@
     padding: 10px 4px;
   }
   .mob-menu-label {
-    font-family: 'IM Fell English', Georgia, serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-weight: 400;
     font-size: clamp(22px, 6vw, 32px);
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #23522E;
+    color: var(--ink-deep);
     line-height: 1.05;
     appearance: none;
     background: transparent;
@@ -656,7 +666,7 @@
   }
   .mob-brand-mark {
     aspect-ratio: 8000 / 5032;
-    background-color: #425A44;
+    background-color: var(--ink-deep);
     -webkit-mask-image: url('/logo-wordmark.png');
             mask-image: url('/logo-wordmark.png');
     -webkit-mask-size: contain;
@@ -724,10 +734,10 @@
      HOME PAGE
      ════════════════════════════════════════════════════════════════════ */
   .page-home .page-inner {
-    /* Symmetric 60px x-padding centres on stage centre (x=720).
-       Zero y-padding centres wordmark on stage centre (y=450), so its
-       top/bottom land at 230/670 and align with the absolutely-positioned
-       sidenav (top:205, height:440 → 205/645). */
+    /* Home overrides the base top:200 → 0 so the wordmark uses the full
+       900px canvas for centring. Symmetric 60px x-padding centres
+       horizontally on stage centre (x=720). */
+    top: 0;
     left: 0;
     right: 0;
     align-items: center;
@@ -758,7 +768,7 @@
   }
   .wordmark .line {
     display: block;
-    font-family: 'IM Fell English', Georgia, serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 144px;
     line-height: 0.92;
     letter-spacing: -0.045em;
@@ -770,7 +780,7 @@
     padding-bottom: 0.04em;
   }
   .wordmark .line em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
     transition: color 0.6s var(--ease);
@@ -788,7 +798,7 @@
     margin: 0 auto;
     user-select: none;
     -webkit-user-drag: none;
-    background-color: #425A44;
+    background-color: var(--ink-deep);
     -webkit-mask-image: url('/logo-wordmark.png');
             mask-image: url('/logo-wordmark.png');
     -webkit-mask-size: contain;
@@ -805,11 +815,11 @@
   }
 
   .home-signature {
-    margin-top: 16px;
+    margin-top: 56px;
     width: 1100px;
     font-size: 22px;
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-size: 18px;
     color: var(--moss);
     letter-spacing: 0;
@@ -829,8 +839,8 @@
     width: 100%;
     overflow: hidden;
     pointer-events: auto;
-    mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #475035 8%, #475035 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #475035 8%, #475035 92%, transparent 100%);
     opacity: 0;
     animation: fadeUp 0.9s var(--ease) forwards;
     animation-delay: 1.3s;
@@ -886,9 +896,8 @@
     content: '';
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(120% 60% at 12% 8%,  rgba(74, 93, 67, 0.06) 0%, transparent 50%),
-      radial-gradient(120% 60% at 90% 96%, rgba(74, 93, 67, 0.05) 0%, transparent 50%);
+    /* Radial-gradient overlays removed per spec ("no gradients, no overlays"). */
+    background: none;
     pointer-events: none;
     z-index: 0;
   }
@@ -899,7 +908,7 @@
      not per-line). All three words share the same upright Fraunces — no
      italic on "Barnes". */
   .mob-hero-title {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-size: clamp(58px, 21vw, 110px);
     line-height: 0.82;
@@ -953,7 +962,7 @@
     -webkit-user-drag: none;
     opacity: 0;
     animation: lineRise 1.1s var(--ease) 0.20s forwards;
-    background-color: #425A44;
+    background-color: var(--ink-deep);
     -webkit-mask-image: url('/logo-wordmark.png');
             mask-image: url('/logo-wordmark.png');
     -webkit-mask-size: contain;
@@ -981,7 +990,7 @@
     margin-bottom: 28px;
   }
   .about-header h2 {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-size: 44px;
     line-height: 1.05;
@@ -991,7 +1000,7 @@
     white-space: nowrap;
   }
   .about-header h2 em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -1034,13 +1043,13 @@
     font-style: normal;
   }
   .about-text p em {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .about-text .lead {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 17px;
     line-height: 1.4;
     color: var(--ink);
@@ -1049,8 +1058,8 @@
   }
   .about-text .closing {
     margin-top: 10px;
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-size: 15px;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
@@ -1067,7 +1076,7 @@
     background: var(--cream);
   }
   .mob-section h2 {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-size: clamp(44px, 12vw, 56px);
     line-height: 0.94;
@@ -1076,13 +1085,13 @@
     margin-bottom: 28px;
   }
   .mob-section h2 em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .mob-section .lead {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-size: 19px;
     line-height: 1.42;
     color: var(--moss);
@@ -1090,7 +1099,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .mob-section p {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 16px;
     line-height: 1.7;
     color: var(--ink-soft);
@@ -1099,7 +1108,7 @@
   .mob-section p strong {
     color: var(--ink);
     font-weight: 500;
-    font-style: italic;
+    font-style: normal;
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .mob-section .gary-img {
@@ -1123,13 +1132,12 @@
      ════════════════════════════════════════════════════════════════════ */
   .page-services .page-inner {
     padding: var(--page-pad-y) var(--page-pad-x) var(--page-pad-y) 0;
-    justify-content: center;
   }
   .services-head {
     margin-bottom: 50px;
   }
   .services-head h2 {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-size: 56px;
     line-height: 0.96;
@@ -1139,7 +1147,7 @@
     white-space: nowrap;
   }
   .services-head h2 em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -1149,7 +1157,7 @@
     width: auto;
     vertical-align: -0.18em;
     margin: 0 0.04em;
-    /* Blend the black ink against the cream paper so any PNG matte
+    /* Blend the #475035 ink against the cream paper so any PNG matte
        disappears and the symbol reads as drawn, not pasted. */
     mix-blend-mode: multiply;
     user-select: none;
@@ -1196,20 +1204,20 @@
     font-weight: 500;
   }
   .service-tier-name {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 22px;
     line-height: 1;
     letter-spacing: -0.015em;
     color: var(--ink);
   }
   .service-tier-name em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .service-tier-note {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-size: 14px;
     color: var(--ink-soft);
     margin-left: auto;
@@ -1239,7 +1247,7 @@
   }
   .service:hover .service-extra p { border-left-color: var(--moss); }
   .service-num {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 18px;
     line-height: 1;
     color: var(--sage);
@@ -1252,7 +1260,7 @@
      line, no heading. */
   .service-group-end { margin-bottom: 28px; }
   .service-name {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 21px;
     line-height: 1.05;
     letter-spacing: -0.02em;
@@ -1260,7 +1268,7 @@
     transition: color 0.3s;
   }
   .service-name em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     transition: color 0.3s;
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
@@ -1309,7 +1317,7 @@
     padding-left: 12px;
     border-left: 1px solid var(--rule-strong);
   }
-  .service-extra em { font-style: italic; color: var(--moss); }
+  .service-extra em { font-style: normal; color: var(--moss); }
   .service-extra strong { color: var(--ink); font-weight: 500; }
 
   /* — Services page CSS, mobile (lines 4571–4675); verbatim — */
@@ -1341,7 +1349,7 @@
     transform: scale(0.985);
   }
   .mob-svc-title {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-size: clamp(16px, 4.6vw, 22px);
     line-height: 1.05;
@@ -1379,7 +1387,7 @@
     position: relative;
     transform: translateY(18px);
     transition: transform 0.35s var(--ease);
-    box-shadow: 0 18px 50px rgba(27, 36, 24, 0.22);
+    box-shadow: none;
   }
   .mob-svc-popup.is-open .mob-svc-popup-card { transform: translateY(0); }
   .mob-svc-popup-close {
@@ -1401,7 +1409,7 @@
   }
   .mob-svc-popup-close svg { width: 22px; height: 22px; }
   .mob-svc-popup-title {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-size: 26px;
     line-height: 1.08;
@@ -1426,7 +1434,7 @@
     width: auto;
     vertical-align: -0.18em;
     margin: 0 0.04em;
-    /* Blend the black ink against the cream paper so any PNG matte
+    /* Blend the #475035 ink against the cream paper so any PNG matte
        disappears and the symbol reads as drawn, not pasted. */
     mix-blend-mode: multiply;
     user-select: none;
@@ -1438,7 +1446,6 @@
      ════════════════════════════════════════════════════════════════════ */
   .page-latelier .page-inner {
     padding: var(--page-pad-y) var(--page-pad-x) var(--page-pad-y) 0;
-    justify-content: center;
   }
   .lat-grid {
     display: grid;
@@ -1456,20 +1463,20 @@
     max-width: 8ch;
   }
   .lat-left h2 em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .lat-tagline {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-size: 16px;
     color: var(--moss);
     margin-bottom: 24px;
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .lat-lead {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 19px;
     line-height: 1.45;
     color: var(--ink);
@@ -1489,15 +1496,15 @@
     align-items: start;
   }
   .step-num {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 32px;
-    font-style: italic;
+    font-style: normal;
     line-height: 0.9;
     color: var(--sage);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .step h3 {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-size: 19px;
     color: var(--ink);
@@ -1528,14 +1535,14 @@
     margin-bottom: 12px;
   }
   .lat-investment p {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 14px;
     line-height: 1.55;
     color: var(--ink-soft);
     margin: 0;
   }
   .lat-investment p em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -1569,7 +1576,7 @@
     border: none;
     border-bottom: 1px solid var(--rule-strong);
     color: var(--ink);
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 17px;
     font-weight: 400;
     padding: 4px 0 12px;
@@ -1587,7 +1594,7 @@
   }
   .field input::placeholder, .field textarea::placeholder {
     color: rgba(27, 36, 24, 0.32);
-    font-style: italic;
+    font-style: normal;
   }
 
   /* Typewriter cursor — blinks at the end of whatever is typed */
@@ -1632,18 +1639,18 @@
     border-radius: 4px;
     cursor: pointer;
     position: relative;
-    box-shadow: 1.5px 1.5px 0 var(--ink);
+    box-shadow: none;
     transition: transform 0.12s, box-shadow 0.12s, background 0.2s;
     user-select: none;
   }
   .file-button:hover {
     background: var(--paper);
     transform: translate(-0.5px, -0.5px);
-    box-shadow: 2px 2px 0 var(--ink);
+    box-shadow: none;
   }
   .file-button:active {
     transform: translate(1px, 1px);
-    box-shadow: 0 0 0 var(--ink);
+    box-shadow: none;
   }
   .file-button .dot {
     width: 6px; height: 6px; background: var(--moss); border-radius: 50%;
@@ -1753,8 +1760,8 @@
     50% { opacity: 0.45; transform: scale(0.85); }
   }
   .form-success h3 {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-size: 44px;
     line-height: 1.05;
     color: var(--ink);
@@ -1767,7 +1774,7 @@
     color: var(--moss);
   }
   .form-success p {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 17px;
     line-height: 1.5;
     color: var(--ink-soft);
@@ -1801,21 +1808,21 @@
     align-items: baseline;
   }
   .mob-gen-step .num {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-size: 18px;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .mob-gen-step h3 {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-size: 17px;
     color: var(--ink);
     margin: 0 0 4px;
   }
   .mob-gen-step p {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 14.5px;
     line-height: 1.55;
     color: var(--ink-soft);
@@ -1842,7 +1849,7 @@
   }
   .mob-gen-form input,
   .mob-gen-form textarea {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 16px;                 /* prevents iOS auto-zoom on focus */
     color: var(--ink);
     background: transparent;
@@ -1867,8 +1874,8 @@
     border: 1px dashed var(--moss);
     border-radius: 4px;
     color: var(--moss);
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-size: 16px;
     cursor: pointer;
     background: transparent;
@@ -1961,7 +1968,7 @@
 
   .gardens-head { text-align: center; }
   .gardens-head h2 {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-size: clamp(40px, 4vw, 56px);
     line-height: 1;
@@ -1998,7 +2005,7 @@
   .gardens-tile-name {
     display: block;
     margin-top: 12px;
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 20px;
     line-height: 1.15;
     letter-spacing: -0.018em;
@@ -2019,7 +2026,7 @@
   /* ─── TESTIMONIAL GARDENS — vertical scrollable list, centred ─── */
   .mob-gardens-title {
     text-align: center;
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-size: clamp(34px, 8vw, 42px);
     line-height: 1;
@@ -2054,7 +2061,7 @@
   .mob-gardens-card-name {
     display: block;
     margin-top: 8px;
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 18px;
     line-height: 1.15;
     letter-spacing: -0.018em;
@@ -2090,7 +2097,7 @@
     max-width: 880px;
   }
   .blog-head h2 {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-size: 50px;
     line-height: 0.96;
@@ -2099,12 +2106,12 @@
     margin-bottom: 12px;
   }
   .blog-head h2 em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .blog-lead {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 16px;
     line-height: 1.45;
     color: var(--ink-soft);
@@ -2140,7 +2147,7 @@
   .post-card:hover {
     transform: translateY(-2px);
     border-color: rgba(47, 64, 48, 0.35);
-    box-shadow: 0 6px 18px rgba(27, 36, 24, 0.06);
+    box-shadow: none;
   }
   .post-date {
     font-family: 'Cormorant Garamond', sans-serif;
@@ -2152,7 +2159,7 @@
     margin-bottom: 8px;
   }
   .post-title {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 20px;
     line-height: 1.15;
     letter-spacing: -0.018em;
@@ -2161,7 +2168,7 @@
     transition: color 0.3s;
   }
   .post-title em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -2227,7 +2234,7 @@
     margin-bottom: 8px;
   }
   .mob-post-title {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 20px;
     line-height: 1.18;
     letter-spacing: -0.018em;
@@ -2235,7 +2242,7 @@
     margin-bottom: 10px;
   }
   .mob-post-title em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -2274,9 +2281,7 @@
     border: 0.5px solid rgba(27, 36, 24, 0.12);
     border-radius: 16px;
     padding: 18px 20px 16px;
-    box-shadow:
-      0 12px 40px rgba(27, 36, 24, 0.18),
-      0 2px 8px rgba(27, 36, 24, 0.06);
+    box-shadow: none;
     z-index: 2000;
     opacity: 0;
     transform: translateX(120%) scale(0.96);
@@ -2334,7 +2339,7 @@
     color: var(--ink);
   }
   .ios-popup-title {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 19px;
     line-height: 1.2;
     letter-spacing: -0.018em;
@@ -2343,7 +2348,7 @@
     font-weight: 400;
   }
   .ios-popup-title em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -2358,7 +2363,7 @@
     width: 100%;
     box-sizing: border-box;
     border: 1px solid var(--rule);
-    background: rgba(255, 255, 255, 0.55);
+    background: rgba(223, 226, 213, 0.55);
     border-radius: 10px;
     padding: 10px 14px;
     font-family: 'Cormorant Garamond', sans-serif;
@@ -2370,8 +2375,8 @@
   }
   .ios-popup-form input[type="email"]:focus {
     border-color: var(--moss);
-    background: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 0 0 3px rgba(47, 64, 48, 0.08);
+    background: rgba(223, 226, 213, 0.85);
+    box-shadow: none;
   }
   .ios-popup-form input::placeholder { color: var(--sage); }
   .ios-popup-actions {
@@ -2406,8 +2411,8 @@
   .ios-popup-subscribe:hover { background: var(--ink); border-color: var(--ink); }
   .ios-popup-thanks {
     display: none;
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-size: 14px;
     color: var(--moss);
     text-align: center;
@@ -2445,13 +2450,13 @@
       circle var(--lens-r) at var(--lens-x) var(--lens-y),
       transparent 0,
       transparent calc(var(--lens-r) - var(--lens-feather)),
-      black var(--lens-r)
+      #475035 var(--lens-r)
     );
     mask-image: radial-gradient(
       circle var(--lens-r) at var(--lens-x) var(--lens-y),
       transparent 0,
       transparent calc(var(--lens-r) - var(--lens-feather)),
-      black var(--lens-r)
+      #475035 var(--lens-r)
     );
   }
   body.blog-popup-open .blog-blur-veil {
@@ -2541,11 +2546,10 @@
   .page-podcast .page-inner {
     padding: var(--page-pad-y-tight) var(--page-pad-x) var(--page-pad-y-tight) 0;
     align-items: center;
-    justify-content: center;
     text-align: center;
   }
   .podcast-headline {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-size: clamp(38px, 4.6vw, 56px);
     line-height: 1.05;
@@ -2555,7 +2559,7 @@
     margin: 0 auto 18px;
   }
   .podcast-headline em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -2579,7 +2583,7 @@
   .podcast-form input[type="email"] {
     flex: 1;
     border: 1px solid var(--rule);
-    background: rgba(255, 255, 255, 0.55);
+    background: rgba(223, 226, 213, 0.55);
     border-radius: 12px;
     padding: 13px 16px;
     font-family: 'Cormorant Garamond', sans-serif;
@@ -2592,8 +2596,8 @@
   .podcast-form input[type="email"]::placeholder { color: var(--sage); }
   .podcast-form input[type="email"]:focus {
     border-color: var(--moss);
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 0 0 3px rgba(47, 64, 48, 0.10);
+    background: rgba(223, 226, 213, 0.9);
+    box-shadow: none;
   }
   .podcast-form button {
     border: 0;
@@ -2613,8 +2617,8 @@
   .podcast-form button:active { transform: scale(0.98); }
   .podcast-thanks {
     display: none;
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-size: 16px;
     color: var(--moss);
     margin-top: 18px;
@@ -2628,7 +2632,7 @@
     padding-top: 120px;
   }
   .mob-podcast-headline {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-size: clamp(30px, 8.5vw, 38px);
     line-height: 1.1;
@@ -2638,7 +2642,7 @@
     max-width: 380px;
   }
   .mob-podcast-headline em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -2661,7 +2665,7 @@
   .mob-podcast-form input[type="email"] {
     flex: 1;
     border: 1px solid var(--rule);
-    background: rgba(255, 255, 255, 0.55);
+    background: rgba(223, 226, 213, 0.55);
     border-radius: 12px;
     padding: 13px 16px;
     font-family: 'Cormorant Garamond', sans-serif;
@@ -2674,7 +2678,7 @@
   .mob-podcast-form input::placeholder { color: var(--sage); }
   .mob-podcast-form input[type="email"]:focus {
     border-color: var(--moss);
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(223, 226, 213, 0.9);
   }
   .mob-podcast-form button {
     border: 0;
@@ -2690,8 +2694,8 @@
   .mob-podcast-form button:active { transform: scale(0.98); }
   .mob-podcast-thanks {
     display: none;
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-size: 16px;
     color: var(--moss);
     margin-top: 18px;
@@ -2716,7 +2720,7 @@
     max-width: 880px;
   }
   .shop-head h2 {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-size: 50px;
     line-height: 0.96;
@@ -2725,12 +2729,12 @@
     margin-bottom: 12px;
   }
   .shop-head h2 em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .shop-lead {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 16px;
     line-height: 1.45;
     color: var(--ink-soft);
@@ -2767,14 +2771,14 @@
     margin-bottom: 10px;
   }
   .shop-types-title {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 32px;
     line-height: 1.05;
     letter-spacing: -0.02em;
     color: var(--ink);
   }
   .shop-types-title em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -2796,7 +2800,7 @@
     cursor: pointer;
     text-decoration: none;
     color: inherit;
-    box-shadow: 0 4px 18px rgba(27, 36, 24, 0.04);
+    box-shadow: none;
     animation: floatBreath 6.5s ease-in-out infinite;
   }
   .shop-type-tile:nth-child(1) { animation-delay: -0.0s; }
@@ -2813,8 +2817,8 @@
   }
   .shop-type-tile:hover .shop-type-icon { transform: rotate(-6deg) scale(1.08); }
   .shop-type-name {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-weight: 400;
     font-size: 24px;
     line-height: 1.05;
@@ -2852,14 +2856,14 @@
     margin-bottom: 10px;
   }
   .shop-featured-title {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 32px;
     line-height: 1.05;
     letter-spacing: -0.02em;
     color: var(--ink);
   }
   .shop-featured-title em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -2878,7 +2882,7 @@
     padding: 26px 24px 22px;
     border-radius: 8px;
     border: 1px solid rgba(47, 64, 48, 0.18);
-    box-shadow: 0 4px 22px rgba(27, 36, 24, 0.05);
+    box-shadow: none;
     animation: floatBreath 6s ease-in-out infinite;
   }
   .product-featured:nth-child(1) { animation-delay: 0s; }
@@ -2922,14 +2926,14 @@
     margin-bottom: 10px;
   }
   .shop-makers-title {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 32px;
     line-height: 1.05;
     letter-spacing: -0.02em;
     color: var(--ink);
   }
   .shop-makers-title em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -2950,7 +2954,7 @@
     cursor: pointer;
     text-decoration: none;
     color: inherit;
-    box-shadow: 0 4px 18px rgba(27, 36, 24, 0.04);
+    box-shadow: none;
     animation: floatBreath 7.5s ease-in-out infinite;
   }
   /* Brand logo at the top of each maker tile. The img is constrained by
@@ -2994,8 +2998,8 @@
     margin-bottom: 12px;
   }
   .shop-maker-tile-name {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-weight: 400;
     font-size: 30px;
     line-height: 1.0;
@@ -3034,11 +3038,11 @@
   @keyframes floatBreath {
     0%, 100% {
       transform: translateY(0);
-      box-shadow: 0 4px 18px rgba(27, 36, 24, 0.05);
+      box-shadow: none;
     }
     50% {
       transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(27, 36, 24, 0.08);
+      box-shadow: none;
     }
   }
 
@@ -3075,8 +3079,8 @@
     margin-bottom: 14px;
   }
   .shop-brand-intro-name {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-weight: 400;
     font-size: 56px;
     line-height: 1.0;
@@ -3086,7 +3090,7 @@
     margin-bottom: 18px;
   }
   .shop-brand-intro-story {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 17px;
     line-height: 1.5;
     color: var(--ink-soft);
@@ -3120,13 +3124,13 @@
     font-weight: 500;
   }
   .shop-section-title {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 24px;
     letter-spacing: -0.02em;
     color: var(--ink);
   }
   .shop-section-title em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -3148,7 +3152,7 @@
   .product:hover {
     transform: translateY(-2px);
     border-color: rgba(47, 64, 48, 0.35);
-    box-shadow: 0 6px 18px rgba(27, 36, 24, 0.06);
+    box-shadow: none;
   }
   .product-brand {
     font-family: 'Cormorant Garamond', sans-serif;
@@ -3160,7 +3164,7 @@
     margin-bottom: 6px;
   }
   .product-name {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 17px;
     line-height: 1.18;
     letter-spacing: -0.012em;
@@ -3168,7 +3172,7 @@
     margin-bottom: 8px;
   }
   .product-name em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -3250,13 +3254,13 @@
     font-weight: 500;
   }
   .mob-shop-section-title {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 22px;
     letter-spacing: -0.02em;
     color: var(--ink);
   }
   .mob-shop-section-title em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -3275,7 +3279,7 @@
     margin: 8px 0 8px;
   }
   .mob-shop-featured-title {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 26px;
     line-height: 1.1;
     letter-spacing: -0.02em;
@@ -3283,7 +3287,7 @@
     margin-bottom: 18px;
   }
   .mob-shop-featured-title em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -3293,7 +3297,7 @@
     padding: 20px 20px 18px;
     border-radius: 8px;
     margin-bottom: 12px;
-    box-shadow: 0 4px 18px rgba(27, 36, 24, 0.05);
+    box-shadow: none;
     animation: floatBreath 6s ease-in-out infinite;
   }
   .mob-product-featured:nth-of-type(1) { animation-delay: 0s; }
@@ -3323,7 +3327,7 @@
     margin: 8px 0 8px;
   }
   .mob-shop-types-title {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 26px;
     line-height: 1.1;
     letter-spacing: -0.02em;
@@ -3331,7 +3335,7 @@
     margin-bottom: 18px;
   }
   .mob-shop-types-title em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -3346,7 +3350,7 @@
     padding: 18px 20px;
     text-decoration: none;
     color: inherit;
-    box-shadow: 0 4px 18px rgba(27, 36, 24, 0.04);
+    box-shadow: none;
     animation: floatBreath 6.5s ease-in-out infinite;
   }
   .mob-shop-type-tile:nth-of-type(1) { animation-delay: -0.0s; }
@@ -3361,8 +3365,8 @@
   }
   .mob-shop-type-body { flex: 1; min-width: 0; }
   .mob-shop-type-name {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-weight: 400;
     font-size: 22px;
     line-height: 1.05;
@@ -3390,7 +3394,7 @@
     margin: 38px 0 8px;
   }
   .mob-shop-makers-title {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 26px;
     line-height: 1.1;
     letter-spacing: -0.02em;
@@ -3398,7 +3402,7 @@
     margin-bottom: 18px;
   }
   .mob-shop-makers-title em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -3413,7 +3417,7 @@
     padding: 22px 22px 20px;
     text-decoration: none;
     color: inherit;
-    box-shadow: 0 4px 18px rgba(27, 36, 24, 0.04);
+    box-shadow: none;
     animation: floatBreath 7.5s ease-in-out infinite;
   }
   .mob-shop-maker-logo {
@@ -3448,8 +3452,8 @@
     margin-bottom: 10px;
   }
   .mob-shop-maker-tile-name {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-weight: 400;
     font-size: 28px;
     line-height: 1.0;
@@ -3502,8 +3506,8 @@
     margin-bottom: 12px;
   }
   .mob-shop-brand-intro-name {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-weight: 400;
     font-size: 44px;
     line-height: 1.0;
@@ -3513,7 +3517,7 @@
     margin-bottom: 16px;
   }
   .mob-shop-brand-intro-story {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 16px;
     line-height: 1.55;
     color: var(--ink-soft);
@@ -3544,7 +3548,7 @@
     margin-bottom: 6px;
   }
   .mob-product-name {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 17px;
     line-height: 1.18;
     letter-spacing: -0.012em;
@@ -3552,7 +3556,7 @@
     margin-bottom: 8px;
   }
   .mob-product-name em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -3598,7 +3602,6 @@
      ════════════════════════════════════════════════════════════════════ */
   .page-contact .page-inner {
     padding: var(--page-pad-y) var(--page-pad-x) var(--page-pad-y) 0;
-    justify-content: center;
   }
   .contact-grid {
     display: grid;
@@ -3617,7 +3620,7 @@
     color: var(--ink);
   }
   .contact-left h2 em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -3641,7 +3644,7 @@
   }
   .contact-channels a:hover { padding-left: 10px; }
   .contact-channels .ch-value {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 16px;
     letter-spacing: -0.01em;
   }
@@ -3685,8 +3688,8 @@
     border-bottom: 1px solid var(--rule);
   }
   .test-hero .qmark {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-size: 64px;
     line-height: 0.4;
     color: var(--moss);
@@ -3695,7 +3698,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .test-hero .test-text {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 22px;
     line-height: 1.4;
     letter-spacing: -0.012em;
@@ -3704,7 +3707,7 @@
     max-width: 56ch;
   }
   .test-hero .test-text em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -3740,8 +3743,8 @@
     padding-top: 18px;
   }
   .test .qmark {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-size: 56px;
     line-height: 0.4;
     color: var(--moss);
@@ -3751,7 +3754,7 @@
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .test-text {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 16px;
     line-height: 1.45;
     letter-spacing: -0.01em;
@@ -3760,7 +3763,7 @@
     margin-top: 26px;
   }
   .test-text em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
@@ -3825,8 +3828,8 @@
     filter: grayscale(0) opacity(0.95);
   }
   .suppliers-accred {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
     font-size: 13px;
     color: var(--moss);
     letter-spacing: -0.005em;
@@ -3874,7 +3877,7 @@
     transform: translateY(-1px);
   }
   .mob-contact-title {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: normal;
     font-weight: 400;
     font-size: clamp(28px, 7.6vw, 38px);
@@ -3929,7 +3932,7 @@
   .mob-contact-value {
     grid-column: 1;
     grid-row: 2;
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: normal;
     font-weight: 400;
     font-size: clamp(18px, 5.2vw, 22px);
@@ -3943,7 +3946,7 @@
     grid-column: 2;
     grid-row: 1 / 3;
     align-self: end;
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: normal;
     font-size: 20px;
     color: var(--moss);
@@ -3954,7 +3957,7 @@
   .mob-contact-row:active .mob-contact-arrow { transform: translateX(5px); }
   .mob-contact-foot {
     margin: 22px 0 0;
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: normal !important;
     font-weight: 400;
     font-size: 13px;
@@ -4036,7 +4039,7 @@
     margin-bottom: 12px;
   }
   .case-title {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
     font-size: 40px;
     line-height: 1.0;
@@ -4045,12 +4048,12 @@
     margin-bottom: 24px;
   }
   .case-title em {
-    font-style: italic;
+    font-style: normal;
     color: var(--moss);
     font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
   }
   .case-lead {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 19px;
     line-height: 1.5;
     color: var(--ink);
@@ -4058,7 +4061,7 @@
     letter-spacing: -0.005em;
   }
   .case-text p {
-    font-family: 'IM Fell English', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 15px;
     line-height: 1.65;
     color: var(--ink-soft);
@@ -4112,7 +4115,7 @@
     overflow: hidden;
     border: 1px solid var(--rule);
     background: var(--paper);
-    box-shadow: 0 12px 40px rgba(26, 36, 24, 0.12);
+    box-shadow: none;
     user-select: none;
     -webkit-user-select: none;
   }
@@ -4157,12 +4160,12 @@
     transform: translateX(-50%);
     pointer-events: none;
     z-index: 5;
-    box-shadow: 0 0 12px rgba(26, 36, 24, 0.3);
+    box-shadow: none;
   }
   .ba-line {
     position: absolute;
     inset: 0;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(223, 226, 213, 0.95);
   }
   .ba-grip {
     position: absolute;
@@ -4181,12 +4184,12 @@
     align-items: center;
     justify-content: center;
     gap: 2px;
-    box-shadow: 0 4px 16px rgba(26, 36, 24, 0.2);
+    box-shadow: none;
     transition: transform 0.2s ease, box-shadow 0.2s;
   }
   .ba-grip:hover {
     transform: translate(-50%, -50%) scale(1.06);
-    box-shadow: 0 6px 22px rgba(26, 36, 24, 0.28);
+    box-shadow: none;
   }
   .ba-grip:active {
     cursor: grabbing;
@@ -4234,15 +4237,15 @@
     100% { margin-left: 0; }
   }
 
-  /* — Corner-logo: Hazell & Twigg wordmark, masked to #23522E.
+  /* — Corner-logo: Hazell & Twigg wordmark, masked to var(--ink-deep).
      Width/left handled in the .corner-logo block (whitespace-comp). */
   .corner-logo-mark {
     display: block;
     width: 100%;
-    aspect-ratio: 8000 / 5032;
-    background-color: #23522E;
-    -webkit-mask-image: url('/logo-wordmark.png');
-            mask-image: url('/logo-wordmark.png');
+    aspect-ratio: 2158 / 468;
+    background-color: var(--ink-deep);
+    -webkit-mask-image: url('/hazell-twigg-1row.png');
+            mask-image: url('/hazell-twigg-1row.png');
     -webkit-mask-size: contain;
             mask-size: contain;
     -webkit-mask-repeat: no-repeat;
@@ -4251,7 +4254,7 @@
             mask-position: left center;
     transition: background-color 0.3s var(--ease);
   }
-  .corner-logo:hover .corner-logo-mark { background-color: #1A3E22; }
+  .corner-logo:hover .corner-logo-mark { background-color: var(--ink-deep); }
 
   /* — Custom cursor: moss dot + lerping ring (lines 5238–5302); verbatim — */
   /* Refined custom cursor — desktop only, hidden on touch / small screens.
@@ -4318,4 +4321,36 @@
     /* Keep the native I-beam in text inputs so people can place a caret */
     body.cursor-ready input,
     body.cursor-ready textarea { cursor: text; }
+  }
+
+  /* All pages share the same content-top — aligned with sidenav "Home"
+     at canvas y=205. The page-inner sits at top:205 already; overriding
+     padding-top here cancels the per-page padding-top so content sits
+     immediately at y=205 instead of being pushed further down by the
+     individual padding-y values. Specificity (.pages .page-inner) ties
+     with each .page-X .page-inner rule and wins on order. Home is
+     unaffected because its own .page-home .page-inner override resets
+     top: 0 and uses flex centering on the full canvas. */
+  .pages .page-inner { padding-top: 0; }
+
+  /* No italics anywhere — strip the browser default for em/i and any
+     stray italic that slipped past the .css scrub. */
+  em, i, cite, address, dfn, var, q { font-style: normal; }
+
+  /* Every non-home page heading matches the Testimonial Gardens treatment:
+     Cormorant Garamond at clamp(40-56px), --ink-body, single line, centred
+     along the y=205 line set by the page-inner top. The first wrapper
+     ancestor inside .page-inner is also text-align:center so its h1/h2
+     sits centred regardless of per-page wrapper styling. */
+  .pages .page-inner > * { text-align: center; }
+  .pages .page-inner h1,
+  .pages .page-inner h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(40px, 4vw, 56px);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    color: var(--ink-body);
+    white-space: nowrap;
+    text-align: center;
   }
