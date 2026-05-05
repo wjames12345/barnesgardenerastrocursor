@@ -220,6 +220,19 @@ const localBusinessJsonLd = {
 </head>
 <body data-mob-page={mobPage}>
 
+<!-- Leaf source images embedded directly in the DOM. The HTML parser
+     starts loading these the instant it sees them. The leaf script
+     reads them out via getElementById + await img.decode(). -->
+<img id="leafSrc1" src="/leaf%201.png" alt="" style="display:none" decoding="async" transition:persist>
+<img id="leafSrc2" src="/leaf%202.png" alt="" style="display:none" decoding="async" transition:persist>
+<img id="leafSrc4" src="/leaf%204.png" alt="" style="display:none" decoding="async" transition:persist>
+<img id="leafSrcF" src="/Screenshot%202026-05-02%20at%2014.49.32%20copy.png" alt="" style="display:none" decoding="async" transition:persist>
+
+<!-- Global background leaf field — full-viewport canvas, sits at z:50
+     between the .viewport stage chrome and the cursor (z:9999). Same
+     canvas powers desktop and mobile. -->
+<canvas id="leafCanvas" aria-hidden="true" transition:persist></canvas>
+
 <!-- Custom cursor — moss dot + lerping ring; desktop fine-pointer only.
      Persisted across view transitions so the cursor doesn't blink between routes. -->
 <div class="cursor-ring" id="cursorRing" aria-hidden="true" transition:persist></div>
@@ -312,6 +325,14 @@ const localBusinessJsonLd = {
     fitStage();
   })();
 </script>
+
+<!-- Background leaf field — solid leaf silhouettes scattered across the
+     viewport. Wind cone follows the cursor; ambient breeze keeps drift
+     when idle. Lifted verbatim from THE WEBSITE.html script C
+     (lines 8159–9499). The script is an IIFE that initialises once on
+     first load; transition:persist on the canvas + leaf imgs above keeps
+     the simulation running unbroken across Astro view-transitions. -->
+<script src="/scripts/leaf-field.js" is:inline></script>
 
 </body>
 </html>

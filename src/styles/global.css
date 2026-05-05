@@ -81,6 +81,19 @@
      Chrome lift from THE WEBSITE.html — verbatim ranges follow
      ═══════════════════════════════════════════════════════════════════ */
 
+  /* Background leaf field — full-viewport canvas. Lives outside .viewport
+     and .mobile-shell so the same simulation runs on desktop and mobile.
+     Sits at z:50 (behind the cursor at z:9999, in front of the stage). */
+  #leafCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100svh;
+    z-index: 50;
+    pointer-events: none;
+  }
+
   /* — Desktop chrome: viewport, stage, persistent UI, page indicator, page system, fade-in (lines 103–357) — */
   /* ────────────────── FIXED CANVAS / STAGE ────────────────── */
   .viewport {
@@ -1036,6 +1049,9 @@
   }
   .about-text p {
     margin-bottom: 8.5px;
+    text-align: justify;
+    text-align-last: left;
+    hyphens: auto;
   }
   .about-text p strong {
     font-weight: 500;
@@ -1480,8 +1496,12 @@
     font-size: 19px;
     line-height: 1.45;
     color: var(--ink);
-    max-width: 28ch;
+    max-width: 480px;          /* matches the visual width of the
+                                  "Upload a photograph." heading above */
     font-variation-settings: "opsz" 144;
+    text-align: justify;
+    text-align-last: left;
+    hyphens: auto;
   }
   .lat-steps {
     display: flex;
@@ -4312,13 +4332,13 @@
      the min-width at 1200px keeps cursor-aware UI off small laptop windows
      and tablets where the standard pointer reads as more competent. */
   @media (hover: hover) and (pointer: fine) and (min-width: 1200px) {
+    /* Hide native cursor across the entire page once cursor-ready fires.
+       The universal selector is necessary because `cursor` does not
+       inherit — without it the OS pointer leaks through over headings,
+       paragraphs and empty regions. */
     body.cursor-ready,
-    body.cursor-ready a,
-    body.cursor-ready button,
-    body.cursor-ready [role="button"],
-    body.cursor-ready .product,
-    body.cursor-ready .post-card { cursor: none; }
-    /* Keep the native I-beam in text inputs so people can place a caret */
+    body.cursor-ready * { cursor: none; }
+    /* Keep the native I-beam in text inputs so people can place a caret. */
     body.cursor-ready input,
     body.cursor-ready textarea { cursor: text; }
   }
@@ -4353,4 +4373,58 @@
     color: var(--ink-body);
     white-space: nowrap;
     text-align: center;
+  }
+
+  /* ────────── Contact (clean editorial v2) ────────── */
+  /* Stripped to essentials: heading, short note, three contact lines.
+     The form and testimonials block were removed in favour of the
+     phone/email/instagram trio sitting as the page's only CTA. */
+  .page-contact .contact-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-faded);
+    text-align: center;
+    max-width: 56ch;
+    margin: 24px auto 0;
+  }
+  .page-contact .contact-lines {
+    list-style: none;
+    margin: 64px auto 0;
+    padding: 0;
+    width: min(560px, 100%);
+    border-top: 0.5px solid var(--rule);
+  }
+  .page-contact .contact-lines li {
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .page-contact .contact-lines a {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    align-items: baseline;
+    gap: 24px;
+    padding: 22px 4px;
+    color: var(--ink-body);
+    text-decoration: none;
+    transition: color 0.25s var(--ease), padding-left 0.25s var(--ease);
+  }
+  .page-contact .contact-lines a:hover {
+    color: var(--ink-deep);
+    padding-left: 8px;
+  }
+  .page-contact .contact-lines .ch-label {
+    font-family: 'Cormorant Garamond', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+  }
+  .page-contact .contact-lines .ch-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 26px;
+    letter-spacing: -0.01em;
+    color: var(--ink-body);
   }
