@@ -1,7 +1,7 @@
   :root {
-    --cream: #8E8E8C;
-    --cream-deep: #8E8E8C;
-    --paper: #8E8E8C;
+    --cream: #DFE2D5;
+    --cream-deep: #DFE2D5;
+    --paper: #DFE2D5;
     --ink: #425A44;
     --ink-soft: #425A44;
     --moss: #425A44;
@@ -114,10 +114,15 @@
 
   /* ────────────────── PERSISTENT UI: LOGO, NAV, BEGIN ────────────────── */
   .corner-logo {
+    /* The logo PNG has 26.2% left + 23.5% right + 25.9% top + 25.2%
+       bottom whitespace baked in. Bounding box widened/shifted so the
+       *visible* content (50% of box width) lands flush-left at canvas
+       x=50 and vertical-centred at y=102 (midpoint of page-top=0 and
+       sidenav-top=205). */
     position: absolute;
-    top: 36px;
-    left: 50px;
-    width: 240px;
+    top: -49px;
+    left: -75px;
+    width: 478px;
     height: auto;
     z-index: 30;
     transition: transform 0.5s var(--ease);
@@ -1140,10 +1145,10 @@
   }
   .amp-symbol {
     display: inline-block;
-    height: 1.15em;
+    height: 0.95em;
     width: auto;
-    vertical-align: -0.28em;
-    margin: 0 0.06em;
+    vertical-align: -0.18em;
+    margin: 0 0.04em;
     /* Blend the black ink against the cream paper so any PNG matte
        disappears and the symbol reads as drawn, not pasted. */
     mix-blend-mode: multiply;
@@ -1166,7 +1171,7 @@
   .shop-head .amp-symbol,
   .podcast-headline .amp-symbol,
   .mob-podcast-headline .amp-symbol,
-  .mob-hero-title .amp-symbol { height: 1.05em; vertical-align: -0.22em; }
+  .mob-hero-title .amp-symbol { height: 0.9em; vertical-align: -0.15em; }
   .service-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1417,10 +1422,10 @@
   /* — .amp-symbol shared utility (lines 606–616); verbatim — */
   .amp-symbol {
     display: inline-block;
-    height: 1.15em;
+    height: 0.95em;
     width: auto;
-    vertical-align: -0.28em;
-    margin: 0 0.06em;
+    vertical-align: -0.18em;
+    margin: 0 0.04em;
     /* Blend the black ink against the cream paper so any PNG matte
        disappears and the symbol reads as drawn, not pasted. */
     mix-blend-mode: multiply;
@@ -4230,9 +4235,7 @@
   }
 
   /* — Corner-logo: Hazell & Twigg wordmark, masked to #23522E.
-     mask-position: left so the visible "H" sits flush at bounding-box
-     left edge → flush-left with the sidenav at left:50. */
-  .corner-logo { width: 240px; height: auto; }
+     Width/left handled in the .corner-logo block (whitespace-comp). */
   .corner-logo-mark {
     display: block;
     width: 100%;
