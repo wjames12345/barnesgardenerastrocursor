@@ -116,8 +116,8 @@
   .corner-logo {
     position: absolute;
     top: 36px;
-    left: 44px;
-    width: 110px;
+    left: 50px;
+    width: 240px;
     height: auto;
     z-index: 30;
     transition: transform 0.5s var(--ease);
@@ -131,15 +131,16 @@
 
   .sidenav {
     position: absolute;
-    top: 200px;
+    top: 205px;
     left: 50px;
+    height: 440px;
     z-index: 30;
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    justify-content: space-between;
     font-family: 'IM Fell English', Georgia, serif;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 16px;
     letter-spacing: -0.005em;
   }
   .sidenav a {
@@ -718,15 +719,15 @@
      HOME PAGE
      ════════════════════════════════════════════════════════════════════ */
   .page-home .page-inner {
-    /* Home overrides the base inset (left: 220px / right: 60px) so the
-       wordmark + conveyor centre across the full stage. Padding bakes in
-       both the sidenav offset (220px left) and the standard rhythm so
-       nothing kisses the edges. */
+    /* Symmetric 60px x-padding centres on stage centre (x=720).
+       Zero y-padding centres wordmark on stage centre (y=450), so its
+       top/bottom land at 230/670 and align with the absolutely-positioned
+       sidenav (top:205, height:440 → 205/645). */
     left: 0;
     right: 0;
     align-items: center;
     justify-content: center;
-    padding: calc(var(--page-pad-y) + 30px) var(--page-pad-x) calc(var(--page-pad-y) + 20px) 220px;
+    padding: 0 60px;
   }
 
   /* Home page is the leaf-clicking playground — nothing here should be
@@ -746,8 +747,9 @@
     position: relative;
     cursor: default;
     text-align: center;
-    padding: 18px 24px 60px;  /* generous padding so nothing crops, room for grass */
+    padding: 8px 24px 16px;
     overflow: visible;
+    flex-shrink: 0;
   }
   .wordmark .line {
     display: block;
@@ -776,7 +778,7 @@
   .wordmark .line em { color: var(--moss); }
   .wordmark-img {
     display: block;
-    width: min(1100px, 75vw, 110vh);
+    width: 1100px;
     aspect-ratio: 8000 / 5032;
     margin: 0 auto;
     user-select: none;
@@ -798,7 +800,9 @@
   }
 
   .home-signature {
-    margin-top: 28px;
+    margin-top: 16px;
+    width: 1100px;
+    font-size: 22px;
     font-family: 'IM Fell English', serif;
     font-style: italic;
     font-size: 18px;
@@ -4225,8 +4229,10 @@
     100% { margin-left: 0; }
   }
 
-  /* — Corner-logo: Hazell & Twigg wordmark, masked to #23522E — */
-  .corner-logo { width: 190px; height: auto; }
+  /* — Corner-logo: Hazell & Twigg wordmark, masked to #23522E.
+     mask-position: left so the visible "H" sits flush at bounding-box
+     left edge → flush-left with the sidenav at left:50. */
+  .corner-logo { width: 240px; height: auto; }
   .corner-logo-mark {
     display: block;
     width: 100%;
@@ -4238,8 +4244,8 @@
             mask-size: contain;
     -webkit-mask-repeat: no-repeat;
             mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-            mask-position: center;
+    -webkit-mask-position: left center;
+            mask-position: left center;
     transition: background-color 0.3s var(--ease);
   }
   .corner-logo:hover .corner-logo-mark { background-color: #1A3E22; }

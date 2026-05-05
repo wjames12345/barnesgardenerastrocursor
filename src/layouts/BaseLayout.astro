@@ -292,5 +292,26 @@ const localBusinessJsonLd = {
   </div>
 </div>
 
+<!-- Fixed-canvas scale-to-fit: lifts the 1440×900 stage and uniformly
+     scales it to the largest factor that fits the viewport. Without this,
+     the canvas overflows on smaller viewports and gets centre-clipped.
+     Lifted verbatim from THE WEBSITE.html (lines 7038–7049). -->
+<script is:inline>
+  (function () {
+    var STAGE_W = 1440;
+    var STAGE_H = 900;
+    function fitStage() {
+      var shell = document.getElementById('stageShell');
+      if (!shell) return;
+      var scale = Math.min(window.innerWidth / STAGE_W, window.innerHeight / STAGE_H);
+      shell.style.transform = 'translate(-50%, -50%) scale(' + scale + ')';
+    }
+    window.addEventListener('resize', fitStage);
+    document.addEventListener('astro:after-swap', fitStage);
+    document.addEventListener('astro:page-load', fitStage);
+    fitStage();
+  })();
+</script>
+
 </body>
 </html>
