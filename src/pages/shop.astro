@@ -1,161 +1,94 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Brand-led editorial list — six sections, each in its own block.
+const brands = [
+  {
+    slug: 'felco',
+    name: 'Felco',
+    where: 'Switzerland · since 1945',
+    note: 'First Felco in 2008. Still the cleanest cut on the bench.',
+    body: 'The Felco 2 is the workhorse — every gardener I respect carries one. Replaceable parts, sharpenable blades, an ergonomic handle that doesn\'t fight your wrist on a long pruning day. I\'ve never had to throw one out. Repaired, yes; replaced, no.',
+    link: 'https://www.niwaki.com/c/felco/',
+    linkLabel: 'Find Felco at Niwaki',
+  },
+  {
+    slug: 'niwaki',
+    name: 'Niwaki',
+    where: 'Japan · via Dorset',
+    note: 'Japanese steel that holds an edge longer than anything else.',
+    body: 'Tripod ladders, sentei snips, hori-hori knives. The materials are a different conversation — high-carbon steel, hand-finished handles, made for a craft tradition that takes pruning seriously. Niwaki source from small Japanese workshops and import them to a yard in Dorset. The price is honest for what arrives.',
+    link: 'https://www.niwaki.com/',
+    linkLabel: 'Visit Niwaki',
+  },
+  {
+    slug: 'stihl',
+    name: 'Stihl',
+    where: 'Germany · since 1926',
+    note: 'The cordless range is the only power kit I trust on a job.',
+    body: 'Battery hedge trimmers, blowers and a small chainsaw — the AP system means one battery fits the whole set. Reliable, dealer-supported, and quiet enough that a Saturday job in a Barnes back garden doesn\'t become the neighbour\'s problem. The bar-and-chain quality is the reason cordless finally works.',
+    link: 'https://www.stihl.co.uk/',
+    linkLabel: 'Find your Stihl dealer',
+  },
+  {
+    slug: 'wolfgarten',
+    name: 'Wolf-Garten',
+    where: 'Germany · since 1922',
+    note: 'One handle, a dozen tool heads. The system that earned its place.',
+    body: 'The multi-change handle is the trick — one wooden shaft, a quick-release coupling, and the trowel becomes a hoe becomes a rake. Less to carry, less to store, less to lose. The steel is strong; the heads sharpen well; and a single handle outlasting a decade of heads is the kind of frugality this site believes in.',
+    link: 'https://www.wolfgarten-tools.co.uk/',
+    linkLabel: 'Browse Wolf-Garten',
+  },
+  {
+    slug: 'aspley',
+    name: 'Aspley Farm',
+    where: 'Bedfordshire · family-run',
+    note: 'Topsoil and turf-loam from a farm that knows what it grew it on.',
+    body: 'For renovation jobs that need real volume — bed-building, levelling, regrading — Aspley\'s screened topsoil is what I order. They know their fields, they know what they\'ve composted, and they deliver bagged or loose without the markup of the chain merchants. Family-run; you talk to people who actually farm the stuff.',
+    link: 'https://www.aspleyfarm.co.uk/',
+    linkLabel: 'Order from Aspley',
+  },
+  {
+    slug: 'sylvagrow',
+    name: 'Melcourt SylvaGrow',
+    where: 'Gloucestershire · peat-free since day one',
+    note: 'The peat-free compost that genuinely behaves like the old peat mixes.',
+    body: 'Most peat-free composts let you down — they dry out, they go anaerobic, the structure collapses. SylvaGrow doesn\'t. RHS-endorsed, made from forestry by-products on a Cotswold mill, and water-holding without ever turning to mud. It\'s the only mix I\'ll specify for client beds and pots.',
+    link: 'https://www.melcourt.co.uk/sylvagrow/',
+    linkLabel: 'Find SylvaGrow stockists',
+  },
+];
 ---
 <BaseLayout
-  title="Gary's Kit Shop — Tools & Compost · The Barnes Gardener"
-  description="The tools, gloves and compost Gary actually reaches for. Felco, Stihl, Niwaki, Wolf-Garten, Aspley Farm, SylvaGrow — independent picks, tested, recommended."
+  title="Gary's Kit Shop — Tools, Compost & Brands I Trust · The Barnes Gardener"
+  description="The tools, gloves and compost Gary actually uses. Felco, Niwaki, Stihl, Wolf-Garten, Aspley Farm, SylvaGrow — independent picks, tested on real gardens, recommended without commission."
 >
   <section class="page page-shop active" id="shop">
     <div class="page-inner" id="shopInner">
 
       <div class="shop-head fade-in" style="--fade-delay: 0.0s;">
-        <h2>Gary's <em>Kit</em> Shop</h2>
-        <p class="shop-lead">The tools I actually reach for.</p>
+        <h2>Gary's Kit Shop</h2>
+        <p class="shop-lead">Tools, gloves and compost I actually use. Independent, tested, recommended.</p>
       </div>
 
-      <!-- LANDING VIEW: two sections — Product Types + Makers I Trust -->
-      <div class="shop-view shop-landing is-active" id="shopLanding">
-
-        <!-- ─── Section 1: PRODUCT TYPES ─── -->
-        <div class="shop-section-block">
-          <div class="shop-types-head fade-in" style="--fade-delay: 0.16s;">
-            <p class="shop-types-eyebrow">Browse by</p>
-            <h3 class="shop-types-title">Product <em>type</em></h3>
-          </div>
-          <div class="shop-types-grid fade-in" style="--fade-delay: 0.24s;">
-
-            <a class="shop-type-tile" href="#" data-type="pruning" role="button">
-              <svg class="shop-type-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M 14 14 L 32 32 L 14 50"/>
-                <path d="M 50 14 L 32 32 L 50 50"/>
-                <circle cx="32" cy="32" r="2.5" fill="currentColor"/>
-              </svg>
-              <h4 class="shop-type-name">Pruning</h4>
-              <p class="shop-type-line">Secateurs and saws for cutting clean.</p>
-              <span class="shop-type-foot">4 picks →</span>
-            </a>
-
-            <a class="shop-type-tile" href="#" data-type="power" role="button">
-              <svg class="shop-type-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="10" y="22" width="38" height="22" rx="3"/>
-                <rect x="48" y="28" width="5" height="10" rx="1.5"/>
-                <path d="M 28 28 L 22 36 L 28 36 L 25 42 L 33 33 L 28 33 Z" fill="currentColor"/>
-              </svg>
-              <h4 class="shop-type-name">Power Tools</h4>
-              <p class="shop-type-line">Cordless trimmers, brushcutters, blowers.</p>
-              <span class="shop-type-foot">3 picks →</span>
-            </a>
-
-            <a class="shop-type-tile" href="#" data-type="hand" role="button">
-              <svg class="shop-type-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M 24 12 L 40 12 Q 42 22 39 32 Q 35 40 32 44 Q 29 40 25 32 Q 22 22 24 12 Z"/>
-                <line x1="32" y1="44" x2="32" y2="50"/>
-                <rect x="27" y="50" width="10" height="6" rx="1.5"/>
-              </svg>
-              <h4 class="shop-type-name">Hand Tools</h4>
-              <p class="shop-type-line">Trowels, weeders, handles, ladders.</p>
-              <span class="shop-type-foot">5 picks →</span>
-            </a>
-
-            <a class="shop-type-tile" href="#" data-type="soil" role="button">
-              <svg class="shop-type-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M 32 12 Q 50 18 50 34 Q 46 50 30 52 Q 14 48 14 32 Q 18 18 32 12 Z"/>
-                <path d="M 30 52 Q 32 38 42 24"/>
-              </svg>
-              <h4 class="shop-type-name">Soil &amp; Compost</h4>
-              <p class="shop-type-line">Topsoil, composts, peat free mixes.</p>
-              <span class="shop-type-foot">5 picks →</span>
-            </a>
-
-          </div>
-        </div>
-
-        <!-- ─── Section 2: BRANDS I TRUST ─── -->
-        <div class="shop-section-block">
-          <div class="shop-makers-head fade-in" style="--fade-delay: 0.32s;">
-            <p class="shop-makers-eyebrow">Or browse by</p>
-            <h3 class="shop-makers-title">Brands <em>I trust</em></h3>
-          </div>
-          <div class="shop-makers-grid fade-in" style="--fade-delay: 0.40s;">
-
-            <a class="shop-maker-tile" href="#" data-maker="felco" role="button">
-              <img class="shop-maker-logo" src="/logos/felco.png" alt="Felco">
-              <span class="shop-maker-tile-where">Switzerland · since 1945</span>
-              <h4 class="shop-maker-tile-name">Felco</h4>
-              <p class="shop-maker-tile-line">Swiss precision that lasts a lifetime. The first secateurs I bought, the only ones I still use.</p>
-              <span class="shop-maker-tile-foot">3 picks <span class="arr" aria-hidden="true">→</span></span>
-            </a>
-
-            <a class="shop-maker-tile" href="#" data-maker="stihl" role="button">
-              <img class="shop-maker-logo" src="/logos/stihl.png" alt="Stihl">
-              <span class="shop-maker-tile-where">Germany · since 1926</span>
-              <h4 class="shop-maker-tile-name">Stihl</h4>
-              <p class="shop-maker-tile-line">When I need power that won't quit, German engineering does the work.</p>
-              <span class="shop-maker-tile-foot">3 picks <span class="arr" aria-hidden="true">→</span></span>
-            </a>
-
-            <a class="shop-maker-tile" href="#" data-maker="niwaki" role="button">
-              <img class="shop-maker-logo" src="/logos/niwaki.png" alt="Niwaki">
-              <span class="shop-maker-tile-where">Dorset, by way of Japan</span>
-              <h4 class="shop-maker-tile-name">Niwaki</h4>
-              <p class="shop-maker-tile-line">Japanese tools brought to British gardens. The way things should be made.</p>
-              <span class="shop-maker-tile-foot">3 picks <span class="arr" aria-hidden="true">→</span></span>
-            </a>
-
-            <a class="shop-maker-tile" href="#" data-maker="wolfgarten" role="button">
-              <img class="shop-maker-logo" src="/logos/wolfgarten.png" alt="Wolf-Garten">
-              <span class="shop-maker-tile-where">Germany · since 1922</span>
-              <h4 class="shop-maker-tile-name">Wolf-Garten</h4>
-              <p class="shop-maker-tile-line">One handle, every job. The system that earns its place in a tight tool shed.</p>
-              <span class="shop-maker-tile-foot">3 picks <span class="arr" aria-hidden="true">→</span></span>
-            </a>
-
-            <a class="shop-maker-tile" href="#" data-maker="aspley" role="button">
-              <img class="shop-maker-logo" src="/logos/aspley.png" alt="Aspley Farm">
-              <span class="shop-maker-tile-where">Bedfordshire · screened topsoil</span>
-              <h4 class="shop-maker-tile-name">Aspley Farm</h4>
-              <p class="shop-maker-tile-line">Properly screened topsoil, by the bulk bag. The base of every new bed I plant.</p>
-              <span class="shop-maker-tile-foot">2 picks <span class="arr" aria-hidden="true">→</span></span>
-            </a>
-
-            <a class="shop-maker-tile" href="#" data-maker="sylvagrow" role="button">
-              <img class="shop-maker-logo" src="/logos/sylvagrow.png" alt="Melcourt SylvaGrow">
-              <span class="shop-maker-tile-where">Tetbury · RHS endorsed</span>
-              <h4 class="shop-maker-tile-name">SylvaGrow</h4>
-              <p class="shop-maker-tile-line">Peat free compost, RHS endorsed. The default for nine plants in ten.</p>
-              <span class="shop-maker-tile-foot">3 picks <span class="arr" aria-hidden="true">→</span></span>
-            </a>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- BRAND-DETAIL VIEW: populated and revealed by JS when a maker tile is clicked -->
-      <div class="shop-view shop-brand" id="shopBrandView">
-        <button class="shop-back" type="button" id="shopBack">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-          <span>All brands</span>
-        </button>
-        <div class="shop-brand-intro">
-          <p class="shop-brand-intro-where" id="shopBrandWhere"></p>
-          <h3 class="shop-brand-intro-name" id="shopBrandName"></h3>
-          <p class="shop-brand-intro-story" id="shopBrandStory"></p>
-        </div>
-        <div class="shop-brand-products" id="shopBrandProducts"></div>
-      </div>
-
-      <!-- TYPE-DETAIL VIEW: populated and revealed by JS when a product-type tile is clicked -->
-      <div class="shop-view shop-brand" id="shopTypeView">
-        <button class="shop-back" type="button" id="shopTypeBack">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-          <span>All product types</span>
-        </button>
-        <div class="shop-brand-intro">
-          <p class="shop-brand-intro-where" id="shopTypeEyebrow">Product type</p>
-          <h3 class="shop-brand-intro-name" id="shopTypeName"></h3>
-          <p class="shop-brand-intro-story" id="shopTypeStory"></p>
-        </div>
-        <div class="shop-type-view-products" id="shopTypeProducts"></div>
+      <div class="shop-brands">
+        {brands.map((b, i) => (
+          <article class="shop-brand fade-in" style={`--fade-delay: ${0.15 + i * 0.06}s;`}>
+            <div class="shop-brand-left">
+              <img class="shop-brand-logo" src={`/logos/${b.slug}.png`} alt={b.name} />
+              <p class="shop-brand-where">{b.where}</p>
+              <p class="shop-brand-note">{b.note}</p>
+            </div>
+            <div class="shop-brand-right">
+              <h3 class="shop-brand-name">{b.name}</h3>
+              <p class="shop-brand-body">{b.body}</p>
+              <a class="shop-brand-link" href={b.link} target="_blank" rel="noopener">
+                {b.linkLabel}
+                <span class="arr" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        ))}
       </div>
 
     </div>
@@ -165,135 +98,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <button class="mob-page-back" type="button" data-mob-back aria-label="Back to home">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
     </button>
-    <h2>Gary's <em>Kit</em> Shop.</h2>
-    <p class="lead">The tools I actually reach for.</p>
+    <h2>Gary's Kit Shop.</h2>
+    <p class="lead">Tools, gloves and compost I actually use.</p>
 
-    <!-- LANDING VIEW: types + brands -->
-    <div class="mob-shop-view is-active" id="mobShopLanding">
-
-      <p class="mob-shop-types-eyebrow">Browse by</p>
-      <h3 class="mob-shop-types-title">Product <em>type</em></h3>
-      <div class="mob-shop-types-list">
-        <a class="mob-shop-type-tile" href="#" data-type="pruning">
-          <svg class="mob-shop-type-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M 14 14 L 32 32 L 14 50"/>
-            <path d="M 50 14 L 32 32 L 50 50"/>
-            <circle cx="32" cy="32" r="2.5" fill="currentColor"/>
-          </svg>
-          <div class="mob-shop-type-body">
-            <h4 class="mob-shop-type-name">Pruning</h4>
-            <span class="mob-shop-type-foot">4 picks →</span>
-          </div>
-        </a>
-        <a class="mob-shop-type-tile" href="#" data-type="power">
-          <svg class="mob-shop-type-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="10" y="22" width="38" height="22" rx="3"/>
-            <rect x="48" y="28" width="5" height="10" rx="1.5"/>
-            <path d="M 28 28 L 22 36 L 28 36 L 25 42 L 33 33 L 28 33 Z" fill="currentColor"/>
-          </svg>
-          <div class="mob-shop-type-body">
-            <h4 class="mob-shop-type-name">Power Tools</h4>
-            <span class="mob-shop-type-foot">3 picks →</span>
-          </div>
-        </a>
-        <a class="mob-shop-type-tile" href="#" data-type="hand">
-          <svg class="mob-shop-type-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M 24 12 L 40 12 Q 42 22 39 32 Q 35 40 32 44 Q 29 40 25 32 Q 22 22 24 12 Z"/>
-            <line x1="32" y1="44" x2="32" y2="50"/>
-            <rect x="27" y="50" width="10" height="6" rx="1.5"/>
-          </svg>
-          <div class="mob-shop-type-body">
-            <h4 class="mob-shop-type-name">Hand Tools</h4>
-            <span class="mob-shop-type-foot">5 picks →</span>
-          </div>
-        </a>
-        <a class="mob-shop-type-tile" href="#" data-type="soil">
-          <svg class="mob-shop-type-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M 32 12 Q 50 18 50 34 Q 46 50 30 52 Q 14 48 14 32 Q 18 18 32 12 Z"/>
-            <path d="M 30 52 Q 32 38 42 24"/>
-          </svg>
-          <div class="mob-shop-type-body">
-            <h4 class="mob-shop-type-name">Soil &amp; Compost</h4>
-            <span class="mob-shop-type-foot">5 picks →</span>
-          </div>
-        </a>
-      </div>
-
-      <p class="mob-shop-makers-eyebrow">Or browse by</p>
-      <h3 class="mob-shop-makers-title">Brands <em>I trust</em></h3>
-
-      <div class="mob-shop-makers-list">
-        <a class="mob-shop-maker-tile" href="#" data-maker="felco">
-          <img class="mob-shop-maker-logo" src="/logos/felco.png" alt="Felco">
-          <span class="mob-shop-maker-tile-where">Switzerland · since 1945</span>
-          <h4 class="mob-shop-maker-tile-name">Felco</h4>
-          <p class="mob-shop-maker-tile-line">Swiss precision that lasts a lifetime. The first secateurs I bought, the only ones I still use.</p>
-          <span class="mob-shop-maker-tile-foot">3 picks →</span>
-        </a>
-        <a class="mob-shop-maker-tile" href="#" data-maker="stihl">
-          <img class="mob-shop-maker-logo" src="/logos/stihl.png" alt="Stihl">
-          <span class="mob-shop-maker-tile-where">Germany · since 1926</span>
-          <h4 class="mob-shop-maker-tile-name">Stihl</h4>
-          <p class="mob-shop-maker-tile-line">When I need power that won't quit, German engineering does the work.</p>
-          <span class="mob-shop-maker-tile-foot">3 picks →</span>
-        </a>
-        <a class="mob-shop-maker-tile" href="#" data-maker="niwaki">
-          <img class="mob-shop-maker-logo" src="/logos/niwaki.png" alt="Niwaki">
-          <span class="mob-shop-maker-tile-where">Dorset, by way of Japan</span>
-          <h4 class="mob-shop-maker-tile-name">Niwaki</h4>
-          <p class="mob-shop-maker-tile-line">Japanese tools brought to British gardens. The way things should be made.</p>
-          <span class="mob-shop-maker-tile-foot">3 picks →</span>
-        </a>
-        <a class="mob-shop-maker-tile" href="#" data-maker="wolfgarten">
-          <img class="mob-shop-maker-logo" src="/logos/wolfgarten.png" alt="Wolf-Garten">
-          <span class="mob-shop-maker-tile-where">Germany · since 1922</span>
-          <h4 class="mob-shop-maker-tile-name">Wolf-Garten</h4>
-          <p class="mob-shop-maker-tile-line">One handle, every job. The system that earns its place in a tight tool shed.</p>
-          <span class="mob-shop-maker-tile-foot">3 picks →</span>
-        </a>
-        <a class="mob-shop-maker-tile" href="#" data-maker="aspley">
-          <img class="mob-shop-maker-logo" src="/logos/aspley.png" alt="Aspley Farm">
-          <span class="mob-shop-maker-tile-where">Bedfordshire · screened topsoil</span>
-          <h4 class="mob-shop-maker-tile-name">Aspley Farm</h4>
-          <p class="mob-shop-maker-tile-line">Properly screened topsoil, by the bulk bag. The base of every new bed I plant.</p>
-          <span class="mob-shop-maker-tile-foot">2 picks →</span>
-        </a>
-        <a class="mob-shop-maker-tile" href="#" data-maker="sylvagrow">
-          <img class="mob-shop-maker-logo" src="/logos/sylvagrow.png" alt="Melcourt SylvaGrow">
-          <span class="mob-shop-maker-tile-where">Tetbury · RHS endorsed</span>
-          <h4 class="mob-shop-maker-tile-name">SylvaGrow</h4>
-          <p class="mob-shop-maker-tile-line">Peat free compost, RHS endorsed. The default for nine plants in ten.</p>
-          <span class="mob-shop-maker-tile-foot">3 picks →</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- BRAND-DETAIL VIEW (populated by JS) -->
-    <div class="mob-shop-view" id="mobShopBrandView">
-      <button class="mob-shop-back" type="button" id="mobShopBack">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-        <span>All brands</span>
-      </button>
-      <div class="mob-shop-brand-intro">
-        <p class="mob-shop-brand-intro-where" id="mobShopBrandWhere"></p>
-        <h3 class="mob-shop-brand-intro-name" id="mobShopBrandName"></h3>
-        <p class="mob-shop-brand-intro-story" id="mobShopBrandStory"></p>
-      </div>
-      <div class="mob-shop-brand-products" id="mobShopBrandProducts"></div>
-    </div>
-
-    <!-- TYPE-DETAIL VIEW (populated by JS) -->
-    <div class="mob-shop-view" id="mobShopTypeView">
-      <button class="mob-shop-back" type="button" id="mobShopTypeBack">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-        <span>All product types</span>
-      </button>
-      <div class="mob-shop-brand-intro">
-        <p class="mob-shop-brand-intro-where">Product type</p>
-        <h3 class="mob-shop-brand-intro-name" id="mobShopTypeName"></h3>
-        <p class="mob-shop-brand-intro-story" id="mobShopTypeStory"></p>
-      </div>
-      <div class="mob-shop-brand-products" id="mobShopTypeProducts"></div>
-    </div>
+    <ul class="mob-shop-brands">
+      {brands.map((b) => (
+        <li class="mob-shop-brand">
+          <img class="mob-shop-brand-logo" src={`/logos/${b.slug}.png`} alt={b.name} />
+          <h3 class="mob-shop-brand-name">{b.name}</h3>
+          <p class="mob-shop-brand-where">{b.where}</p>
+          <p class="mob-shop-brand-body">{b.body}</p>
+          <a class="mob-shop-brand-link" href={b.link} target="_blank" rel="noopener">
+            {b.linkLabel} →
+          </a>
+        </li>
+      ))}
+    </ul>
   </section>
 </BaseLayout>

@@ -174,4 +174,10 @@
   } else {
     initBlogPopup();
   }
+  // Navigation listener — re-runs init after every Astro client-side
+  // navigation, so the popup also fires when the user reaches /blog
+  // from another route (initBlogPopup() bails on cold load if the
+  // overlay markup isn't in the DOM yet for non-blog routes).
+  document.addEventListener('astro:page-load', initBlogPopup);
+  document.addEventListener('astro:after-swap', initBlogPopup);
 })();

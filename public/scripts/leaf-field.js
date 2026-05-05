@@ -1,6 +1,17 @@
 (() => {
   const canvas = document.getElementById('leafCanvas');
   if (!canvas) return;
+
+  // ── Disable the leaf field on mobile / narrow viewports ──
+  // Without a cursor wind source the simulation devolves into a pile
+  // of leaves accumulating in the bottom corners. Touch devices have
+  // no equivalent to "moving the mouse near a leaf" — leaves drop and
+  // settle. Cleaner to skip the simulation entirely on phones; the
+  // canvas stays in the DOM (transition:persist) but draws nothing.
+  if (window.matchMedia('(max-width: 900px), (max-aspect-ratio: 4/5)').matches) {
+    canvas.style.display = 'none';
+    return;
+  }
   const ctx = canvas.getContext('2d');
 
   // ── Mobile field flag ──

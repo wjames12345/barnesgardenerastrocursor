@@ -93,6 +93,21 @@
     z-index: 50;
     pointer-events: none;
   }
+  /* Mobile: hide the canvas entirely. Without a pointer wind source the
+     simulation piles leaves into the corners on touch devices. The JS
+     also bails on the same breakpoint; this CSS guard is the safety net
+     in case the script is cached or somehow doesn't run. */
+  @media (max-width: 900px), (max-aspect-ratio: 4/5), (hover: none), (pointer: coarse) {
+    #leafCanvas { display: none !important; }
+  }
+
+  /* mob-loader: markup exists in BaseLayout for symmetry with the desktop
+     loader, but no styling — without explicit position/visibility rules
+     the SVG ring + bulb-frame divs render inline in the document flow
+     as a stray dark circle mid-page. Hide it; the smart loader on slow
+     navigations is handled by the desktop .loader (visible on desktop)
+     or skipped entirely on mobile. */
+  .mob-loader { display: none !important; }
 
   /* — Desktop chrome: viewport, stage, persistent UI, page indicator, page system, fade-in (lines 103–357) — */
   /* ────────────────── FIXED CANVAS / STAGE ────────────────── */
@@ -501,7 +516,7 @@
   .mob-menu-toggle {
     position: fixed;
     top: max(22px, env(safe-area-inset-top));
-    right: 22px;
+    left: 22px;
     width: 44px;
     height: 44px;
     background: transparent;
@@ -601,10 +616,10 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    border-top: 1px solid rgba(27, 36, 24, 0.18);
+    border-top: 0.5px solid var(--rule);
   }
   .mob-menu-item {
-    border-bottom: 1px solid rgba(27, 36, 24, 0.18);
+    border-bottom: 0.5px solid var(--rule);
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
@@ -630,7 +645,7 @@
   .mob-menu-label {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-weight: 400;
-    font-size: clamp(22px, 6vw, 32px);
+    font-size: clamp(15px, 4vw, 20px);
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--ink-deep);
@@ -645,6 +660,13 @@
     -webkit-tap-highlight-color: transparent;
   }
   .mob-menu-label:active { opacity: 0.55; }
+  /* Active page indicator on mobile menu — terracotta to match desktop. */
+  .mob-menu-label.active { color: #B25E3D; }
+  .mob-menu-label.active .amp-symbol {
+    mix-blend-mode: normal;
+    filter: brightness(0) saturate(100%) invert(40%) sepia(56%)
+            saturate(594%) hue-rotate(343deg) brightness(95%) contrast(89%);
+  }
   .mob-menu-expand,
   .mob-menu-go {
     appearance: none;
@@ -713,32 +735,34 @@
          non-home mobile page. Tapping returns to home (uses the existing
          data-mob-back routing). Hidden on home where the big wordmark
          already brands the page. ─── */
+  /* Mobile chrome refinement: per-page back arrow retired — the
+     hamburger top-left is the single navigation control. The brand
+     mark sits centred at the top of every page (always-on). */
+  .mob-page-back { display: none !important; }
   .mob-brand {
-    position: absolute;
-    top: 16px;
+    position: fixed;
+    top: max(22px, env(safe-area-inset-top));
     left: 50%;
     transform: translateX(-50%);
-    width: 78px;
-    height: auto;
+    width: 240px;
+    height: 52px;
+    z-index: 60;
     background: transparent;
     border: 0;
     padding: 0;
     cursor: pointer;
-    z-index: 6;
     -webkit-tap-highlight-color: transparent;
-    transition: transform 0.25s var(--ease), opacity 0.2s var(--ease);
+    transition: opacity 0.2s var(--ease);
   }
-  .mob-brand img,
+  .mob-brand:active { opacity: 0.7; }
   .mob-brand-mark {
-    width: 100%;
-    height: auto;
     display: block;
-  }
-  .mob-brand-mark {
-    aspect-ratio: 8000 / 5032;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 2158 / 468;
     background-color: var(--ink-deep);
-    -webkit-mask-image: url('/logo-wordmark.png');
-            mask-image: url('/logo-wordmark.png');
+    -webkit-mask-image: url('/hazell-twigg-1row.png');
+            mask-image: url('/hazell-twigg-1row.png');
     -webkit-mask-size: contain;
             mask-size: contain;
     -webkit-mask-repeat: no-repeat;
@@ -746,8 +770,7 @@
     -webkit-mask-position: center;
             mask-position: center;
   }
-  .mob-brand:active { transform: translateX(-50%) scale(0.94); opacity: 0.75; }
-  /* Hide the brand on home (wordmark covers it). */
+  /* Hide the top brand on home — the central hero wordmark is the brand. */
   body[data-mob-page="home"] .mob-brand { display: none; }
   /* Push the back arrow down a touch so it sits beneath the centred brand
      visually balanced rather than competing for the same horizontal axis. */
@@ -958,6 +981,8 @@
              max(40px, env(safe-area-inset-bottom));
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;   /* wordmark sits centred in the viewport */
     position: relative;
     border-top: none !important;
   }
@@ -1021,17 +1046,20 @@
     transform: none;
     margin: 14px 0 0;
     line-height: 1;
+    width: 100%;            /* mob-hero is a flex column with align-items:
+                               center — without an explicit width the h1
+                               collapses and the inner span (width:86%)
+                               renders at 0px wide. */
   }
   .mob-hero-logo-img {
     display: block;
-    width: 88%;
-    max-width: 520px;
+    width: 96%;
+    max-width: 640px;
     aspect-ratio: 8000 / 5032;
     margin: 0 auto;
     user-select: none;
     -webkit-user-drag: none;
-    opacity: 0;
-    animation: lineRise 1.1s var(--ease) 0.20s forwards;
+    opacity: 1;
     background-color: var(--ink-deep);
     -webkit-mask-image: url('/logo-wordmark.png');
             mask-image: url('/logo-wordmark.png');
@@ -1144,39 +1172,61 @@
   .mob-section {
     display: none;
     min-height: 100svh;
-    padding: 84px 26px 64px;
+    /* Top padding clears the centred mob-brand (top:22, h:52) plus a
+       comfortable gap before the heading. */
+    padding: 120px 22px 56px;
     position: relative;
-    background: var(--cream);
+    background: var(--bg-page);
   }
+  /* Page heading — left-aligned (mobile-only override), Cormorant 400. */
   .mob-section h2 {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
-    font-size: clamp(44px, 12vw, 56px);
-    line-height: 0.94;
-    letter-spacing: -0.035em;
-    color: var(--ink);
-    margin-bottom: 28px;
+    font-size: clamp(34px, 9vw, 44px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink-body);
+    text-align: left;
+    margin: 0 0 14px;
   }
-  .mob-section h2 em {
-    font-style: normal;
-    color: var(--moss);
-    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
-  }
+  .mob-section h2 em,
+  .mob-section h2 u { font-style: normal; color: var(--ink-body); }
+  /* Sub-lead — left-aligned, Light, faded moss. */
   .mob-section .lead {
     font-family: 'Cormorant Garamond', serif;
-    font-style: normal;
-    font-size: 19px;
-    line-height: 1.42;
-    color: var(--moss);
-    margin-bottom: 22px;
-    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--ink-faded);
+    text-align: left;
+    margin: 0 0 22px;
   }
+  /* Body text — Light, faded, justified so paragraphs that fill the
+     viewport width have even left + right edges. text-align-last:left
+     keeps the final ragged line from being stretched. */
   .mob-section p {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--ink-soft);
-    margin-bottom: 14px;
+    font-weight: 300;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--ink-faded);
+    text-align: justify;
+    text-align-last: left;
+    hyphens: auto;
+    margin: 0 0 12px;
+  }
+  /* Mobile-wide alignment override: any text inside the mobile shell
+     that's centred elsewhere on the site reverts to left-aligned. The
+     hamburger overlay menu is exempt (still centred via its own rules). */
+  .mobile-shell h1,
+  .mobile-shell h2,
+  .mobile-shell h3,
+  .mobile-shell p,
+  .mobile-shell li { text-align: left; }
+  .mobile-shell p {
+    text-align: justify;
+    text-align-last: left;
+    hyphens: auto;
   }
   .mob-section p strong {
     color: var(--ink);
@@ -1908,13 +1958,13 @@
   .mob-gen-form {
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    margin-top: 8px;
+    gap: 12px;
+    margin-top: 4px;
   }
   .mob-gen-form .field {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
   }
   .mob-gen-form label {
     font-family: 'Cormorant Garamond', sans-serif;
@@ -1941,13 +1991,13 @@
   .mob-gen-form textarea:focus {
     border-color: var(--moss);
   }
-  .mob-gen-form textarea { min-height: 76px; }
+  .mob-gen-form textarea { min-height: 50px; }
   .mob-gen-photo {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 18px;
+    padding: 12px;
     border: 1px dashed var(--moss);
     border-radius: 4px;
     color: var(--moss);
@@ -1996,8 +2046,10 @@
   }
   .mob-gen-submit:active { background: var(--moss); }
 
-  /* Vision & Quote: stretch to fill one screen, no italic header */
-  #m-generator { padding: 72px 26px 32px; }
+  /* Quote & Render: inherit standard .mob-section padding-top (120) so
+     the heading aligns with every other page; just trim padding-bottom
+     to claw back vertical space for the form to fit on one screen. */
+  #m-generator { padding: 120px 22px 24px; }
   body[data-mob-page="generator"] #m-generator {
     display: flex;
     flex-direction: column;
@@ -2171,7 +2223,6 @@
   .page-blog .page-inner::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
   .blog-head {
     margin-bottom: 26px;
-    max-width: 880px;
   }
   .blog-head h2 {
     font-family: 'Cormorant Garamond', serif;
@@ -2794,7 +2845,6 @@
   .page-shop .page-inner::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
   .shop-head {
     margin-bottom: 22px;
-    max-width: 880px;
   }
   .shop-head h2 {
     font-family: 'Cormorant Garamond', serif;
@@ -3953,101 +4003,69 @@
     margin-right: 12px;
     transform: translateY(-1px);
   }
+  /* Mobile contact — mirrors the desktop editorial layout: centred
+     heading + short intro line, then three rows (Phone / Email /
+     Instagram) separated by hairline rules. Label small-caps eyebrow,
+     value in Cormorant 400 large. No arrow, no row background, no
+     italic anywhere. */
   .mob-contact-title {
     font-family: 'Cormorant Garamond', serif;
-    font-style: normal;
     font-weight: 400;
-    font-size: clamp(28px, 7.6vw, 38px);
-    line-height: 1.05;
-    letter-spacing: -0.025em;
-    color: var(--ink);
-    margin: 0 0 28px;
-    font-variation-settings: "opsz" 144, "SOFT" 30;
-    max-width: 14ch;
-    flex: 0 0 auto;
+    font-size: clamp(34px, 9vw, 44px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink-body);
+    text-align: center;
+    margin: 0 0 14px;
+    max-width: none;
+  }
+  .mob-contact-foot {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink-faded);
+    text-align: center;
+    max-width: 40ch;
+    margin: 140px auto 0;   /* sits well below the contact list */
   }
   .mob-contact-list {
     list-style: none;
-    margin: 0;
+    margin: 32px 0 0;
     padding: 0;
-    border-top: 1px solid var(--rule);
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 0;
+    border-top: 0.5px solid var(--rule);
   }
-  .mob-contact-list li {
-    border-bottom: 1px solid var(--rule);
-    display: flex;
-  }
+  .mob-contact-list li { border-bottom: 0.5px solid var(--rule); }
   .mob-contact-row {
     display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-rows: auto auto;
-    column-gap: 16px;
-    row-gap: 4px;
-    padding: 16px 2px 14px;
+    grid-template-columns: 90px 1fr;
+    align-items: baseline;
+    column-gap: 18px;
+    padding: 18px 4px;
     text-decoration: none;
     color: inherit;
-    align-items: end;
     -webkit-tap-highlight-color: transparent;
-    transition: background 0.25s var(--ease);
-    width: 100%;
+    transition: padding-left 0.25s var(--ease);
   }
-  .mob-contact-row:active { background: rgba(74, 93, 67, 0.05); }
+  .mob-contact-row:active { padding-left: 8px; }
   .mob-contact-label {
-    grid-column: 1;
-    grid-row: 1;
     font-family: 'Cormorant Garamond', sans-serif;
-    font-size: 10px;
     font-weight: 500;
-    letter-spacing: 0.24em;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--sage);
+    color: var(--ink-faded);
   }
   .mob-contact-value {
-    grid-column: 1;
-    grid-row: 2;
     font-family: 'Cormorant Garamond', serif;
-    font-style: normal;
     font-weight: 400;
-    font-size: clamp(18px, 5.2vw, 22px);
-    line-height: 1.1;
-    letter-spacing: -0.012em;
-    color: var(--ink);
-    font-variation-settings: "opsz" 144, "SOFT" 30;
+    font-size: clamp(17px, 4.6vw, 21px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink-body);
     word-break: break-word;
   }
-  .mob-contact-arrow {
-    grid-column: 2;
-    grid-row: 1 / 3;
-    align-self: end;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: normal;
-    font-size: 20px;
-    color: var(--moss);
-    line-height: 1;
-    padding-bottom: 4px;
-    transition: transform 0.28s var(--ease);
-  }
-  .mob-contact-row:active .mob-contact-arrow { transform: translateX(5px); }
-  .mob-contact-foot {
-    margin: 22px 0 0;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: normal !important;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 1.5;
-    color: var(--ink-soft);
-    opacity: 0.78;
-    max-width: 34ch;
-    flex: 0 0 auto;
-  }
-  /* Defensive override — generic .mob-section p strong is italic; the
-     contact directory uses its own typography and shouldn't pick that up. */
-  #m-contact .mob-contact-row,
-  #m-contact .mob-contact-row * { font-style: normal; }
+  .mob-contact-arrow { display: none; }
 
   /* — Case study page CSS, desktop (lines 2094–2356); verbatim — */
   /* ════════════════════════════════════════════════════════════════════
@@ -4344,15 +4362,13 @@
     pointer-events: none;
     z-index: 9999;
     will-change: transform;
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.4s ease,
                 width 0.3s var(--ease),
                 height 0.3s var(--ease),
                 background 0.3s ease,
                 border-color 0.3s ease;
   }
-  body.cursor-ready .cursor-dot,
-  body.cursor-ready .cursor-ring { opacity: 1; }
   .cursor-dot {
     width: 5px;
     height: 5px;
@@ -4436,8 +4452,30 @@
     letter-spacing: -0.025em;
     color: var(--ink-body);
     white-space: nowrap;
-    text-align: center;
+    text-align: center !important;
   }
+
+  /* Sub-heading rule for every page: sits flush at the page-inner left
+     edge, single line, small gap before whatever body content follows.
+     Class list covers the per-page lead/intro elements — anything new
+     should reuse one of these names so it inherits the treatment. */
+  .pages .page-inner :where(.shop-lead, .blog-lead, .lat-lead,
+                             .podcast-sub, .contact-intro) {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink-faded);
+    text-align: left;
+    margin: 14px 0 0;
+    max-width: none;
+    width: 100%;
+    white-space: nowrap;
+  }
+  /* Podcast is the exception — its sub sits centred under the headline
+     because the form below it is a single centred element, not a left-
+     aligned column of content. */
+  .pages .page-inner .podcast-sub { text-align: center; }
 
   /* ────────── Services (essay v4 — three grouped columns) ──────────
      Eight services grouped into three categories laid out as three
@@ -4501,6 +4539,156 @@
     margin: 0;
   }
 
+  /* ────────── Shop (brand-led editorial v2) ──────────
+     Six brand sections stacked vertically on the scrolling shop page.
+     Each is a 2-column grid: logo + small note (left), longer body
+     paragraph + outbound link (right). Hairline rules between brands
+     instead of cards/shadows. Replaces the old types-grid + makers-
+     grid layout — one essay-like list per brand, no cart, no SVG icons. */
+  .page-shop .shop-lead {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-faded);
+    text-align: center;
+    margin: 16px auto 0;
+    max-width: 56ch;
+  }
+  .page-shop .shop-brands {
+    margin: 16px auto 80px;
+    width: min(900px, 100%);
+    text-align: left;
+    border-top: 0.5px solid var(--rule);
+  }
+  .page-shop .shop-brand {
+    display: grid;
+    grid-template-columns: 0.4fr 0.6fr;
+    gap: 56px;
+    align-items: start;
+    padding: 40px 0;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .page-shop .shop-brand-left { text-align: left; }
+  .page-shop .shop-brand-logo {
+    /* Uniform bounding box across every brand — each logo's intrinsic
+       aspect is preserved by object-fit:contain inside the box, so all
+       marks present at the same scale regardless of the source PNG's
+       proportions. */
+    display: block;
+    width: 160px;
+    height: 56px;
+    margin: 0 0 18px;
+    object-fit: contain;
+    object-position: left center;
+    /* Logos are typically dark-on-light; tint to ink-deep via filter
+       so all brand marks read in the unified moss palette. */
+    filter: brightness(0) saturate(100%) invert(20%) sepia(13%)
+            saturate(906%) hue-rotate(72deg) brightness(95%) contrast(89%);
+  }
+  .page-shop .shop-brand-where {
+    font-family: 'Cormorant Garamond', sans-serif;
+    font-weight: 500;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin: 0 0 10px;
+  }
+  .page-shop .shop-brand-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--ink-body);
+    margin: 0;
+    max-width: 24ch;
+  }
+  .page-shop .shop-brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--ink-body);
+    margin: 0 0 12px;
+  }
+  .page-shop .shop-brand-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--ink-faded);
+    margin: 0 0 18px;
+  }
+  .page-shop .shop-brand-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Cormorant Garamond', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #B25E3D;
+    transition: gap 0.25s var(--ease);
+  }
+  .page-shop .shop-brand-link:hover { gap: 14px; }
+
+  /* Mobile shop — same brand-led idea, single column. */
+  .mob-section .mob-shop-brands {
+    list-style: none;
+    margin: 0;
+    padding: 0 22px 60px;
+  }
+  .mob-section .mob-shop-brand {
+    padding: 28px 0;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .mob-section .mob-shop-brand:first-child { padding-top: 16px; }
+  .mob-section .mob-shop-brand-logo {
+    width: 130px;
+    height: 42px;
+    object-fit: contain;
+    object-position: left center;
+    margin-bottom: 12px;
+    filter: brightness(0) saturate(100%) invert(20%) sepia(13%)
+            saturate(906%) hue-rotate(72deg) brightness(95%) contrast(89%);
+  }
+  .mob-section .mob-shop-brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--ink-body);
+    margin: 0 0 6px;
+  }
+  .mob-section .mob-shop-brand-where {
+    font-family: 'Cormorant Garamond', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faded);
+    margin: 0 0 12px;
+  }
+  .mob-section .mob-shop-brand-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--ink-faded);
+    margin: 0 0 14px;
+  }
+  .mob-section .mob-shop-brand-link {
+    font-family: 'Cormorant Garamond', sans-serif;
+    font-weight: 500;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #B25E3D;
+  }
+
   /* ────────── Contact (clean editorial v2) ────────── */
   /* Stripped to essentials: heading, short note, three contact lines.
      The form and testimonials block were removed in favour of the
@@ -4517,7 +4705,7 @@
   }
   .page-contact .contact-lines {
     list-style: none;
-    margin: 64px auto 0;
+    margin: 16px auto 0;
     padding: 0;
     width: min(560px, 100%);
     border-top: 0.5px solid var(--rule);

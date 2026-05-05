@@ -366,5 +366,31 @@ const localBusinessJsonLd = {
      trigger the popup. -->
 <script src="/scripts/blog-popup.js" is:inline></script>
 
+<!-- Mobile menu open/close. The desktop sidenav is rendered always;
+     the mobile hamburger overlay shows only at the mobile breakpoint
+     and toggles via body.mob-menu-open. -->
+<script is:inline>
+  (function () {
+    function open()  { document.body.classList.add('mob-menu-open'); var t = document.getElementById('mobMenuToggle'); if (t) { t.setAttribute('aria-expanded', 'true');  t.setAttribute('aria-label', 'Close menu'); } }
+    function close() { document.body.classList.remove('mob-menu-open'); var t = document.getElementById('mobMenuToggle'); if (t) { t.setAttribute('aria-expanded', 'false'); t.setAttribute('aria-label', 'Open menu'); } }
+    document.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('#mobMenuToggle')) {
+        e.preventDefault();
+        if (document.body.classList.contains('mob-menu-open')) close(); else open();
+        return;
+      }
+      if (e.target.closest && e.target.closest('#mobMenuBackdrop')) {
+        close();
+        return;
+      }
+      // Tapping any link inside the overlay closes it; Astro then navigates.
+      if (e.target.closest && e.target.closest('.mob-menu-overlay a[href]')) {
+        close();
+      }
+    });
+    document.addEventListener('astro:after-swap', close);
+  })();
+</script>
+
 </body>
 </html>

@@ -1,6 +1,17 @@
-<!-- Brand mark — swan + leaves logo at the top of every non-home mobile
-     page. Reuses data-mob-back so the existing handler routes the user
-     to home (loader + page swap). Hidden on home via CSS. -->
+---
+// Active state matches the desktop sidenav: terracotta on the picked
+// item. Computed from the current pathname so the menu reflects the
+// active page without JS.
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => {
+  if (href === '/') return path === '/';
+  if (href === '/gardens') return path === '/gardens' || path.startsWith('/case/');
+  return path === href || path.startsWith(href + '/');
+};
+const cls = (href: string) => 'mob-menu-label' + (isActive(href) ? ' active' : '');
+---
+<!-- Brand mark — retired (CSS hides it) but kept for any legacy back-
+     navigation flows that still query data-mob-back. -->
 <a class="mob-brand" href="/" data-mob-back aria-label="Home">
   <span class="mob-brand-mark" role="img" aria-label="The Barnes Gardener"></span>
 </a>
@@ -20,7 +31,7 @@
   <ul class="mob-menu-list" id="mobMenuList">
     <li class="mob-menu-item" data-mob-key="home">
       <div class="mob-menu-row">
-        <a class="mob-menu-label" href="/" data-mob-go="home">Home</a>
+        <a class={cls('/')} href="/" data-mob-go="home">Home</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -33,7 +44,7 @@
 
     <li class="mob-menu-item" data-mob-key="about">
       <div class="mob-menu-row">
-        <a class="mob-menu-label" href="/about" data-mob-go="about">About</a>
+        <a class={cls('/about')} href="/about" data-mob-go="about">About</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -46,7 +57,7 @@
 
     <li class="mob-menu-item" data-mob-key="services">
       <div class="mob-menu-row">
-        <a class="mob-menu-label" href="/services" data-mob-go="services">Services</a>
+        <a class={cls('/services')} href="/services" data-mob-go="services">Services</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -59,7 +70,7 @@
 
     <li class="mob-menu-item" data-mob-key="gardens">
       <div class="mob-menu-row">
-        <a class="mob-menu-label" href="/gardens" data-mob-go="gardens">Testimonial Gardens</a>
+        <a class={cls('/gardens')} href="/gardens" data-mob-go="gardens">Testimonial Gardens</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -72,7 +83,7 @@
 
     <li class="mob-menu-item" data-mob-key="generator">
       <div class="mob-menu-row">
-        <a class="mob-menu-label" href="/latelier" data-mob-go="generator">Quote <img class="amp-symbol" src="/ampersand-new.png" alt="and"> Render</a>
+        <a class={cls('/latelier')} href="/latelier" data-mob-go="generator">Quote <img class="amp-symbol" src="/ampersand-new.png" alt="and"> Render</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -85,7 +96,7 @@
 
     <li class="mob-menu-item" data-mob-key="blog">
       <div class="mob-menu-row">
-        <a class="mob-menu-label" href="/blog" data-mob-go="blog">What's Growing</a>
+        <a class={cls('/blog')} href="/blog" data-mob-go="blog">What's Growing</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -98,7 +109,7 @@
 
     <li class="mob-menu-item" data-mob-key="podcast">
       <div class="mob-menu-row">
-        <a class="mob-menu-label" href="/podcast" data-mob-go="podcast">Podcast</a>
+        <a class={cls('/podcast')} href="/podcast" data-mob-go="podcast">Podcast</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -111,7 +122,7 @@
 
     <li class="mob-menu-item" data-mob-key="shop">
       <div class="mob-menu-row">
-        <a class="mob-menu-label" href="/shop" data-mob-go="shop">Gary's Kit Shop</a>
+        <a class={cls('/shop')} href="/shop" data-mob-go="shop">Gary's Kit Shop</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
@@ -124,7 +135,7 @@
 
     <li class="mob-menu-item" data-mob-key="contact">
       <div class="mob-menu-row">
-        <a class="mob-menu-label" href="/contact" data-mob-go="contact">Contact</a>
+        <a class={cls('/contact')} href="/contact" data-mob-go="contact">Contact</a>
         <button class="mob-menu-expand" type="button" aria-expanded="false" aria-label="About this section">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
