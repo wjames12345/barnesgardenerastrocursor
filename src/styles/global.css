@@ -776,7 +776,7 @@
   .wordmark .line em { color: var(--moss); }
   .wordmark-img {
     display: block;
-    width: min(1500px, 92vw);
+    width: min(1100px, 75vw, 110vh);
     aspect-ratio: 8000 / 5032;
     margin: 0 auto;
     user-select: none;
