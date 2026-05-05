@@ -131,15 +131,15 @@
 
   .sidenav {
     position: absolute;
-    top: 240px;
+    top: 200px;
     left: 50px;
     z-index: 30;
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-weight: 300;
-    font-size: 38px;
+    gap: 7px;
+    font-family: 'IM Fell English', Georgia, serif;
+    font-weight: 400;
+    font-size: 14px;
     letter-spacing: -0.005em;
   }
   .sidenav a {
@@ -542,8 +542,8 @@
     padding: 10px 4px;
   }
   .mob-menu-label {
-    font-family: 'Cormorant Garamond', 'Inter', sans-serif;
-    font-weight: 300;
+    font-family: 'IM Fell English', Georgia, serif;
+    font-weight: 400;
     font-size: clamp(22px, 6vw, 32px);
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -4226,7 +4226,7 @@
   }
 
   /* — Corner-logo: Hazell & Twigg wordmark, masked to #23522E — */
-  .corner-logo { width: 320px; height: auto; }
+  .corner-logo { width: 190px; height: auto; }
   .corner-logo-mark {
     display: block;
     width: 100%;
