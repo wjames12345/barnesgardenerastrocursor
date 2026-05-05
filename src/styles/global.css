@@ -131,18 +131,19 @@
 
   .sidenav {
     position: absolute;
-    top: 220px;
+    top: 240px;
     left: 50px;
     z-index: 30;
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    font-family: 'IM Fell English', serif;
-    font-size: 24px;
+    gap: 18px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 300;
+    font-size: 38px;
     letter-spacing: -0.005em;
   }
   .sidenav a {
-    color: var(--navy);
+    color: #23522E;
     opacity: 0.55;
     transition: opacity 0.25s, transform 0.25s, color 0.25s;
     position: relative;
@@ -167,7 +168,7 @@
   }
   .sidenav a.active {
     opacity: 1;
-    color: var(--moss);
+    color: #23522E;
     letter-spacing: 0.06em;
     animation: navBreathe 3.6s ease-in-out infinite;
   }
@@ -543,10 +544,10 @@
   .mob-menu-label {
     font-family: 'Cormorant Garamond', 'Inter', sans-serif;
     font-weight: 300;
-    font-size: clamp(15px, 3.6vw, 18px);
-    letter-spacing: 0.22em;
+    font-size: clamp(22px, 6vw, 32px);
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--ink);
+    color: #23522E;
     line-height: 1.05;
     appearance: none;
     background: transparent;
@@ -775,7 +776,7 @@
   .wordmark .line em { color: var(--moss); }
   .wordmark-img {
     display: block;
-    width: min(620px, 72vw);
+    width: min(1500px, 92vw);
     aspect-ratio: 8000 / 5032;
     margin: 0 auto;
     user-select: none;
@@ -1148,7 +1149,8 @@
      and mobile list. The & sits visually as a letter alongside the others
      instead of towering / dancing as the viewport changes. */
   .sidenav .amp-symbol,
-  .mob-list-label .amp-symbol {
+  .mob-list-label .amp-symbol,
+  .mob-menu-label .amp-symbol {
     height: 0.85em;
     vertical-align: -0.12em;
     margin: 0 0.05em;
@@ -4223,15 +4225,15 @@
     100% { margin-left: 0; }
   }
 
-  /* — Corner-logo: stamp mark masked as moss green — */
-  .corner-logo { width: 130px; height: auto; }
+  /* — Corner-logo: Hazell & Twigg wordmark, masked to #23522E — */
+  .corner-logo { width: 320px; height: auto; }
   .corner-logo-mark {
     display: block;
     width: 100%;
-    aspect-ratio: 1612 / 2056;
-    background-color: var(--moss);
-    -webkit-mask-image: url('/barnes_gardener_stamp_2x.png');
-            mask-image: url('/barnes_gardener_stamp_2x.png');
+    aspect-ratio: 8000 / 5032;
+    background-color: #23522E;
+    -webkit-mask-image: url('/logo-wordmark.png');
+            mask-image: url('/logo-wordmark.png');
     -webkit-mask-size: contain;
             mask-size: contain;
     -webkit-mask-repeat: no-repeat;
@@ -4240,7 +4242,7 @@
             mask-position: center;
     transition: background-color 0.3s var(--ease);
   }
-  .corner-logo:hover .corner-logo-mark { background-color: var(--moss-deep); }
+  .corner-logo:hover .corner-logo-mark { background-color: #1A3E22; }
 
   /* — Custom cursor: moss dot + lerping ring (lines 5238–5302); verbatim — */
   /* Refined custom cursor — desktop only, hidden on touch / small screens.
