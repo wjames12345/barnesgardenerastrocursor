@@ -177,30 +177,19 @@
     'map':        { ambient: 0.9,  gustChance: 1.0 },
   };
 
-  // ── Autumn palette PER SPECIES (oak, maple, rowan, fig, flower) ──
+  // ── Single dark-moss palette across all three species. The site's
+  //    palette spec collapses everything to --ink-deep #425A44, so all
+  //    three leaf shapes (maple/oak/fig) tint to the same colour and
+  //    read as one botanical voice. ──
   const SPECIES_PALETTES = [
-    // ── Palette index aligned to leafImages index — was the root cause
-    //    of the "no variety" issue: the silhouettes in leafImages are
-    //    [maple, oak, fig, flower] but this list used to start with
-    //    "oak" then "maple", so the maple silhouette was being tinted
-    //    with oak russet, fig with rowan yellow, etc. The colours were
-    //    fighting the shapes and the species blurred together. Fixed
-    //    order matches leafImages exactly so each leaf shape gets its
-    //    intended palette and the four species read as clearly distinct.
-    // 0 — maple (leaf 1.png) — scarlet/orange
-    ['#a83320', '#8a2018', '#c25a2a', '#d27b30', '#7a3018'],
-    // 1 — oak (leaf 2.png) — russet/burgundy
-    ['#8a3a1c', '#6a2618', '#a3502a', '#5a2218', '#7a4a22'],
-    // 2 — fig (leaf 4.png) — mossy green-brown
-    ['#4a4a22', '#6a5a2a', '#3a3a18', '#5a4a22', '#6a4a18'],
-    // 3 — flower (Screenshot copy) — pinkish/cream
-    ['#c98591', '#a37a6a', '#8a5a4a', '#b09a8a', '#9a6a7a'],
+    ['#425A44'],  // 0 — maple (leaf 1.png)
+    ['#425A44'],  // 1 — oak   (leaf 2.png)
+    ['#425A44'],  // 2 — fig   (leaf 4.png)
   ];
 
-  // Mobile palette — single moss green (with tight tonal variation so the
-  // pile doesn't read as a flat sticker). Replaces the per-species autumn
-  // palettes on phones so every leaf reads as one species.
-  const MOSS_PALETTE = ['#2F4030', '#374A35', '#28391F', '#3F5640', '#1F2E1F'];
+  // Mobile palette — same single moss; kept as a separate constant so
+  // the existing references downstream don't need rewiring.
+  const MOSS_PALETTE = ['#425A44'];
 
   // Canvas covers the full viewport (sibling of stage-shell). W/H are the
   // viewport pixel dimensions; the only "wall" is the screen edge.
@@ -566,12 +555,11 @@
                    Math.random() * (GUST_INTERVAL_MAX - GUST_INTERVAL_MIN);
   }
 
-  // Leaf source PNGs — transparent-bg versions provided by Gary
+  // Leaf source PNGs — three botanical silhouettes, all tinted to moss.
   const LEAF_FILES = [
-    'leaf 1.png',                                    // maple
-    'leaf 2.png',                                    // oak
-    'leaf 4.png',                                    // fig
-    'Screenshot 2026-05-02 at 14.49.32 copy.png',    // flower
+    'leaf 1.png',  // maple
+    'leaf 2.png',  // oak
+    'leaf 4.png',  // fig
   ];
   const leafImages = [];
 
@@ -1002,7 +990,7 @@
   // already loading them by the time this runs, and decode() resolves as
   // soon as the bitmap is ready.
   async function loadAllLeavesFromDOM() {
-    const ids = ['leafSrc1', 'leafSrc2', 'leafSrc4', 'leafSrcF'];
+    const ids = ['leafSrc1', 'leafSrc2', 'leafSrc4'];
     const out = [];
     for (const id of ids) {
       const img = document.getElementById(id);
@@ -1048,7 +1036,7 @@
     //      no getImageData, no async decode wait.
     //   2. Fire the kickoff burst and start the tick loop on this frame.
     //   3. Upgrade to processed silhouettes in the background on idle.
-    const ids = ['leafSrc1', 'leafSrc2', 'leafSrc4', 'leafSrcF'];
+    const ids = ['leafSrc1', 'leafSrc2', 'leafSrc4'];
     for (const id of ids) {
       const img = document.getElementById(id);
       if (img && img.complete && img.naturalWidth > 0) {

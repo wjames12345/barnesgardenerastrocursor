@@ -8,73 +8,55 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="page page-services active" id="services">
     <div class="page-inner">
       <div class="services-head fade-in" style="--fade-delay: 0s;">
-        <h2>A gardener for the gardens of Barnes <img class="amp-symbol" src="/ampersand-new.png" alt="and"> beyond.</h2>
+        <h2>Services</h2>
       </div>
 
-      <div class="service-grid fade-in" style="--fade-delay: 0.4s;">
-        <div class="service service-expandable" data-expandable>
-          <span class="service-num" aria-hidden="true">—</span>
-          <div>
-            <div class="service-name">Garden renovations</div>
-            <div class="service-desc">Reworking tired gardens. Planting schemes, beds and structure, rather than starting from scratch. <button class="expand-toggle" type="button">+ also offered</button></div>
-            <div class="service-extra">
-              <p><strong>Clearances.</strong> Available where needed, though Gary's preference is renovation over clearance. Most gardens have more to keep than to remove.</p>
-            </div>
+      <div class="services-prose fade-in" style="--fade-delay: 0.25s;">
+
+        <div class="svc-section">
+          <p class="svc-eyebrow"><span>Design &amp; renovation</span></p>
+          <div class="svc-block">
+            <h3 class="svc-name">Garden renovations</h3>
+            <p class="svc-body">Reworking tired gardens. Planting schemes, beds and structure, rather than starting from scratch. Clearances available where needed, but renovation is preferred — most gardens have more to keep than to remove.</p>
           </div>
-        </div>
-        <div class="service">
-          <span class="service-num" aria-hidden="true">—</span>
-          <div>
-            <div class="service-name">Productive gardens</div>
-            <div class="service-desc">Vegetables, herbs, soft fruit, cutting flowers. Designed to actually be used.</div>
+          <div class="svc-block">
+            <h3 class="svc-name">Productive gardens</h3>
+            <p class="svc-body">Vegetables, herbs, soft fruit, cutting flowers. Designed to actually be used, not just admired.</p>
           </div>
-        </div>
-        <div class="service">
-          <span class="service-num" aria-hidden="true">—</span>
-          <div>
-            <div class="service-name">Source and supply plants</div>
-            <div class="service-desc">From specialist nurseries. The right plant, well grown, suited to the spot.</div>
-          </div>
-        </div>
-        <div class="service service-expandable service-group-end" data-expandable>
-          <span class="service-num" aria-hidden="true">—</span>
-          <div>
-            <div class="service-name">Garden ornaments</div>
-            <div class="service-desc">Vintage stoneware, metalware and garden objets. <button class="expand-toggle" type="button">+ read more</button></div>
-            <div class="service-extra">
-              <p>Gary deals in vintage stoneware, metalware and <em>objets d'art</em>, the French term for the variety of collectable pieces that bring weight and patina to a garden. Troughs, urns, staddle stones, statuary, gates, finials, planters and ornament. Sourced and placed properly, with a feel for scale, age and where each piece wants to sit.</p>
-            </div>
+          <div class="svc-block">
+            <h3 class="svc-name">Source and supply plants</h3>
+            <p class="svc-body">From specialist nurseries across the south. The right plant, well grown, suited to the spot.</p>
           </div>
         </div>
 
-        <div class="service">
-          <span class="service-num" aria-hidden="true">—</span>
-          <div>
-            <div class="service-name">Regular maintenance</div>
-            <div class="service-desc">Weekly, fortnightly or monthly visits, year round. Quietly keeping things right.</div>
+        <div class="svc-section">
+          <p class="svc-eyebrow"><span>Year-round care</span></p>
+          <div class="svc-block">
+            <h3 class="svc-name">Regular maintenance</h3>
+            <p class="svc-body">Weekly, fortnightly or monthly visits, year round. Quietly keeping things right.</p>
+          </div>
+          <div class="svc-block">
+            <h3 class="svc-name">Lawn care, treatment &amp; irrigation</h3>
+            <p class="svc-body">Mowing, scarifying, feeding, top dressing. Smart irrigation systems installed and maintained.</p>
+          </div>
+          <div class="svc-block">
+            <h3 class="svc-name">Pruning &amp; tree care</h3>
+            <p class="svc-body">Wisteria, climbers, fruit trees and shrubs. By hand, in season, for the long term.</p>
+          </div>
+          <div class="svc-block">
+            <h3 class="svc-name">Hedges, shaped</h3>
+            <p class="svc-body">Beech, yew, box, hornbeam. Clipped properly, not just topped off.</p>
           </div>
         </div>
-        <div class="service">
-          <span class="service-num" aria-hidden="true">—</span>
-          <div>
-            <div class="service-name">Lawn care, treatment <img class="amp-symbol" src="/ampersand-new.png" alt="and"> irrigation</div>
-            <div class="service-desc">Mowing, scarifying, feeding, top dressing; smart irrigation systems installed and maintained.</div>
+
+        <div class="svc-section">
+          <p class="svc-eyebrow"><span>Vintage materials &amp; ornament</span></p>
+          <div class="svc-block">
+            <h3 class="svc-name">Garden ornaments</h3>
+            <p class="svc-body">Vintage stoneware, metalware and objets d'art. Troughs, urns, staddle stones, statuary, gates, finials. Sourced and placed properly, with a feel for scale, age and where each piece wants to sit.</p>
           </div>
         </div>
-        <div class="service">
-          <span class="service-num" aria-hidden="true">—</span>
-          <div>
-            <div class="service-name">Pruning <img class="amp-symbol" src="/ampersand-new.png" alt="and"> tree care</div>
-            <div class="service-desc">Wisteria, climbers, fruit trees and shrubs. By hand, in season, for the long term.</div>
-          </div>
-        </div>
-        <div class="service">
-          <span class="service-num" aria-hidden="true">—</span>
-          <div>
-            <div class="service-name">Hedges, shaped</div>
-            <div class="service-desc">Beech, yew, box, hornbeam. Clipped properly, not just topped off.</div>
-          </div>
-        </div>
+
       </div>
     </div>
   </section>
@@ -83,7 +65,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <button class="mob-page-back" type="button" data-mob-back aria-label="Back to home">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
     </button>
-    <h2>What's on <em>offer</em>.</h2>
+    <h2>What's on offer.</h2>
 
     <div class="mob-svc-grid">
       <button class="mob-svc-card" type="button"

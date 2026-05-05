@@ -113,12 +113,15 @@ const localBusinessJsonLd = {
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Gary">
-<link rel="apple-touch-icon" href="/ampersand.png">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
 <link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="/BULB TO FLOWER.png" fetchpriority="high">
+<link rel="preload" as="image" href="/hazell-twigg-1row.png" fetchpriority="high">
+<link rel="preload" as="image" href="/logo-wordmark.png" fetchpriority="high">
 
 <script type="application/ld+json" set:html={JSON.stringify(localBusinessJsonLd)} />
 
@@ -152,7 +155,11 @@ const localBusinessJsonLd = {
 </script>
 
 <!-- Custom cursor IIFE — lifted verbatim from source script B 8051–8110.
-     Runs once on initial load; window listeners + persisted DOM survive view transitions. -->
+     Runs once on initial load; window listeners + persisted DOM survive
+     view transitions. The init waits for DOMContentLoaded so the cursor
+     elements exist when the script first looks for them — the original
+     bug was the script firing in <head> before the body parsed and
+     ensureRefs() returning null. -->
 <script is:inline>
   (function () {
     var fineMQ = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1200px)');
@@ -164,7 +171,16 @@ const localBusinessJsonLd = {
       ring = document.getElementById('cursorRing');
       return dot && ring;
     }
-    if (!ensureRefs()) return;
+    function setup() {
+      if (!ensureRefs()) return;
+      _setup();
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setup);
+    } else {
+      setup();
+    }
+    function _setup() {
 
     var mouseX = -100, mouseY = -100;
     var ringX  = -100, ringY  = -100;
@@ -215,6 +231,7 @@ const localBusinessJsonLd = {
     // After astro:after-swap the cursor elements may have been re-created
     // (transition:persist makes that rare, but be defensive).
     document.addEventListener('astro:after-swap', function () { ensureRefs(); });
+    } /* end _setup */
   })();
 </script>
 </head>
@@ -226,7 +243,6 @@ const localBusinessJsonLd = {
 <img id="leafSrc1" src="/leaf%201.png" alt="" style="display:none" decoding="async" transition:persist>
 <img id="leafSrc2" src="/leaf%202.png" alt="" style="display:none" decoding="async" transition:persist>
 <img id="leafSrc4" src="/leaf%204.png" alt="" style="display:none" decoding="async" transition:persist>
-<img id="leafSrcF" src="/Screenshot%202026-05-02%20at%2014.49.32%20copy.png" alt="" style="display:none" decoding="async" transition:persist>
 
 <!-- Global background leaf field — full-viewport canvas, sits at z:50
      between the .viewport stage chrome and the cursor (z:9999). Same
@@ -252,7 +268,7 @@ const localBusinessJsonLd = {
     </a>
 
     <a href="/latelier" class="begin-btn" data-link>
-      Begin a vision <span class="arr" aria-hidden="true">→</span>
+      Get a quote and render now <span class="arr" aria-hidden="true">→</span>
     </a>
 
     <SideNav />
@@ -264,13 +280,22 @@ const localBusinessJsonLd = {
       <slot />
     </div><!-- /.pages -->
 
-    <!-- LOADING OVERLAY (4 stacked composites, each clipped to one bulb, cascading flash) -->
+    <!-- LOADING OVERLAY — anchored bulb stop-motion inside a moss ring.
+         All four bulb sprite cells render at the same centre point;
+         each one's transform offsets the cell's own bulb-body centroid
+         so the bulb stays still while roots fan down and the bloom
+         rises up. Step-end keyframes hard-flip between frames. -->
     <div class="loader" id="loader" aria-hidden="true" transition:persist>
       <div class="bulb-stage">
-        <img src="/BULB TO FLOWER.png" alt="" style="--i: 0">
-        <img src="/BULB TO FLOWER.png" alt="" style="--i: 1">
-        <img src="/BULB TO FLOWER.png" alt="" style="--i: 2">
-        <img src="/BULB TO FLOWER.png" alt="" style="--i: 3">
+        <svg class="loader-ring" viewBox="0 0 132 132" aria-hidden="true">
+          <circle class="loader-ring__track" cx="66" cy="66" r="60"></circle>
+          <circle class="loader-ring__arc"   cx="66" cy="66" r="60"
+                  stroke-dasharray="95 282"></circle>
+        </svg>
+        <div class="bulb-frame" data-i="0" aria-hidden="true"></div>
+        <div class="bulb-frame" data-i="1" aria-hidden="true"></div>
+        <div class="bulb-frame" data-i="2" aria-hidden="true"></div>
+        <div class="bulb-frame" data-i="3" aria-hidden="true"></div>
       </div>
     </div>
 
@@ -333,6 +358,13 @@ const localBusinessJsonLd = {
      first load; transition:persist on the canvas + leaf imgs above keeps
      the simulation running unbroken across Astro view-transitions. -->
 <script src="/scripts/leaf-field.js" is:inline></script>
+
+<!-- Blog "What's Growing" iOS-style popup + blur veil. Lifted from
+     THE WEBSITE.html script B (lines 7666–7831). Markup lives in the
+     overlay slot of blog.astro; the script defers to DOMContentLoaded
+     and re-fires on astro:after-swap so navigations into /blog still
+     trigger the popup. -->
+<script src="/scripts/blog-popup.js" is:inline></script>
 
 </body>
 </html>

@@ -166,14 +166,14 @@
     flex-direction: column;
     justify-content: space-between;
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 16px;
     letter-spacing: -0.005em;
   }
   .sidenav a {
     color: var(--ink-deep);
-    opacity: 0.55;
-    transition: opacity 0.25s, transform 0.25s, color 0.25s;
+    opacity: 1;
+    transition: color 0.25s, transform 0.25s;
     position: relative;
     padding-left: 0;
     width: max-content;
@@ -192,21 +192,25 @@
     transition: opacity 0.25s, width 0.25s;
   }
   .sidenav a:hover {
-    opacity: 1;
+    color: #B25E3D;
   }
   .sidenav a.active {
-    opacity: 1;
-    color: var(--ink-deep);
+    color: #B25E3D;
     letter-spacing: 0.06em;
-    animation: navBreathe 3.6s ease-in-out infinite;
   }
   .sidenav a.active::before {
     opacity: 1;
     width: 10px;
   }
-  @keyframes navBreathe {
-    0%, 100% { letter-spacing: 0.04em; opacity: 0.92; }
-    50%      { letter-spacing: 0.085em; opacity: 1; }
+  /* Tint the ampersand glyph to terracotta when its link is hovered or
+     active. The glyph is a black-on-transparent PNG; the filter chain
+     converts black → #B25E3D. mix-blend-mode is reset so the colour
+     reads cleanly instead of multiplying with the page background. */
+  .sidenav a:hover .amp-symbol,
+  .sidenav a.active .amp-symbol {
+    mix-blend-mode: normal;
+    filter: brightness(0) saturate(100%) invert(40%) sepia(56%)
+            saturate(594%) hue-rotate(343deg) brightness(95%) contrast(89%);
   }
 
   .begin-btn {
@@ -378,39 +382,92 @@
     opacity: 1;
     pointer-events: auto;
   }
+  /* — Anchored bulb stop-motion in a moss ring (lifted from source mobile
+     loader, lines 4459–4555). One stage, four bulb-frame sprites all
+     centred at the same anchor — frame transforms keep the bulb body
+     stationary while roots / bloom grow around it. Step-end keyframes
+     hard-flip between frames so there's no cross-fade ghost. */
   .bulb-stage {
     position: relative;
-    width: 85%;
-    max-width: 1200px;
-    aspect-ratio: 2560 / 1664;
+    width: 280px;
+    height: 280px;
+    overflow: visible;
   }
-  .bulb-stage img {
+  .loader-ring {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    opacity: 0;
-    mix-blend-mode: multiply;
+    overflow: visible;
     pointer-events: none;
   }
-  /* Each layer is the full composite, clipped to only its bulb's quarter */
-  .bulb-stage img:nth-child(1) { clip-path: inset(0 75%  0 0);   }
-  .bulb-stage img:nth-child(2) { clip-path: inset(0 50%  0 25%); }
-  .bulb-stage img:nth-child(3) { clip-path: inset(0 25%  0 50%); }
-  .bulb-stage img:nth-child(4) { clip-path: inset(0 0    0 75%); }
-
-  /* Cascading flash — each bulb fades in then away, staggered over ~1s total.
-     --i is set on each <img> in the HTML so this rule covers all four. */
-  .loader.visible .bulb-stage img {
-    animation: bulbFlash 0.55s ease-in-out forwards;
-    animation-delay: calc(var(--i) * 0.15s);
+  .loader-ring__track {
+    fill: none;
+    stroke: var(--ink-deep);
+    stroke-opacity: 0.14;
+    stroke-width: 1;
   }
+  .loader-ring__arc {
+    fill: none;
+    stroke: var(--ink-deep);
+    stroke-width: 1;
+    stroke-linecap: round;
+    transform-origin: 50% 50%;
+    transform: rotate(-90deg);
+  }
+  .loader.visible .loader-ring__arc {
+    animation: loaderRingTravel 1.2s linear infinite;
+  }
+  @keyframes loaderRingTravel {
+    from { transform: rotate(-90deg); }
+    to   { transform: rotate(270deg); }
+  }
+  /* Bulb stop-motion — sprite cells from BULB TO FLOWER transparent.png.
+     Per-frame translate values come from the bulb-body centroid in each
+     of the four 640×1664 cells (matches mob loader exactly). */
+  .bulb-frame {
+    position: absolute;
+    top: 62%;
+    left: 50%;
+    width: 82px;
+    height: 213px;   /* 82 × (1664/640) */
+    background-image: url('/BULB TO FLOWER transparent.png');
+    background-repeat: no-repeat;
+    background-size: 400% 100%;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    opacity: 0;
+    will-change: opacity;
+  }
+  .bulb-frame[data-i="0"] {
+    background-position: 0%      50%;
+    transform: translate(-49.8%, -73.3%);
+  }
+  .bulb-frame[data-i="1"] {
+    background-position: 33.333% 50%;
+    transform: translate(-40.6%, -73.6%);
+  }
+  .bulb-frame[data-i="2"] {
+    background-position: 66.667% 50%;
+    transform: translate(-32.0%, -71.8%);
+  }
+  .bulb-frame[data-i="3"] {
+    background-position: 100%    50%;
+    transform: translate(-38.3%, -70.1%);
+  }
+  .loader.visible .bulb-frame[data-i="0"] { animation: loaderBulb0 1.04s infinite step-end; }
+  .loader.visible .bulb-frame[data-i="1"] { animation: loaderBulb1 1.04s infinite step-end; }
+  .loader.visible .bulb-frame[data-i="2"] { animation: loaderBulb2 1.04s infinite step-end; }
+  .loader.visible .bulb-frame[data-i="3"] { animation: loaderBulb3 1.04s infinite step-end; }
+  @keyframes loaderBulb0 { 0% { opacity: 1; } 25%, 100% { opacity: 0; } }
+  @keyframes loaderBulb1 { 0%, 24.9% { opacity: 0; } 25% { opacity: 1; } 50%, 100% { opacity: 0; } }
+  @keyframes loaderBulb2 { 0%, 49.9% { opacity: 0; } 50% { opacity: 1; } 75%, 100% { opacity: 0; } }
+  @keyframes loaderBulb3 { 0%, 74.9% { opacity: 0; } 75%, 100% { opacity: 1; } }
 
-  @keyframes bulbFlash {
-    0%   { opacity: 0; }
-    45%  { opacity: 1; }
-    100% { opacity: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    .loader.visible .loader-ring__arc,
+    .loader.visible .bulb-frame { animation: none !important; }
+    .loader.visible .bulb-frame[data-i="3"] { opacity: 1; }
   }
 
   /* — Mobile shell base + breakpoint gate (lines 2712–2731) — */
@@ -4357,6 +4414,13 @@
      stray italic that slipped past the .css scrub. */
   em, i, cite, address, dfn, var, q { font-style: normal; }
 
+  /* Thin underline for <u> — overrides the heavy browser default. */
+  u {
+    text-decoration: underline;
+    text-decoration-thickness: 0.5px;
+    text-underline-offset: 0.18em;
+  }
+
   /* Every non-home page heading matches the Testimonial Gardens treatment:
      Cormorant Garamond at clamp(40-56px), --ink-body, single line, centred
      along the y=205 line set by the page-inner top. The first wrapper
@@ -4373,6 +4437,68 @@
     color: var(--ink-body);
     white-space: nowrap;
     text-align: center;
+  }
+
+  /* ────────── Services (essay v4 — three grouped columns) ──────────
+     Eight services grouped into three categories laid out as three
+     columns side-by-side, so the page fits the fixed 900px canvas
+     without scrolling. Each column has a small-caps eyebrow flanked
+     by hairline rules; underneath, services render as title + body
+     paragraph blocks. Tighter typography than the stacked v3 to keep
+     everything above the fold. */
+  .page-services .services-prose {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 56px;
+    align-items: start;
+    margin: 8px auto 0;
+    width: min(1100px, 100%);
+    text-align: left;
+  }
+  .page-services .svc-section + .svc-section {
+    margin-top: 0;   /* sections sit in their own grid cells now */
+  }
+  .page-services .svc-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 24px;
+    color: var(--ink-faded);
+  }
+  .page-services .svc-eyebrow::before,
+  .page-services .svc-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--rule);
+  }
+  .page-services .svc-eyebrow span {
+    font-family: 'Cormorant Garamond', sans-serif;
+    font-weight: 500;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .page-services .svc-block + .svc-block {
+    margin-top: 18px;
+  }
+  .page-services .svc-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    color: var(--ink-body);
+    margin: 0 0 4px;
+  }
+  .page-services .svc-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-faded);
+    margin: 0;
   }
 
   /* ────────── Contact (clean editorial v2) ────────── */

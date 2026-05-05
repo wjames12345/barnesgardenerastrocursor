@@ -1,11 +1,30 @@
+---
+// Active link is computed from the current pathname so the picked item
+// stays terracotta on every render. /case/* routes count as gardens.
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => {
+  if (href === '/') return path === '/';
+  if (href === '/gardens') return path === '/gardens' || path.startsWith('/case/');
+  return path === href || path.startsWith(href + '/');
+};
+const links = [
+  { href: '/',          label: 'Home' },
+  { href: '/about',     label: 'About' },
+  { href: '/services',  label: 'Services' },
+  { href: '/gardens',   label: 'Testimonial Gardens' },
+  { href: '/latelier',  label: 'latelier' },
+  { href: '/blog',      label: "What's Growing" },
+  { href: '/podcast',   label: 'Podcast' },
+  { href: '/shop',      label: "Gary's Kit Shop" },
+  { href: '/contact',   label: 'Contact' },
+];
+---
 <nav class="sidenav" id="sidenav" aria-label="Primary">
-  <a href="/"          data-link>Home</a>
-  <a href="/about"     data-link>About</a>
-  <a href="/services"  data-link>Services</a>
-  <a href="/gardens"   data-link>Testimonial Gardens</a>
-  <a href="/latelier"  data-link>Vision <img class="amp-symbol" src="/ampersand-new.png" alt="and"> Quote</a>
-  <a href="/blog"      data-link>What's Growing</a>
-  <a href="/podcast"   data-link>Podcast</a>
-  <a href="/shop"      data-link>Gary's Kit Shop</a>
-  <a href="/contact"   data-link>Contact</a>
+  {links.map(({ href, label }) => (
+    <a href={href} data-link class:list={[{ active: isActive(href) }]}>
+      {label === 'latelier' ? (
+        <>Quote <img class="amp-symbol" src="/ampersand-new.png" alt="and" /> Render</>
+      ) : label}
+    </a>
+  ))}
 </nav>
