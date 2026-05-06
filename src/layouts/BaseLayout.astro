@@ -22,14 +22,14 @@ const {
 } = Astro.props;
 
 // data-mob-page drives the mobile section visibility rules at source 4143–4162.
-// /latelier maps to "generator" — mobile uses the "generator" slug for the
-// Vision-and-Quote page (matches #m-generator markup).
+// /quoteandrender maps to "generator" — mobile uses the "generator" slug for the
+// Quote-and-Render page (matches #m-generator markup).
 const PATH_TO_MOB_PAGE: Record<string, string> = {
   '/':         'home',
   '/about':    'about',
   '/services': 'services',
   '/gardens':  'gardens',
-  '/latelier': 'generator',
+  '/quoteandrender': 'generator',
   '/blog':     'blog',
   '/podcast':  'podcast',
   '/shop':     'shop',
@@ -80,7 +80,7 @@ const localBusinessJsonLd = {
     if (!h) return;
     var map = {
       home: '/', about: '/about', services: '/services', gardens: '/gardens',
-      latelier: '/latelier', generator: '/latelier', blog: '/blog',
+      quoteandrender: '/quoteandrender', generator: '/quoteandrender', blog: '/blog',
       podcast: '/podcast', shop: '/shop', contact: '/contact',
       'case': '/gardens', map: '/gardens'
     };
@@ -267,7 +267,7 @@ const localBusinessJsonLd = {
       <span class="corner-logo-mark" aria-hidden="true"></span>
     </a>
 
-    <a href="/latelier" class="begin-btn" data-link>
+    <a href="/quoteandrender" class="begin-btn" data-link>
       Get a quote and render now <span class="arr" aria-hidden="true">→</span>
     </a>
 

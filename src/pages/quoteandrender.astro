@@ -5,7 +5,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   title="Quote & Render — Photo Renderings · The Barnes Gardener"
   description="Send a photograph of your garden. Get a rendering and a written quote within 24 hours, no obligation. Quote & Render by The Barnes Gardener."
 >
-  <section class="page page-latelier active" id="latelier">
+  <section class="page page-latelier active" id="quoteandrender">
     <div class="page-inner">
       <header class="lat-head fade-in" style="--fade-delay: 0.0s;">
         <h2>Upload a photograph.</h2>
@@ -61,13 +61,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </ul>
 
       <div class="lat-success" id="envSuccess" hidden>
-        <p class="lat-success-eyebrow"><span class="pulse"></span>Received · in queue</p>
-        <h3 class="lat-success-h">Your garden is on Gary's bench.</h3>
-        <p class="lat-success-body">He'll have something back to you within 24 hours.</p>
-        <dl class="lat-receipt">
-          <div><dt>Status</dt><dd id="receiptStatus">Awaiting review</dd></div>
-          <div><dt>Reply by</dt><dd id="receiptReply">·</dd></div>
-        </dl>
+        <div class="lat-success-stage">
+          <div class="lat-success-text">
+            <h3 class="lat-success-h">Your garden is on<br>Gary's bench.</h3>
+            <p class="lat-success-body">He'll have something back to you within 24 hours.</p>
+          </div>
+          <img class="lat-success-bench" src="/bench.png" alt="" aria-hidden="true">
+        </div>
       </div>
     </div>
   </section>
@@ -99,5 +99,60 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <button type="submit" class="mob-gen-submit">Send to Gary</button>
     </form>
+
+    <!-- Mobile success card. Mirrors the desktop /quoteandrender success
+         layout but stacks for portrait phone screens. -->
+    <div class="mob-gen-success" id="mobGenSuccess" hidden>
+      <h3 class="mob-gen-success-h">Your garden is on<br>Gary's bench.</h3>
+      <p class="mob-gen-success-body">He'll have something back to you within 24 hours.</p>
+      <img class="mob-gen-success-bench" src="/bench.png" alt="" aria-hidden="true">
+    </div>
   </section>
+
+  <!-- Form handlers — desktop + mobile. Intercept submit, hide form +
+       supporting elements, reveal the success card with the big
+       "your garden is on Gary's bench" headline. Stamp the receipt's
+       reply-by row with a 24-hour-from-now timestamp. -->
+  <script is:inline>
+    (function () {
+      // Marker prevents double-binding when this runs on both page-load
+      // and after-swap events.
+      function wire(formId, hideSelectors, successId) {
+        var form = document.getElementById(formId);
+        if (!form || form.dataset.qrWired) return;
+        form.dataset.qrWired = '1';
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          hideSelectors.forEach(function (sel) {
+            var el = document.querySelector(sel);
+            if (el) el.style.display = 'none';
+          });
+          var success = document.getElementById(successId);
+          if (success) {
+            success.removeAttribute('hidden');
+            success.style.display = 'block';   // belt-and-braces in case [hidden] override lingers
+            // Wait one frame so the layout has updated, then scroll the
+            // success card into view.
+            requestAnimationFrame(function () {
+              success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+          }
+        });
+      }
+      function setup() {
+        // Desktop: hide the entire .lat-body (form + submit pill) and
+        // the promise row so only the head + success card remain.
+        wire('envForm', ['.lat-body', '.lat-promise'], 'envSuccess');
+        // Mobile: hide the heading, lead, form — show the dedicated
+        // mobile success block (#mobGenSuccess).
+        wire('mobGenForm', ['#m-generator > h2', '#m-generator > .lead', '#mobGenForm'], 'mobGenSuccess');
+      }
+      // Run on initial load AND every Astro client-side navigation, so
+      // the handler is attached whether the user lands directly on
+      // /quoteandrender or arrives via the sidenav.
+      setup();
+      document.addEventListener('astro:after-swap', setup);
+      document.addEventListener('astro:page-load', setup);
+    })();
+  </script>
 </BaseLayout>

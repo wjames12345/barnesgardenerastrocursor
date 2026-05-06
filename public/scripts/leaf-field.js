@@ -2,16 +2,10 @@
   const canvas = document.getElementById('leafCanvas');
   if (!canvas) return;
 
-  // ── Disable the leaf field on mobile / narrow viewports ──
-  // Without a cursor wind source the simulation devolves into a pile
-  // of leaves accumulating in the bottom corners. Touch devices have
-  // no equivalent to "moving the mouse near a leaf" — leaves drop and
-  // settle. Cleaner to skip the simulation entirely on phones; the
-  // canvas stays in the DOM (transition:persist) but draws nothing.
-  if (window.matchMedia('(max-width: 900px), (max-aspect-ratio: 4/5)').matches) {
-    canvas.style.display = 'none';
-    return;
-  }
+  // Mobile: leaves run, but pointer-events stay off (no cursor wind on
+  // touch), and the IS_MOBILE_FIELD wall-bounce block further down is
+  // suppressed so leaves blow off the edges and respawn rather than
+  // piling up in the corners.
   const ctx = canvas.getContext('2d');
 
   // ── Mobile field flag ──
@@ -88,7 +82,10 @@
   // streaky "rain" effect rather than realistic falling-leaf physics.
   // With the trimmed mobile counts and added flutter, normal gravity
   // gives a believable terminal velocity (~73 px/s).
-  const LEAF_GRAVITY      = 160;
+  // Mobile gets a stronger pull — no cursor wind to lift leaves, no
+  // floor (walls disabled), so gravity is the dominant force and the
+  // page reads as constant top-down rain.
+  const LEAF_GRAVITY      = IS_MOBILE_FIELD ? 360 : 160;
 
   // ── Ground physics — leaves rest at the bottom and visually flatten ──
   // GROUND_INSET sets where the floor sits (px above the very bottom).
@@ -803,16 +800,11 @@
         }
       }
 
-      // ── Mobile walls — all four page edges are solid on phones so
-      //    leaves can't escape the canvas. Only enforced when the leaf
-      //    is heading OUT (vx/vy points outward), so spawn-from-edge
-      //    entry still passes through cleanly. The wall-parallel
-      //    friction term is intentionally omitted: previously a leaf
-      //    sliding down a side wall kept losing vy on every micro-bounce
-      //    and stuck in the corner. Now bounces only flip the
-      //    perpendicular component, so leaves keep falling under gravity
-      //    along the wall and gusts can carry them back up and across.
-      if (IS_MOBILE_FIELD) {
+      // ── Mobile walls disabled — open edges on every device. Leaves
+      //    blow off the canvas and respawn from a random edge, same as
+      //    desktop. Without this the absence of a cursor wind source
+      //    caused leaves to pile in the bottom corners on touch devices.
+      if (false) {
         const wr = Math.max(this.imgW, this.imgH) * this.scale * 0.18;
         if (this.x < wr && this.vx < 0) {
           this.x = wr;
@@ -952,7 +944,9 @@
     // the silhouette image hasn't loaded yet.
     const speciesIdx = pickAmbientSpecies();
     const leaf = new Leaf(speciesIdx);
-    const side = Math.floor(Math.random() * 4);
+    // Mobile: spawn ALWAYS from the top edge so leaves rain down through
+    // the page like falling autumn. Desktop keeps the four-edge spawn.
+    const side = IS_MOBILE_FIELD ? 0 : Math.floor(Math.random() * 4);
     // Faster inward velocity so leaves visibly traverse the page on
     // entry, instead of just being dragged down by gravity.
     const inward  = 70 + Math.random() * 100;     // 70–170 px/s

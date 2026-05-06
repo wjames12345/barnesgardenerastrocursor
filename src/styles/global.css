@@ -93,13 +93,9 @@
     z-index: 50;
     pointer-events: none;
   }
-  /* Mobile: hide the canvas entirely. Without a pointer wind source the
-     simulation piles leaves into the corners on touch devices. The JS
-     also bails on the same breakpoint; this CSS guard is the safety net
-     in case the script is cached or somehow doesn't run. */
-  @media (max-width: 900px), (max-aspect-ratio: 4/5), (hover: none), (pointer: coarse) {
-    #leafCanvas { display: none !important; }
-  }
+  /* Leaves now drift on mobile too — pointer-events stay off so they're
+     non-interactive, and the JS-side mobile-wall block is disabled so
+     leaves blow off the edges and respawn instead of piling in corners. */
 
   /* mob-loader: markup exists in BaseLayout for symmetry with the desktop
      loader, but no styling — without explicit position/visibility rules
@@ -516,7 +512,7 @@
   .mob-menu-toggle {
     position: fixed;
     top: max(22px, env(safe-area-inset-top));
-    left: 22px;
+    right: 22px;
     width: 44px;
     height: 44px;
     background: transparent;
@@ -533,8 +529,8 @@
   }
   .mob-menu-toggle .bars {
     position: relative;
-    width: 24px;
-    height: 16px;
+    width: 20px;
+    height: 12px;
   }
   .mob-menu-toggle .bars::before,
   .mob-menu-toggle .bars::after,
@@ -616,14 +612,19 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    border-top: 0.5px solid var(--rule);
+    /* Borders removed — relying on whitespace + letter-spacing to do
+       the separation. Reads as a typeset index. */
   }
   .mob-menu-item {
-    border-bottom: 0.5px solid var(--rule);
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
   }
+  /* Drop all menu icons — chevrons + right-arrows. The label is the
+     link; everything else is visual noise. */
+  .mob-menu-expand,
+  .mob-menu-go,
+  .mob-menu-desc { display: none !important; }
   body.mob-menu-open .mob-menu-item { opacity: 1; transform: translateY(0); }
   body.mob-menu-open .mob-menu-item:nth-child(1) { transition-delay: 0.18s; }
   body.mob-menu-open .mob-menu-item:nth-child(2) { transition-delay: 0.24s; }
@@ -636,17 +637,15 @@
   body.mob-menu-open .mob-menu-item:nth-child(9) { transition-delay: 0.66s; }
 
   .mob-menu-row {
-    display: grid;
-    grid-template-columns: 1fr auto auto;
-    align-items: center;
-    gap: 14px;
-    padding: 10px 4px;
+    display: block;
+    padding: 16px 4px;       /* generous vertical breathing room */
   }
   .mob-menu-label {
+    display: inline-block;
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-weight: 400;
-    font-size: clamp(15px, 4vw, 20px);
-    letter-spacing: 0.18em;
+    font-size: clamp(13px, 3.6vw, 17px);
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     color: var(--ink-deep);
     line-height: 1.05;
@@ -809,7 +808,7 @@
     body[data-mob-page="shop"]      #m-shop { display: block; }
     /* Contact uses a flex column to distribute its rows over the viewport
        without scroll — keep the active-page selector but flip to flex. */
-    body[data-mob-page="contact"] #m-contact.mob-section { display: flex; }
+    body[data-mob-page="contact"] #m-contact.mob-section { display: block; }
 
     body[data-mob-page="generator"] .mob-hero,
     body[data-mob-page="about"]     .mob-hero,
@@ -1173,8 +1172,9 @@
     display: none;
     min-height: 100svh;
     /* Top padding clears the centred mob-brand (top:22, h:52) plus a
-       comfortable gap before the heading. */
-    padding: 120px 22px 56px;
+       comfortable gap before the heading. 140px is consistent across
+       every mobile page so all headings sit at the same y-position. */
+    padding: 140px 22px 56px !important;
     position: relative;
     background: var(--bg-page);
   }
@@ -1182,9 +1182,9 @@
   .mob-section h2 {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
-    font-size: clamp(34px, 9vw, 44px);
-    line-height: 1;
-    letter-spacing: -0.02em;
+    font-size: clamp(24px, 6.4vw, 30px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
     color: var(--ink-body);
     text-align: left;
     margin: 0 0 14px;
@@ -2046,10 +2046,42 @@
   }
   .mob-gen-submit:active { background: var(--moss); }
 
-  /* Quote & Render: inherit standard .mob-section padding-top (120) so
-     the heading aligns with every other page; just trim padding-bottom
-     to claw back vertical space for the form to fit on one screen. */
-  #m-generator { padding: 120px 22px 24px; }
+  /* Quote & Render: inherits .mob-section's 140 padding (locked with
+     !important above) so the heading aligns with every other page. */
+
+  /* Mobile post-submission success card — replaces the heading + lead +
+     form. Big two-line headline, small body line, full-width bench. */
+  .mob-gen-success {
+    text-align: left;
+  }
+  .mob-gen-success-h {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(28px, 7.6vw, 38px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink-body);
+    margin: 0 0 14px;
+  }
+  .mob-gen-success-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-faded);
+    margin: 0 0 28px;
+  }
+  .mob-gen-success-bench {
+    display: block;
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
+    /* Same brand-tint filter as the desktop bench. */
+    filter: brightness(0) saturate(100%) invert(20%) sepia(13%)
+            saturate(906%) hue-rotate(72deg) brightness(95%) contrast(89%);
+  }
   body[data-mob-page="generator"] #m-generator {
     display: flex;
     flex-direction: column;
@@ -2154,13 +2186,13 @@
   /* — Testimonial Gardens page CSS, mobile (lines 4887–4941); verbatim — */
   /* ─── TESTIMONIAL GARDENS — vertical scrollable list, centred ─── */
   .mob-gardens-title {
-    text-align: center;
+    text-align: left;
     font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
-    font-size: clamp(34px, 8vw, 42px);
-    line-height: 1;
-    letter-spacing: -0.025em;
-    color: var(--ink);
+    font-size: clamp(24px, 6.4vw, 30px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--ink-body);
     margin-bottom: 24px;
     white-space: nowrap;
   }
@@ -2757,17 +2789,18 @@
   /* ─── MOBILE PODCAST — headline + sub-line + Apple-style email box ─── */
   #m-podcast {
     text-align: center;
-    padding-top: 120px;
+    /* padding-top inherits 140 from .mob-section so the heading aligns
+       with every other mobile page. */
   }
   .mob-podcast-headline {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
-    font-size: clamp(30px, 8.5vw, 38px);
-    line-height: 1.1;
-    letter-spacing: -0.025em;
-    color: var(--ink);
+    font-size: clamp(24px, 6.4vw, 30px);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--ink-body);
     margin: 0 auto 16px;
-    max-width: 380px;
+    max-width: none;
   }
   .mob-podcast-headline em {
     font-style: normal;
@@ -2835,6 +2868,10 @@
      SHOP PAGE — Gary's Kit Shop (affiliate product grid)
      ════════════════════════════════════════════════════════════════════ */
   .page-shop .page-inner {
+    /* Extend to the very right edge of the stage so the scrollbar sits
+       flush against the page's right border (was inset by 60px because
+       of the base .page-inner right: 60px rule). */
+    right: 0 !important;
     padding: var(--page-pad-y-tight) var(--page-pad-x) var(--page-pad-y-tight) 0;
     overflow-y: auto;
     overflow-x: hidden;
@@ -4011,26 +4048,22 @@
   .mob-contact-title {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
-    font-size: clamp(34px, 9vw, 44px);
-    line-height: 1;
-    letter-spacing: -0.02em;
+    font-size: clamp(24px, 6.4vw, 30px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
     color: var(--ink-body);
-    text-align: center;
+    text-align: left;
     margin: 0 0 14px;
     max-width: none;
   }
   .mob-contact-foot {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 300;
-    font-size: 15px;
-    line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.55;
     color: var(--ink-faded);
-    text-align: center;
-    max-width: 40ch;
-    /* #m-contact is display:flex column at the mobile breakpoint, so
-       margin-top:auto pushes the foot text to the bottom of the screen
-       — visually detached from the contact list above with maximum air. */
-    margin: auto auto 0;
+    text-align: left;
+    margin: 180px 0 0 !important;   /* overrides .mob-section p (0,1,1 specificity) */
   }
   .mob-contact-list {
     list-style: none;
@@ -4533,6 +4566,7 @@
     display: block;
     text-align: left;
     color: var(--ink-faded);
+    white-space: nowrap;       /* keep "Your email so we can get back to you" on one line */
   }
   /* Pill submit on the right column. Filled moss, light text — the only
      filled CTA on the page (overrides the outlined .begin-btn pattern
@@ -4620,8 +4654,43 @@
      doesn't reflow. */
   .page-latelier .lat-success {
     margin-top: 32px;
-    max-width: 640px;
+    max-width: 1100px;
     text-align: left;
+  }
+  /* Two-column stage: text + bench illustration. Bench is tinted to
+     ink-deep to match the palette (no overlays per spec) and floats to
+     the right of the headline on desktop. */
+  .page-latelier .lat-success-stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 460px;
+    gap: 48px;
+    align-items: center;
+  }
+  .page-latelier .lat-success-bench {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: right center;
+    /* Tint the bench PNG to --ink-deep so the illustration reads in the
+       site palette rather than its source colour. */
+    filter: brightness(0) saturate(100%) invert(20%) sepia(13%)
+            saturate(906%) hue-rotate(72deg) brightness(95%) contrast(89%);
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  /* Mobile: bench drops above the heading, full-width-ish, centred. */
+  @media (max-width: 900px), (max-aspect-ratio: 4/5) {
+    .page-latelier .lat-success-stage {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 24px;
+      align-items: stretch;
+    }
+    .page-latelier .lat-success-bench {
+      max-width: 320px;
+      margin: 0 auto;
+      object-position: center;
+    }
   }
   .page-latelier .lat-success-eyebrow {
     display: inline-flex;
@@ -4644,20 +4713,20 @@
   .page-latelier .lat-success-h {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 400;
-    font-size: 36px;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    font-size: clamp(48px, 6vw, 72px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
     color: var(--ink-body);
-    margin: 0 0 10px;
+    margin: 0 0 18px;
     text-align: left;
   }
   .page-latelier .lat-success-body {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 300;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.55;
     color: var(--ink-faded);
-    margin: 0 0 22px;
+    margin: 16px 0 0;   /* tight gap below the big two-line heading */
   }
   .page-latelier .lat-receipt {
     margin: 0;

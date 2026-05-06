@@ -125,6 +125,16 @@
       if (e.target.closest('[data-popup-close]')) hidePopup();
     });
 
+    // Click anywhere outside the popup card (on the blur veil or the
+    // page behind it) to dismiss. Uses document-level delegation so it
+    // catches the veil even though pointer-events are off there.
+    document.addEventListener('click', (e) => {
+      if (!document.body.classList.contains('blog-popup-open')) return;
+      if (e.target.closest('#blogPopup')) return;       // ignore taps inside the card
+      if (e.target.closest('#mobMenuToggle')) return;   // ignore the hamburger
+      hidePopup();
+    });
+
     // Submit (no backend wired — same pattern as the podcast form)
     if (popupForm) {
       popupForm.addEventListener('submit', (e) => {
