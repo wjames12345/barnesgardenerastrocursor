@@ -9,14 +9,15 @@
   const ctx = canvas.getContext('2d');
 
   // ── Mobile field flag ──
-  // Tracked for perf gating only (DPR cap, leaf-leaf collision skip).
-  // Wind sources are identical to desktop.
-  const _leafFieldMQ = window.matchMedia('(max-width: 900px), (max-aspect-ratio: 4/5)');
-  let IS_MOBILE_FIELD = _leafFieldMQ.matches;
-  const _onLeafMQ = () => { IS_MOBILE_FIELD = _leafFieldMQ.matches; };
-  if (_leafFieldMQ.addEventListener) _leafFieldMQ.addEventListener('change', _onLeafMQ);
-  else if (_leafFieldMQ.addListener) _leafFieldMQ.addListener(_onLeafMQ);
-  window.addEventListener('orientationchange', _onLeafMQ);
+  // Mobile now runs the IDENTICAL desktop leaf simulation. The old
+  // mobile-only physics (heavier gravity, top-down rain, no ground floor,
+  // disabled walls/collisions, extra flutter) read as glitchy, so the flag
+  // is forced false: every behavioural branch below takes the smooth
+  // desktop path — leaves blow in from the edges, drift on the ambient
+  // breeze + gusts, and rest on the ground floor (never falling out the
+  // bottom). The per-phone DPR cap that keeps fill-rate down is handled
+  // separately (see `_isMobileDpr` below), so performance is unaffected.
+  const IS_MOBILE_FIELD = false;
 
   // ── Wind cone — gentle, mostly omnidirectional puff with a slight
   //    forward boost so cursor movement still has direction. Soft. ──

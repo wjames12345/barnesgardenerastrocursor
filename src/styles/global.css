@@ -93,9 +93,9 @@
     z-index: 50;
     pointer-events: none;
   }
-  /* Leaves now drift on mobile too — pointer-events stay off so they're
-     non-interactive, and the JS-side mobile-wall block is disabled so
-     leaves blow off the edges and respawn instead of piling in corners. */
+  /* Mobile runs the identical desktop leaf simulation (see leaf-field.js):
+     leaves blow in from the edges, drift on the breeze + gusts, and rest on
+     the ground floor — never falling out the bottom of the page. */
 
   /* mob-loader: markup exists in BaseLayout for symmetry with the desktop
      loader, but no styling — without explicit position/visibility rules
@@ -501,6 +501,25 @@
     .viewport { display: none; }
     .mobile-shell { display: block; }
     .mob-menu-toggle { display: flex !important; }
+
+    /* Home is a single full-screen wordmark sitting on the interactive leaf
+       field. Lock it against scroll AND rubber-band so dragging to play with
+       the leaves never scrolls the page. touch-action:none lets the leaf
+       pointer events still fire while suppressing the browser's scroll/zoom.
+       Other mobile pages keep their normal vertical scroll. */
+    html:has(body[data-mob-page="home"]) {
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
+    body[data-mob-page="home"] {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      overscroll-behavior: none;
+      touch-action: none;
+    }
   }
 
   /* — Mobile hamburger toggle + cream overlay menu (lines 2989–3201); JS open/close deferred — */
