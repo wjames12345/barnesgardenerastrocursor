@@ -335,8 +335,15 @@
     const active = document.querySelector('.page.active');
     return active ? active.id : 'home';
   }
+  // Weather only changes when the active page changes, so there's no point
+  // running a querySelector for it on every one of the 60 frames/sec. Cache
+  // it and refresh on the same 250ms cadence as the UI-rect refresh.
+  let _cachedWeather = PAGE_WEATHER['home'];
+  function refreshPageWeather() {
+    _cachedWeather = PAGE_WEATHER[getActivePageId()] || { ambient: 0.8, gustChance: 0.6 };
+  }
   function getPageWeather() {
-    return PAGE_WEATHER[getActivePageId()] || { ambient: 0.8, gustChance: 0.6 };
+    return _cachedWeather;
   }
 
   // ── UI catch zones — disabled. Leaves pass freely through every UI
@@ -632,6 +639,23 @@
     return oc;
   }
 
+  // Memoised tint. Every leaf tints to the SAME moss colour, so building a
+  // fresh canvas per leaf (≈80 of them, rebuilt again after the background
+  // upgrade) is pure waste + GC pressure. Cache one tinted canvas per
+  // (silhouette-entry, colour) and share it — leaves only ever READ the
+  // bitmap when drawing, so sharing is safe. Keyed on the entry OBJECT via a
+  // WeakMap, so when upgrade() swaps in a processed silhouette the old cache
+  // entry is dropped automatically and the new one is built once.
+  const _tintCache = new WeakMap();
+  function getTinted(entry, color) {
+    if (!entry.processed) return entry.silhouette;   // raw silhouettes are already shared
+    let byColor = _tintCache.get(entry);
+    if (!byColor) { byColor = new Map(); _tintCache.set(entry, byColor); }
+    let canvas = byColor.get(color);
+    if (!canvas) { canvas = tintSilhouette(entry, color); byColor.set(color, canvas); }
+    return canvas;
+  }
+
   function loadImage(src) {
     // First try the eager preloads kicked off in <head> — those have
     // typically finished by the time this script runs.
@@ -661,7 +685,7 @@
       // placeholder dimensions so physics/collisions still work.
       const sil = leafImages[speciesIdx];
       if (sil) {
-        this.img = tintSilhouette(sil, this.color);
+        this.img = getTinted(sil, this.color);
         this.imgW = sil.w;
         this.imgH = sil.h;
         this.usesMultiply = !sil.processed;
@@ -707,7 +731,7 @@
       if (this.img) return;
       const sil = leafImages[this.species] || leafImages[0];
       if (!sil) return;
-      this.img = tintSilhouette(sil, this.color);
+      this.img = getTinted(sil, this.color);
       this.imgW = sil.w;
       this.imgH = sil.h;
       this.usesMultiply = !sil.processed;
@@ -919,6 +943,24 @@
   // the all-pairs loop would have caught. Far-apart pairs are never measured.
   // The pairwise resolution maths below is byte-for-byte the old code; only
   // the candidate set changed.
+  // Frame-persistent scratch so the collision pass allocates NOTHING per
+  // frame — a fresh Map + bucket arrays + string keys every frame (60×/sec)
+  // is a steady stream of garbage that shows up as GC micro-stutter. We reuse
+  // one Map, recycle bucket arrays through a pool, sort with a hoisted
+  // comparator, and key cells with INTEGERS instead of strings.
+  const _grid       = new Map();
+  const _bucketPool = [];
+  const _cand       = [];
+  const _ascending  = (p, q) => p - q;
+  // Linear integer cell key. The offset keeps cells negative-safe (leaves
+  // drift to ~-120px off-screen); the stride dwarfs any realistic cell-coord
+  // range, so two distinct cells can never map to the same key.
+  const _CELL_OFFSET = 2048;
+  const _CELL_STRIDE = 1 << 16;
+  function _cellKey(cx, cy) {
+    return (cx + _CELL_OFFSET) * _CELL_STRIDE + (cy + _CELL_OFFSET);
+  }
+
   function leafLeafCollisions() {
     const n = leaves.length;
     if (n < 2) return;
@@ -932,13 +974,16 @@
     const cell = Math.max(2 * maxR, 1);   // guard against degenerate 0-size cells
     const inv  = 1 / cell;
 
-    // Bucket leaf INDICES into a hashed grid keyed by "cellX,cellY".
-    const grid = new Map();
+    // Recycle last frame's buckets back to the pool, then clear the grid.
+    for (const b of _grid.values()) { b.length = 0; _bucketPool.push(b); }
+    _grid.clear();
+
+    // Bucket leaf INDICES into the reused grid, keyed by integer cell id.
     for (let i = 0; i < n; i++) {
       const l = leaves[i];
-      const key = Math.floor(l.x * inv) + ',' + Math.floor(l.y * inv);
-      let bucket = grid.get(key);
-      if (!bucket) { bucket = []; grid.set(key, bucket); }
+      const key = _cellKey(Math.floor(l.x * inv), Math.floor(l.y * inv));
+      let bucket = _grid.get(key);
+      if (!bucket) { bucket = _bucketPool.pop() || []; _grid.set(key, bucket); }
       bucket.push(i);
     }
 
@@ -950,7 +995,7 @@
     // displacement aren't re-detected this frame — they settle on the next
     // one. Verified broad-phase-complete (no real collision missed) over 600
     // randomised fields; ~38× fewer distance checks than all-pairs at n=80.
-    const cand = [];
+    const cand = _cand;
     for (let i = 0; i < n; i++) {
       const a = leaves[i];
       const ar = a.radius;
@@ -959,7 +1004,7 @@
       cand.length = 0;
       for (let ox = -1; ox <= 1; ox++) {
         for (let oy = -1; oy <= 1; oy++) {
-          const bucket = grid.get((cx + ox) + ',' + (cy + oy));
+          const bucket = _grid.get(_cellKey(cx + ox, cy + oy));
           if (!bucket) continue;
           for (let k = 0; k < bucket.length; k++) {
             const j = bucket[k];
@@ -967,7 +1012,7 @@
           }
         }
       }
-      cand.sort((p, q) => p - q);
+      cand.sort(_ascending);
       for (let c = 0; c < cand.length; c++) {
         const b = leaves[cand[c]];
         const br = b.radius;
@@ -1097,6 +1142,7 @@
   function init() {
     resize();
     refreshUIRects();
+    refreshPageWeather();
 
     // Non-negotiable: leaves must be visibly blowing onto the page within
     // ~1s of load. Strategy:
@@ -1155,7 +1201,7 @@
       for (const l of leaves) {
         const sil = leafImages[l.species];
         if (!sil) continue;
-        l.img = tintSilhouette(sil, l.color);
+        l.img = getTinted(sil, l.color);
         l.imgW = sil.w;
         l.imgH = sil.h;
         l.usesMultiply = !sil.processed;
@@ -1205,7 +1251,7 @@
 
     // Refresh UI rects every ~250ms (handles page changes + window resize)
     uiRefreshT += dt;
-    if (uiRefreshT > 0.25) { refreshUIRects(); uiRefreshT = 0; }
+    if (uiRefreshT > 0.25) { refreshUIRects(); refreshPageWeather(); uiRefreshT = 0; }
 
     // Cursor velocity (frame-paced delta + EMA smoothing)
     if (dt > 0) {
