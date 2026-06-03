@@ -429,6 +429,14 @@
   .loader.visible .loader-ring__arc {
     animation: loaderRingTravel 1.2s linear infinite;
   }
+  /* When the smart loader is JS-driven (.loader--js, added on show), one
+     shared requestAnimationFrame clock owns the ring rotation and the bulb
+     frame opacities so they stay perfectly in sync and finish a clean cycle.
+     Disable the standalone CSS loops so they don't fight the JS transforms. */
+  .loader--js .loader-ring__arc,
+  .loader--js .bulb-frame {
+    animation: none !important;
+  }
   @keyframes loaderRingTravel {
     from { transform: rotate(-90deg); }
     to   { transform: rotate(270deg); }
