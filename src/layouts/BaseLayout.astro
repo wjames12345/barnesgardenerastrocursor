@@ -119,7 +119,7 @@ const localBusinessJsonLd = {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="/BULB TO FLOWER.png" fetchpriority="high">
+<link rel="preload" as="image" href="/BULB TO FLOWER transparent.png" fetchpriority="high">
 <link rel="preload" as="image" href="/hazell-twigg-1row.png" fetchpriority="high">
 <link rel="preload" as="image" href="/logo-wordmark.png" fetchpriority="high">
 
@@ -127,29 +127,118 @@ const localBusinessJsonLd = {
 
 <ClientRouter />
 
-<!-- Smart page-transition loader: bulb-to-flower cascade only shows when a
-     navigation hasn't completed within ~200ms. Fast navs get no loader at all
-     (no flash). Slow navs get a 0.55s cascade as a perceptual bridge. -->
+<!-- Smart page-transition loader, synchronised to the real load time.
+     Fast navs (< THRESHOLD) show nothing — no flash. When the loader does
+     show, the ring + bulb are driven by ONE shared JS clock (so they never
+     drift apart like two independent CSS loops would), and the cycle length
+     is fitted to a rolling estimate of how long this site's navigations take:
+       • short load  → ONE fast full cycle that fits the window,
+       • long load   → N calm cycles (N = round(window / comfortable cycle)).
+     The crucial bit: when the page is actually ready we never hard-cut the
+     animation mid-frame — we gracefully complete the current cycle (ring back
+     to 12 o'clock, bulb at full bloom) within <=FINISH_MS, then fade out. -->
 <script is:inline>
   (function () {
-    var THRESHOLD = 200;
-    var timer = null;
+    var THRESHOLD   = 200;    // navs faster than this never show the loader
+    var COMFORTABLE = 1100;   // a calm full cycle (ms)
+    var FAST_MIN    = 450;    // fastest a full cycle is allowed to run
+    var FINISH_MS   = 280;    // max time to gracefully finish the cycle once ready
+    var EMA_KEY     = 'navDurEMA';
+    var reduced     = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var loader, arc, frames;
+    function refs() {
+      loader = document.getElementById('loader');
+      if (!loader) return false;
+      arc = loader.querySelector('.loader-ring__arc');
+      frames = loader.querySelectorAll('.bulb-frame');
+      return true;
+    }
+
+    // Rolling estimate (EMA) of nav duration, persisted for the session.
+    function getEMA() {
+      var v = parseFloat(sessionStorage.getItem(EMA_KEY));
+      return (isFinite(v) && v > 0) ? v : 700;
+    }
+    function pushEMA(d) {
+      if (!(d > 0) || d > 20000) return;
+      var next = getEMA() * 0.65 + d * 0.35;
+      try { sessionStorage.setItem(EMA_KEY, String(Math.round(next))); } catch (_) {}
+    }
+
+    var navStart = 0, showTimer = null, rafId = null;
+    var animStart = 0, cycleMs = COMFORTABLE;
+    var finishing = false, finishStart = 0, finishFrom = 0, finishDur = 0;
+
+    // Render one moment of the cycle. p in [0,1]: 0 = start, 1 = full bloom.
+    function render(p) {
+      if (arc) arc.style.transform = 'rotate(' + (-90 + 360 * p) + 'deg)';
+      if (frames && frames.length) {
+        var idx = p >= 1 ? frames.length - 1 : Math.floor(p * frames.length);
+        if (idx > frames.length - 1) idx = frames.length - 1;
+        for (var i = 0; i < frames.length; i++) {
+          frames[i].style.opacity = (i === idx) ? '1' : '0';
+        }
+      }
+    }
+
+    function frame(now) {
+      if (!finishing) {
+        render(((now - animStart) % cycleMs) / cycleMs);
+        rafId = requestAnimationFrame(frame);
+      } else {
+        var t = finishDur > 0 ? (now - finishStart) / finishDur : 1;
+        if (t >= 1) { render(1); doHide(); return; }
+        var e = 1 - Math.pow(1 - t, 2);          // ease-out to the cycle end
+        render(finishFrom + (1 - finishFrom) * e);
+        rafId = requestAnimationFrame(frame);
+      }
+    }
+
     function showLoader() {
-      var l = document.getElementById('loader');
-      if (l) l.classList.add('visible');
+      if (!refs()) return;
+      // Size the cycle so a whole number of cycles fills the expected window.
+      var visible = Math.max(getEMA() - THRESHOLD, FAST_MIN);
+      var n = Math.max(1, Math.round(visible / COMFORTABLE));
+      cycleMs = Math.min(Math.max(visible / n, FAST_MIN), COMFORTABLE);
+      finishing = false;
+      animStart = performance.now();
+      loader.classList.add('loader--js', 'visible');
+      if (reduced) { render(1); return; }        // static bloom, no spin
+      rafId = requestAnimationFrame(frame);
     }
-    function hideLoader() {
-      if (timer) { clearTimeout(timer); timer = null; }
-      var l = document.getElementById('loader');
-      if (l) l.classList.remove('visible');
+
+    // Page is ready: finish the current cycle smoothly instead of chopping it.
+    function beginFinish() {
+      if (!loader || !loader.classList.contains('visible')) return;
+      if (reduced || finishing) { doHide(); return; }
+      var now = performance.now();
+      finishFrom = ((now - animStart) % cycleMs) / cycleMs;
+      finishStart = now;
+      finishDur = Math.min((1 - finishFrom) * cycleMs, FINISH_MS);
+      finishing = true;
+      if (rafId === null) rafId = requestAnimationFrame(frame);
     }
+
+    function doHide() {
+      if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
+      finishing = false;
+      if (loader) loader.classList.remove('visible');
+      setTimeout(function () { if (loader) loader.classList.remove('loader--js'); }, 220);
+    }
+
     document.addEventListener('astro:before-preparation', function () {
-      timer = setTimeout(showLoader, THRESHOLD);
+      navStart = performance.now();
+      if (showTimer) clearTimeout(showTimer);
+      showTimer = setTimeout(showLoader, THRESHOLD);
     });
-    document.addEventListener('astro:after-swap', hideLoader);
-    // Defensive: clear stale timer if user aborts navigation mid-flight.
+    document.addEventListener('astro:after-swap', function () {
+      if (showTimer) { clearTimeout(showTimer); showTimer = null; }
+      if (navStart) { pushEMA(performance.now() - navStart); navStart = 0; }
+      beginFinish();
+    });
     document.addEventListener('astro:before-swap', function () {
-      if (timer) { clearTimeout(timer); timer = null; }
+      if (showTimer) { clearTimeout(showTimer); showTimer = null; }
     });
   })();
 </script>
